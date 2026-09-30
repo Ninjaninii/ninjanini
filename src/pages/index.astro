@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site';
+---
+
+<Base title={site.name}>
+  <h1>{site.name}</h1>
+  <p>{site.tagline}</p>
+  <p>
+    MFA candidate in technology and art at NTHU, Taiwan. Working across interfaces,
+    installations and printed matter.
+  </p>
+
+  <p>
+    <a href="/project">Projects</a> · <a href="/artwork">Artwork</a> ·
+    <a href={`mailto:${site.email}`}>Email</a>
+  </p>
+
+  <p class="placeholder">
+    W1 skeleton. Featured work, the three-point intro and the about summary land in W3
+    once the content model is in place.
+  </p>
+</Base>
