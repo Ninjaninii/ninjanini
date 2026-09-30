@@ -8,9 +8,8 @@ export const site = {
   tagline: 'Designer and producer working between technology and art.',
   domain: 'https://ninjanini.cc',
 
-  // TODO: replace both before launch
-  email: 'hello@ninjanini.cc',
-  linkedin: 'https://www.linkedin.com/in/your-handle',
+  email: 'chianiiiccn@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/ninjanini',
 
   nav: [
     { href: '/project', label: 'Project' },
