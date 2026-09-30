@@ -6,10 +6,10 @@ export const site = {
   name: 'Chia Ni Chen',
   nameZh: '陳家妮',
   tagline: 'Designer and producer working between technology and art.',
-  domain: 'https://ninjanini.com',
+  domain: 'https://ninjanini.cc',
 
   // TODO: replace both before launch
-  email: 'hello@ninjanini.com',
+  email: 'hello@ninjanini.cc',
   linkedin: 'https://www.linkedin.com/in/your-handle',
 
   nav: [

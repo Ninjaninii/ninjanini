@@ -1,4 +1,4 @@
-# ninjanini.com
+# ninjanini.cc
 
 Portfolio site for Chia Ni Chen (陳家妮).
 Astro, static output, no backend. Deployed on Vercel.
