@@ -4,7 +4,6 @@
  */
 export const site = {
   name: 'Chia Ni Chen',
-  nameZh: '陳家妮',
   tagline: 'Designer and producer working between technology and art.',
   domain: 'https://ninjanini.cc',
 
