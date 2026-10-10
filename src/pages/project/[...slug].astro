@@ -1,0 +1,123 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WorkMeta from '../../components/WorkMeta.astro';
+import type { GetStaticPaths } from 'astro';
+
+type Props = { entry: CollectionEntry<'project'> };
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const entries = await getCollection('project', ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+};
+
+const { entry } = Astro.props as Props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+
+<Base title={d.title} description={d.summary}>
+  <article class="work">
+    <p class="eyebrow"><a href="/project">Projects</a></p>
+    <h1>{d.title}</h1>
+    <p class="hook">{d.hook}</p>
+
+    <WorkMeta data={d} />
+
+    {
+      d.cover && (
+        <img class="cover" src={d.cover} alt={d.coverAlt ?? ''} width="1200" height="750" />
+      )
+    }
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {
+      d.link && (
+        <p class="outlink">
+          <a href={d.link} rel="noopener" target="_blank">
+            View the project &#8599;
+          </a>
+        </p>
+      )
+    }
+  </article>
+</Base>
+
+<style>
+  .work { max-width: none; }
+  .work > * { max-width: var(--measure); }
+
+  .eyebrow { font-size: 14px; margin: 0 0 14px; }
+  .eyebrow a { color: var(--ink-2); }
+
+  .hook {
+    font-size: clamp(19px, 2.6vw, 25px);
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-weight: 600;
+    max-width: 24ch;
+    margin: 14px 0 0;
+  }
+
+  .cover {
+    display: block;
+    width: 100%;
+    max-width: none;
+    margin: 28px 0 0;
+    border: 1px solid var(--line);
+  }
+
+  .prose { margin-top: 8px; }
+  .outlink { margin-top: 28px; }
+</style>
+
+<style is:global>
+  /* Markdown body. Structural only — real design lands in W5. */
+  .prose h2 {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin: 38px 0 10px;
+    font-weight: 700;
+  }
+  .prose p { max-width: var(--measure); }
+  .prose p strong:first-child { color: var(--ink); }
+  .prose ul,
+  .prose ol { max-width: var(--measure); color: var(--ink-2); padding-left: 20px; }
+  .prose li { margin-bottom: 6px; }
+  .prose li strong { color: var(--ink); }
+  .prose blockquote {
+    margin: 20px 0;
+    padding-left: 18px;
+    border-left: 2px solid var(--line);
+    color: var(--ink);
+    font-size: 17px;
+  }
+  .prose blockquote p { color: inherit; }
+  .prose table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: var(--measure);
+    font-size: 15px;
+    margin: 18px 0;
+  }
+  .prose th,
+  .prose td {
+    border: 1px solid var(--line);
+    padding: 9px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .prose th { font-weight: 600; }
+  .prose hr { border: 0; border-top: 1px solid var(--line); margin: 34px 0 20px; max-width: var(--measure); }
+  .prose em { color: var(--ink-2); }
+  .prose > p:last-child em { font-size: 14px; }
+</style>

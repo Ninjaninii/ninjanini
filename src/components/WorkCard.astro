@@ -1,0 +1,59 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'project'> | CollectionEntry<'artwork'>;
+  /** '/project' or '/artwork' */
+  base: string;
+}
+const { entry, base } = Astro.props;
+const d = entry.data;
+const href = `${base}/${entry.id}/`;
+---
+
+<li class="card">
+  <a href={href}>
+    {
+      d.cover ? (
+        <img src={d.cover} alt={d.coverAlt ?? ''} width="600" height="450" loading="lazy" />
+      ) : (
+        <span class="noimg" aria-hidden="true" />
+      )
+    }
+    <h2>{d.title}</h2>
+  </a>
+  <p class="summary">{d.summary}</p>
+  <p class="line">
+    <span>{d.role.split(/[;,]/)[0].trim()}</span>
+    <span>{d.year}</span>
+  </p>
+</li>
+
+<style>
+  .card { display: grid; gap: 8px; align-content: start; }
+  .card a { text-decoration: none; display: grid; gap: 10px; }
+  .card img,
+  .noimg {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--line);
+    background: transparent;
+  }
+  .noimg { border-style: dashed; }
+  .card h2 {
+    margin: 0;
+    font-size: 19px;
+    letter-spacing: -0.015em;
+  }
+  .card a:hover h2 { text-decoration: underline; }
+  .summary { margin: 0; font-size: 14.5px; }
+  .line {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+</style>

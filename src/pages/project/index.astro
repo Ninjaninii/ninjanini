@@ -1,16 +1,41 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import WorkCard from '../../components/WorkCard.astro';
+
+const entries = (await getCollection('project', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order || b.data.year.localeCompare(a.data.year),
+);
 ---
 
 <Base
   title="Projects"
-  description="Design projects by Chia Ni Chen — UI/UX, graphic design and commissioned work."
+  description="Design projects by Chia Ni Chen — product, UX and strategy work."
 >
   <h1>Projects</h1>
-  <p>Design work: UI/UX, graphic design, identity and commissioned projects.</p>
+  <p>Product, UX and strategy work. Each one opens into how it was decided, not just how it turned out.</p>
 
-  <p class="placeholder">
-    W1 skeleton. In W3 this becomes a grid generated from the <code>project</code> content
-    collection — adding a project will mean adding one Markdown file, not editing this page.
-  </p>
+  {
+    entries.length === 0 ? (
+      <p class="placeholder">No projects published yet.</p>
+    ) : (
+      <ul class="grid">
+        {entries.map((entry) => (
+          <WorkCard entry={entry} base="/project" />
+        ))}
+      </ul>
+    )
+  }
 </Base>
+
+<style>
+  .grid {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    max-width: none;
+    display: grid;
+    gap: 26px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+</style>

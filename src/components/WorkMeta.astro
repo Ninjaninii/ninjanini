@@ -1,0 +1,56 @@
+---
+/** Role / Team / Year / Context block. Scannable in a few seconds. */
+interface Props {
+  data: {
+    role: string;
+    team?: string;
+    year: string;
+    context?: string;
+    tools?: string[];
+  };
+}
+const { data } = Astro.props;
+
+const rows = [
+  { label: 'Role', value: data.role },
+  { label: 'Team', value: data.team },
+  { label: 'Year', value: data.year },
+  { label: 'Context', value: data.context },
+  { label: 'Tools', value: data.tools?.length ? data.tools.join(', ') : undefined },
+].filter((r) => r.value);
+---
+
+<dl class="meta">
+  {
+    rows.map((r) => (
+      <div>
+        <dt>{r.label}</dt>
+        <dd>{r.value}</dd>
+      </div>
+    ))
+  }
+</dl>
+
+<style>
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 28px;
+    margin: 28px 0 0;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    max-width: var(--measure);
+  }
+  @media (max-width: 560px) {
+    .meta { grid-template-columns: 1fr; }
+  }
+  .meta div { display: grid; gap: 2px; }
+  dt {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  dd { margin: 0; font-size: 15px; }
+</style>
