@@ -74,10 +74,10 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: 'Instrument Sans', ui-sans-serif, system-ui, 'Noto Sans TC', sans-serif;
+  font-family: 'Outfit', ui-sans-serif, system-ui, 'Noto Sans TC', sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  font-feature-settings: 'ss01', 'cv01';
+  font-feature-settings: normal;
   -webkit-font-smoothing: antialiased;
   display: flex;
   flex-direction: column;
@@ -119,7 +119,7 @@ body::after {
 h1,
 h2,
 h3 {
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
   line-height: 1.04;
   text-wrap: balance;
   margin: 0;
