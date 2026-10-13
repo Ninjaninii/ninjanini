@@ -9,14 +9,14 @@
   --paper: #fbfbfa;
   --paper-2: #f4f4f1;
   --panel: #ffffff;
-  --plate: #f0f0ec; /* tinted ground that images float on */
+  --plate: #f0f0ee; /* tinted ground that images float on */
 
   /* ink — warm-biased neutrals, not pure grey */
-  --ink: #16160f;
-  --ink-2: #5f5f56;
-  --ink-3: #8d8d82;
-  --hair: rgba(22, 22, 15, 0.09);
-  --hair-2: rgba(22, 22, 15, 0.055);
+  --ink: #232321;
+  --ink-2: #4d4d49;
+  --ink-3: #8c8c88;
+  --hair: rgba(35, 35, 33, 0.1);
+  --hair-2: rgba(35, 35, 33, 0.06);
 
   /* the single accent */
   --accent: #4a5bb8;
@@ -29,8 +29,8 @@
   /* rhythm */
   --gutter: clamp(20px, 5vw, 56px);
   --measure: 64ch;
-  --radius: 26px;
-  --radius-inner: 20px;
+  --radius: 16px;
+  --radius-inner: 8px; /* = radius - plate padding, concentric */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -194,7 +194,7 @@ p {
   background: color-mix(in srgb, var(--panel) 72%, transparent);
   backdrop-filter: blur(20px) saturate(1.6);
   -webkit-backdrop-filter: blur(20px) saturate(1.6);
-  box-shadow: 0 1px 1px rgba(22, 22, 15, 0.02), 0 12px 30px -18px rgba(22, 22, 15, 0.3);
+  box-shadow: 0 1px 2px rgba(35, 35, 33, 0.04);
 }
 .nav__brand {
   font-size: 14px;
@@ -243,10 +243,10 @@ main {
   flex: 1;
 }
 .sec {
-  padding: clamp(72px, 11vw, 150px) 0;
+  padding: clamp(72px, 12vw, 168px) 0;
 }
 .sec--tight {
-  padding-block: clamp(48px, 7vw, 90px);
+  padding-block: clamp(48px, 8vw, 120px);
 }
 .sec__head {
   display: flex;
@@ -274,7 +274,7 @@ main {
   font-size: 14.5px;
   font-weight: 500;
   transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
-  box-shadow: 0 10px 26px -16px rgba(22, 22, 15, 0.7);
+  box-shadow: 0 2px 8px -4px rgba(35, 35, 33, 0.3);
 }
 .btn:active {
   transform: scale(0.985);
