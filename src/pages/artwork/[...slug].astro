@@ -1,0 +1,217 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WorkMeta from '../../components/WorkMeta.astro';
+import type { GetStaticPaths } from 'astro';
+
+type Props = { entry: CollectionEntry<'artwork'> };
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const entries = await getCollection('artwork', ({ data }) => !data.draft);
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+};
+
+const { entry } = Astro.props as Props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+
+<Base title={d.title} description={d.summary}>
+  <article>
+    <header class="sec sec--tight whead">
+      <div class="shell">
+        <p class="backrow reveal">
+          <a class="back" href="/artwork"><span aria-hidden="true">&#8592;</span> Artwork</a>
+        </p>
+
+        {d.metric && <span class="eyebrow reveal" data-delay="40" style="margin-top:24px"><i></i>{d.metric}</span>}
+
+        <h1 class="display reveal" data-delay="80" style="margin-top:20px; font-size:clamp(40px,7vw,82px)">
+          {d.title}
+        </h1>
+
+        <p class="hook reveal" data-delay="140">{d.hook}</p>
+
+        <div class="reveal" data-delay="200">
+          <WorkMeta data={d} />
+        </div>
+      </div>
+    </header>
+
+    {
+      d.cover && (
+        <div class="shell reveal">
+          <div class="plate plate--wide">
+            <div class="plate__in">
+              <img src={d.cover} alt={d.coverAlt ?? ''} width="1600" height="1000" />
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    <div class="shell">
+      <div class="prose reveal">
+        <Content />
+      </div>
+
+      {
+        d.link && (
+          <p style="margin-top:40px">
+            <a class="btn" href={d.link} rel="noopener" target="_blank">
+              View the project
+              <span class="btn__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.3">
+                  <path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+            </a>
+          </p>
+        )
+      }
+    </div>
+  </article>
+</Base>
+
+<style>
+  .whead {
+    padding-top: clamp(70px, 10vw, 130px);
+  }
+  .backrow {
+    margin: 0 0 26px;
+  }
+  .back {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    text-decoration: none;
+    display: inline-flex;
+    gap: 8px;
+    transition: color 0.5s var(--ease), gap 0.5s var(--ease);
+  }
+  .back:hover {
+    color: var(--ink);
+    gap: 12px;
+  }
+  .hook {
+    font-size: clamp(19px, 2.5vw, 27px);
+    line-height: 1.33;
+    letter-spacing: -0.025em;
+    max-width: 24ch;
+    margin-top: 24px;
+  }
+  .plate--wide {
+    background: var(--plate);
+    border: 1px solid var(--hair-2);
+    border-radius: var(--radius);
+    padding: 12px;
+    margin-bottom: clamp(40px, 6vw, 80px);
+  }
+  .plate--wide .plate__in {
+    border-radius: var(--radius-inner);
+    overflow: hidden;
+    background: var(--panel);
+  }
+  .prose {
+    padding-bottom: clamp(50px, 7vw, 90px);
+  }
+</style>
+
+<style is:global>
+  /* ── markdown body ── */
+  .prose > * {
+    max-width: var(--measure);
+  }
+  .prose h2 {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 500;
+    margin: clamp(48px, 6vw, 84px) 0 14px;
+  }
+  .prose h2::before {
+    content: '';
+    display: block;
+    width: 26px;
+    height: 1px;
+    background: var(--accent);
+    margin-bottom: 14px;
+  }
+  .prose p {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin: 0 0 16px;
+  }
+  .prose p > strong:first-child {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .prose ul,
+  .prose ol {
+    color: var(--ink-2);
+    padding-left: 20px;
+    margin: 0 0 16px;
+    font-size: 16.5px;
+  }
+  .prose li {
+    margin-bottom: 9px;
+    padding-left: 4px;
+  }
+  .prose li::marker {
+    color: var(--ink-3);
+  }
+  .prose strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .prose blockquote {
+    margin: 30px 0;
+    padding: 2px 0 2px 24px;
+    border-left: 2px solid var(--accent);
+  }
+  .prose blockquote p {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(20px, 2.3vw, 26px);
+    line-height: 1.35;
+    color: var(--ink);
+  }
+  .prose table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 15px;
+    margin: 22px 0;
+    background: var(--panel);
+    border: 1px solid var(--hair-2);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .prose th,
+  .prose td {
+    padding: 11px 15px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--hair-2);
+  }
+  .prose tr:last-child th,
+  .prose tr:last-child td {
+    border-bottom: 0;
+  }
+  .prose th {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .prose td {
+    color: var(--ink-2);
+  }
+  .prose hr {
+    border: 0;
+    border-top: 1px solid var(--hair-2);
+    margin: clamp(44px, 6vw, 70px) 0 24px;
+  }
+  .prose > p:last-child em {
+    font-size: 13.5px;
+    color: var(--ink-3);
+    font-style: normal;
+  }
+</style>

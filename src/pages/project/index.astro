@@ -10,32 +10,47 @@ const entries = (await getCollection('project', ({ data }) => !data.draft)).sort
 
 <Base
   title="Projects"
-  description="Design projects by Chia Ni Chen — product, UX and strategy work."
+  description="Product, UX and strategy work by Chia Ni Chen."
 >
-  <h1>Projects</h1>
-  <p>Product, UX and strategy work. Each one opens into how it was decided, not just how it turned out.</p>
+  <section class="sec sec--tight">
+    <div class="shell">
+      <span class="eyebrow reveal"><i></i>Projects</span>
+      <h1 class="display reveal" data-delay="60" style="margin-top:22px; font-size:clamp(34px,5.6vw,64px)">
+        Product, UX and<br /><span class="serif-it">strategy work.</span>
+      </h1>
+      <p class="lede reveal" data-delay="130" style="margin-top:26px">
+        Each one opens into how it was decided, not just how it turned out.
+      </p>
+    </div>
+  </section>
 
-  {
-    entries.length === 0 ? (
-      <p class="placeholder">No projects published yet.</p>
-    ) : (
-      <ul class="grid">
-        {entries.map((entry) => (
-          <WorkCard entry={entry} base="/project" />
-        ))}
-      </ul>
-    )
-  }
+  <section class="sec" style="padding-top:0">
+    <div class="shell">
+      {
+        entries.length === 0 ? (
+          <p class="lede">Nothing published yet.</p>
+        ) : (
+          <ul class="grid">
+            {entries.map((entry, i) => (
+              <WorkCard entry={entry} base="/project" delay={i * 70} />
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </section>
 </Base>
 
 <style>
   .grid {
     list-style: none;
-    margin: 32px 0 0;
+    margin: 0;
     padding: 0;
-    max-width: none;
     display: grid;
-    gap: 26px;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: clamp(36px, 4.5vw, 64px) clamp(26px, 3vw, 44px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; }
   }
 </style>

@@ -1,6 +1,7 @@
 ---
 title: 澗序
 hook: Every productivity tool tries to stop you being interrupted. None of them help you come back.
+metric: Best Research Award · 6 teams
 summary: A workplace concept that treats the moment after an interruption — not the interruption itself — as the thing worth designing.
 year: '2025'
 role: UI design and design thinking; literature review with the team; presentation deck and poster

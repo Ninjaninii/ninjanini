@@ -11,6 +11,8 @@ const work = z.object({
   hook: z.string(),
   /** 40 words or fewer — used on the listing card. */
   summary: z.string(),
+  /** Leads the card, before the title. An outcome, not a label. */
+  metric: z.string().optional(),
   year: z.string(),
   /** What Chia Ni did, separated from what the team did. */
   role: z.string(),

@@ -5,55 +5,161 @@ interface Props {
   entry: CollectionEntry<'project'> | CollectionEntry<'artwork'>;
   /** '/project' or '/artwork' */
   base: string;
+  delay?: number;
 }
-const { entry, base } = Astro.props;
+const { entry, base, delay = 0 } = Astro.props;
 const d = entry.data;
 const href = `${base}/${entry.id}/`;
+const lead = d.role.split(/[;,]/)[0].trim();
 ---
 
-<li class="card">
-  <a href={href}>
-    {
-      d.cover ? (
-        <img src={d.cover} alt={d.coverAlt ?? ''} width="600" height="450" loading="lazy" />
-      ) : (
-        <span class="noimg" aria-hidden="true" />
-      )
-    }
-    <h2>{d.title}</h2>
+<li class="card reveal" data-delay={delay}>
+  <a href={href} class="card__link">
+    <div class="card__top">
+      <div class="card__words">
+        {d.metric && <span class="card__metric">{d.metric}</span>}
+        <h3>{d.title}</h3>
+        <p class="card__sum">{d.summary}</p>
+      </div>
+      <span class="card__go" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.25">
+          <path d="M5 12h13M12.5 5.5 19 12l-6.5 6.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </span>
+    </div>
+
+    <!-- Double-bezel: the plate is a tinted tray, the image sits inside it. -->
+    <div class="plate">
+      <div class="plate__in">
+        {
+          d.cover ? (
+            <img src={d.cover} alt={d.coverAlt ?? ''} width="900" height="675" loading="lazy" />
+          ) : (
+            <span class="plate__empty">{lead}</span>
+          )
+        }
+      </div>
+    </div>
+
+    <p class="card__foot">
+      <span>{lead}</span>
+      <span>{d.year}</span>
+    </p>
   </a>
-  <p class="summary">{d.summary}</p>
-  <p class="line">
-    <span>{d.role.split(/[;,]/)[0].trim()}</span>
-    <span>{d.year}</span>
-  </p>
 </li>
 
 <style>
-  .card { display: grid; gap: 8px; align-content: start; }
-  .card a { text-decoration: none; display: grid; gap: 10px; }
-  .card img,
-  .noimg {
-    display: block;
-    width: 100%;
+  .card {
+    list-style: none;
+  }
+  .card__link {
+    text-decoration: none;
+    display: grid;
+    gap: 16px;
+  }
+
+  .card__top {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    justify-content: space-between;
+  }
+  .card__words {
+    display: grid;
+    gap: 7px;
+  }
+
+  .card__metric {
+    justify-self: start;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink-2);
+    background: var(--paper-2);
+    border: 1px solid var(--hair-2);
+    border-radius: 999px;
+    padding: 4px 11px;
+  }
+
+  .card h3 {
+    font-size: clamp(21px, 2.1vw, 26px);
+    font-weight: 500;
+  }
+  .card__sum {
+    font-size: 14.5px;
+    color: var(--ink-2);
+    line-height: 1.5;
+    max-width: 46ch;
+  }
+
+  .card__go {
+    flex: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--hair);
+    color: var(--ink-2);
+    margin-top: 2px;
+    transition:
+      transform 0.65s var(--ease),
+      background 0.65s var(--ease),
+      color 0.65s var(--ease),
+      border-color 0.65s var(--ease);
+  }
+  .card__link:hover .card__go {
+    transform: translate(3px, -2px);
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .plate {
+    background: var(--plate);
+    border: 1px solid var(--hair-2);
+    border-radius: var(--radius);
+    padding: 10px;
+    transition: transform 0.75s var(--ease);
+  }
+  .card__link:hover .plate {
+    transform: translateY(-3px);
+  }
+  .plate__in {
+    border-radius: var(--radius-inner);
+    overflow: hidden;
     aspect-ratio: 4 / 3;
-    border: 1px solid var(--line);
-    background: transparent;
+    background: var(--panel);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    display: grid;
+    place-items: center;
   }
-  .noimg { border-style: dashed; }
-  .card h2 {
-    margin: 0;
-    font-size: 19px;
-    letter-spacing: -0.015em;
+  .plate__in img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
-  .card a:hover h2 { text-decoration: underline; }
-  .summary { margin: 0; font-size: 14.5px; }
-  .line {
-    margin: 0;
+  .plate__empty {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .card__foot {
     display: flex;
     justify-content: space-between;
-    gap: 12px;
-    font-size: 13px;
-    color: var(--ink-2);
+    gap: 14px;
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card__link:hover .plate,
+    .card__link:hover .card__go {
+      transform: none;
+    }
   }
 </style>

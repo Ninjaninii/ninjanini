@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ninjanini",
+      "cwd": "C:/Users/USER/Projects/ninjanini",
+      "runtimeExecutable": "npm.cmd",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 4321
+    }
+  ]
+}
