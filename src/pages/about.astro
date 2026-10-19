@@ -1,24 +1,201 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site } from '../site';
+
+/*
+ * Every entry below is a confirmed CV line from the master experience
+ * workbook. Dates and titles must match it exactly — change them there first.
+ * Taiwan-specific names carry a one-line gloss for a reader outside Taiwan.
+ */
+const education = [
+  {
+    org: 'National University of Singapore',
+    role: 'Exchange student, Industrial Design',
+    dates: 'Aug – Dec 2026',
+  },
+  {
+    org: 'National Tsing Hua University',
+    role: 'B.A., Interdisciplinary Program of Technology and Art',
+    dates: '2022 – Dec 2026',
+    note: 'One of Taiwan’s leading research universities.',
+  },
+];
+
+const experience = [
+  {
+    org: 'LINE Taiwan',
+    role: 'B2B Marketing Intern, Brand Communication Group',
+    dates: 'Aug 2025 – Mar 2026',
+    note: 'LINE is the dominant messaging platform in Taiwan, Japan and Thailand.',
+  },
+  { org: 'Tang Cheng Goose Restaurant', role: 'Freelance Marketing', dates: 'Sep 2026 – present' },
+  { org: 'NTHU Consulting Group', role: 'Teaching Supervisor', dates: 'Aug 2025 – Jun 2026' },
+  { org: 'NTHU Consulting Group', role: 'Director of Marketing', dates: 'Jul 2024 – Aug 2025' },
+  {
+    org: 'NTHU Technology & Art Graduation Exhibition',
+    role: 'Director of Public Relations',
+    dates: 'Jul 2025 – May 2026',
+  },
+  {
+    org: 'OpenHCI',
+    role: 'Academic Team',
+    dates: 'Mar – Jul 2026',
+    note: 'Organising team of Taiwan’s longest-running student HCI workshop.',
+  },
+  {
+    org: 'Taipei Art Book Fair',
+    role: 'Exhibition Coordination & Arts Administration Intern',
+    dates: 'Apr – Jun 2025',
+  },
+];
+
+const recognition = [
+  {
+    org: 'TAICHI 2026',
+    role: 'First author, poster and demo',
+    dates: 'Aug 2026',
+    note: 'Taiwan’s annual conference on human–computer interaction.',
+  },
+  { org: 'OpenHCI 2025', role: 'Best Research Award', dates: 'Jul 2025' },
+  { org: 'NCCU Innovation Hackathon', role: 'Monetisation Award', dates: '2025' },
+];
+
+const groups = [
+  { label: 'Education', items: education },
+  { label: 'Experience', items: experience },
+  { label: 'Recognition', items: recognition },
+];
 ---
 
 <Base
   title="About"
-  description="Chia Ni Chen — designer, artist and producer based in Taiwan."
+  description="Chia Ni Chen — marketing, product design and research. Technology and Art at NTHU, on exchange at NUS Singapore."
 >
-  <h1>About</h1>
-  <p>
-    I'm a final-year undergraduate in Technology Art at the College of Arts,
-    National Tsing Hua University, graduating in 2026.
-    Half my week is making things — interfaces, installations, printed matter.
-    The other half is production: budgets, schedules, vendors, crew.
-  </p>
+  <section class="sec sec--tight">
+    <div class="shell">
+      <span class="eyebrow reveal"><i></i>About</span>
+      <h1 class="display reveal" data-delay="60" style="margin-top:22px; font-size:clamp(34px,5.6vw,64px)">
+        Three disciplines that<br /><span class="serif-it">usually sit apart.</span>
+      </h1>
 
-  <h2>Experience</h2>
-  <p class="placeholder">
-    W1 skeleton. CV entries and a photo land in W4.
-  </p>
+      <div class="intro">
+        <p class="lede reveal" data-delay="130">
+          I'm a final-year undergraduate in the <strong>Interdisciplinary Program of Technology and Art</strong>
+          at National Tsing Hua University, graduating December 2026, and currently on exchange in Industrial
+          Design at the <strong>National University of Singapore</strong>.
+        </p>
+        <p class="lede reveal" data-delay="180">
+          My work crosses marketing strategy grounded in data, product and UX design, and research. Those
+          usually belong to different departments. I'm most useful where they meet &mdash; and I'm usually also
+          the one running the production that gets the work out the door: budgets, vendors, launch day.
+        </p>
+      </div>
+    </div>
+  </section>
 
-  <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+  <section class="sec" style="padding-top:0">
+    <div class="shell">
+      {
+        groups.map((g) => (
+          <div class="group reveal">
+            <h2 class="group__label">{g.label}</h2>
+            <ol class="cv">
+              {g.items.map((it) => (
+                <li class="cv__row">
+                  <span class="cv__dates">{it.dates}</span>
+                  <div class="cv__body">
+                    <p class="cv__role">{it.role}</p>
+                    <p class="cv__org">{it.org}</p>
+                    {it.note && <p class="cv__note">{it.note}</p>}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))
+      }
+    </div>
+  </section>
 </Base>
+
+<style>
+  .intro {
+    display: grid;
+    gap: 18px;
+    margin-top: 30px;
+  }
+
+  .group {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 28px;
+    padding: clamp(28px, 4vw, 44px) 0;
+    border-top: 1px solid var(--hair-2);
+  }
+  .group:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  @media (max-width: 760px) {
+    .group {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+  .group__label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding-top: 4px;
+  }
+
+  .cv {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+  }
+  .cv__row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 22px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--hair-2);
+  }
+  .cv__row:first-child {
+    padding-top: 0;
+  }
+  .cv__row:last-child {
+    border-bottom: 0;
+  }
+  @media (max-width: 560px) {
+    .cv__row {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+  .cv__dates {
+    font-size: 13px;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+    padding-top: 2px;
+  }
+  .cv__role {
+    font-size: 16.5px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .cv__org {
+    font-size: 14.5px;
+    color: var(--ink-2);
+    margin-top: 2px;
+  }
+  .cv__note {
+    font-size: 13px;
+    color: var(--ink-3);
+    margin-top: 4px;
+  }
+</style>

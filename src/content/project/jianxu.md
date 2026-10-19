@@ -1,12 +1,12 @@
 ---
 title: 澗序
 hook: Every productivity tool tries to stop you being interrupted. None of them help you come back.
-metric: Best Research Award · 6 teams
-summary: A workplace concept that treats the moment after an interruption — not the interruption itself — as the thing worth designing.
+metric: Best Research Award
+summary: A focus-recovery concept for knowledge workers — designing the moment after an interruption, not the interruption itself.
 year: '2025'
-role: UI design and design thinking; literature review with the team; presentation deck and poster
+role: UI design and research; pitch deck and poster
 team: 6 students, 2 teaching assistants
-context: OpenHCI 2025 · Best Research Award, 6 teams
+context: OpenHCI 2025 · Best Research Award
 tools: ['Figma']
 skills: ['UX research', 'Product concept', 'UI design']
 featured: true
@@ -98,11 +98,11 @@ The gap created by the interruption becomes the resource: the pause is where the
 
 ## Result
 
-**Best Research Award** at OpenHCI 2025, from six competing teams. The judges' stated reason was the depth of the literature grounding behind the concept.
+**Best Research Award** at OpenHCI 2025. The judges' stated reason was the depth of the literature grounding behind the concept.
 
 ## My contribution
 
-Concept development and the literature review were done collectively — six of us reading, arguing and consolidating together. In the split that followed I took UI design, and produced the presentation deck and the poster.
+Concept development and the literature review were done collectively — six of us reading, arguing and consolidating together. In the split that followed I took UI design, and produced the pitch deck and the poster.
 
 The decision I argue for hardest is the one above: dropping the plugin. It is the reason the project stopped being a focus tool and became something about recovery.
 
