@@ -137,7 +137,11 @@ I also coached how the analysis was presented: lead every slide with its insight
 
 ## What I took from it
 
-Reviewing work I wasn't doing showed me where arguments actually break. It is rarely the maths. It is the step where the evidence says one thing and the recommendation quietly assumes another. A strategy has to be right and also easy to follow, and the second part is easy to skip when you are close to the analysis.
+Supervising the team meant switching between two roles. The first was the outside reader. The team knew the material far better than any judge would, and that closeness made it easy to lose the top-down view: a slide could be right in every detail and still break the thread, because its logic only connected for someone who already had the domain knowledge. Reading as a third party let me see where the argument stopped following on and the information stopped fitting together.
+
+The second role was the opposite. Before calling something a problem, I had to understand it from the mentee's side, and follow how they had reasoned their way there. Only then could I point to the gap I saw, talk it through with them, and lay out my own reasoning in full instead of handing down a verdict.
+
+Moving between the two taught me to think in both directions, and to keep asking myself the question I was asking them: why?
 
 ---
 
