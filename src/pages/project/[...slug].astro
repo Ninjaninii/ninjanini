@@ -214,4 +214,308 @@ const d = entry.data;
     color: var(--ink-3);
     font-style: normal;
   }
+
+  /* ── figures written as raw HTML in the markdown ── */
+  .prose .fig {
+    margin: 30px 0 34px;
+    padding: 22px 22px 18px;
+    background: var(--panel);
+    border: 1px solid var(--hair-2);
+    border-radius: var(--radius);
+  }
+  .fig__t {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .fig__s {
+    display: block;
+    font-size: 13px;
+    color: var(--ink-3);
+    margin: 3px 0 20px;
+  }
+  .fig__src {
+    display: block;
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-top: 16px;
+  }
+  .fig details {
+    margin-top: 12px;
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+  .fig summary {
+    cursor: pointer;
+    width: max-content;
+  }
+  .fig summary:hover {
+    color: var(--ink);
+  }
+  .prose .fig table {
+    font-size: 13px;
+    margin: 10px 0 0;
+  }
+  .prose .fig th,
+  .prose .fig td {
+    padding: 7px 11px;
+  }
+  .fig .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .fig__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: 12.5px;
+    color: var(--ink-2);
+    margin: -6px 0 16px;
+  }
+  .fig__legend i {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: -1px;
+  }
+
+  /* hover / focus tooltip on any mark that carries data-tip */
+  .fig [data-tip] {
+    position: relative;
+    outline: none;
+  }
+  .fig [data-tip]:hover::after,
+  .fig [data-tip]:focus-visible::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 230px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.4;
+    text-align: left;
+    white-space: normal;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .fig [data-tip]:focus-visible {
+    box-shadow: 0 0 0 2px var(--panel), 0 0 0 4px var(--accent);
+  }
+
+  /* column charts (also used for the waterfall) */
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+  .cols__t {
+    display: block;
+    font-size: 12.5px;
+    color: var(--ink-2);
+    margin-bottom: 10px;
+  }
+  .plot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 170px;
+    border-bottom: 1px solid var(--hair);
+    background: repeating-linear-gradient(to top, var(--hair-2) 0 1px, transparent 1px 42.5px);
+  }
+  .plot__c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+    min-width: 0;
+  }
+  .plot__v {
+    font-size: 12.5px;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 6px;
+    white-space: nowrap;
+  }
+  .plot__b {
+    width: 26px;
+    border-radius: 4px 4px 0 0;
+    cursor: default;
+  }
+  .plot--wf .plot__b {
+    border-radius: 4px;
+  }
+  .plot__x {
+    display: flex;
+    justify-content: space-around;
+    font-size: 11.5px;
+    color: var(--ink-3);
+    line-height: 1.35;
+    margin-top: 8px;
+    text-align: center;
+  }
+  .plot__x span {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* treemap */
+  .tree {
+    display: flex;
+    gap: 2px;
+    height: 250px;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  .tree__col {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .tree__t {
+    border-radius: 4px;
+    padding: 10px 11px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 34px;
+    min-width: 0;
+    color: var(--ink);
+    cursor: default;
+  }
+  .tree__t.on {
+    color: var(--seq-on);
+  }
+  .tree__t b {
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .tree__t.big b {
+    font-size: clamp(26px, 4vw, 36px);
+  }
+  .tree__t.row {
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 11px;
+  }
+
+  /* donut */
+  .donut {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .donut svg {
+    width: 170px;
+    height: 170px;
+    flex: none;
+  }
+  .donut__c {
+    font-size: 21px;
+    font-weight: 500;
+    fill: var(--ink);
+  }
+  .donut__s {
+    font-size: 8.5px;
+    fill: var(--ink-3);
+  }
+  .donut ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .prose .donut li {
+    margin: 0;
+    padding: 0;
+  }
+  .donut li b {
+    display: inline-block;
+    min-width: 52px;
+    color: var(--ink);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .donut li i {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    margin-right: 8px;
+    vertical-align: -1px;
+  }
+
+  /* worked equations */
+  .eq {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 12px;
+    padding: 14px 0;
+    border-top: 1px solid var(--hair-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .eq:first-of-type {
+    border-top: 0;
+    padding-top: 2px;
+  }
+  .eq span {
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .eq b {
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .eq b small {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 400;
+    color: var(--ink-3);
+    letter-spacing: 0;
+  }
+  .eq .res {
+    color: var(--accent);
+  }
+  .eq i {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 12px;
+    font-style: normal;
+  }
+
+  @media (max-width: 560px) {
+    .prose .fig {
+      padding: 18px 14px 14px;
+    }
+    .cols {
+      grid-template-columns: 1fr;
+    }
+    .tree {
+      height: 230px;
+      font-size: 11px;
+    }
+    .tree__t {
+      padding: 7px 8px;
+    }
+  }
 </style>

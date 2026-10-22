@@ -21,6 +21,14 @@
   /* the single accent */
   --accent: #4a5bb8;
   --accent-soft: rgba(74, 91, 184, 0.09);
+  /* chart steps — one hue light→dark, plus two greys for de-emphasis */
+  --seq-1: #dfe2f5;
+  --seq-2: #aab3e6;
+  --seq-3: #5f6fc6;
+  --seq-4: #2b367a;
+  --seq-on: #ffffff; /* text on seq-3/4 */
+  --g-1: #d9d9d4;
+  --g-2: #b4b4ae;
 
   /* motion */
   --ease: cubic-bezier(0.32, 0.72, 0, 1);
@@ -46,6 +54,13 @@
     --hair-2: rgba(242, 242, 236, 0.07);
     --accent: #93a0ec;
     --accent-soft: rgba(147, 160, 236, 0.14);
+    --seq-1: #262b4a;
+    --seq-2: #3b478e;
+    --seq-3: #6878d2;
+    --seq-4: #a9b3f1;
+    --seq-on: #0e0e0c;
+    --g-1: #34342f;
+    --g-2: #4f4f48;
   }
 }
 :root[data-theme='dark'] {
@@ -60,6 +75,13 @@
   --hair-2: rgba(242, 242, 236, 0.07);
   --accent: #93a0ec;
   --accent-soft: rgba(147, 160, 236, 0.14);
+  --seq-1: #262b4a;
+  --seq-2: #3b478e;
+  --seq-3: #6878d2;
+  --seq-4: #a9b3f1;
+  --seq-on: #0e0e0c;
+  --g-1: #34342f;
+  --g-2: #4f4f48;
 }
 
 * {
