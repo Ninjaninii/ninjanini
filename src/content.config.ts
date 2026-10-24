@@ -24,6 +24,13 @@ const work = z.object({
   skills: z.array(z.string()).default([]),
   cover: z.string().optional(),
   coverAlt: z.string().optional(),
+  // shown beside the title on the detail page, instead of the wide cover plate
+  heroImage: z.string().optional(),
+  // reading aids over the first characters of the title, e.g. pinyin over Chinese
+  phonetic: z.array(z.string()).optional(),
+  // a small image that swims in to sit after the title
+  titleMark: z.string().optional(),
+  heroAlt: z.string().optional(),
   link: z.string().url().optional(),
   /** Pulled onto the landing page. */
   featured: z.boolean().default(false),
