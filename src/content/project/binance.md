@@ -11,49 +11,83 @@ tools: []
 skills: ['Go-to-market strategy', 'Strategy review', 'Storytelling']
 featured: true
 order: 1
+cover: /work/binance/logo.webp
+coverAlt: Logo of the NTHU Consulting Group, the student club that ran the project
+coverCutout: true
+coverWidth: 30
 draft: false
 ---
 
 ## What this was
 
-A simulated consulting project run by the NTHU Consulting Group, a student consulting club. Each team was assigned a different real company and built a growth strategy across three judged review rounds, from September to December 2025. It was a training exercise with no affiliation to Binance, and nothing here represents Binance's own plans.
+**A simulated consulting case, reviewed three times.** The NTHU Consulting Group, a student consulting club, assigned each team a different real company to grow. Ours was Binance in Taiwan, from September to December 2025. It was a training exercise with no affiliation to Binance, and nothing here represents Binance's own plans.
+
+<figure class="fig bn">
+<span class="fig__t">Three judged reviews</span>
+<ol class="vflow">
+<li><small>Review 1</small><b>One customer for everything</b><span>Targets 18-to-29-year-olds for both goals, on desk research alone.</span></li>
+<li><small>Review 2</small><b>Two goals, two customers</b><span>Splits the market after a 191-response survey.</span></li>
+<li class="on"><small>Review 3</small><b>A priced plan for each customer</b><span>Sizes every target, values each user and costs each lever. Ranked 1st of all teams.</span></li>
+</ol>
+</figure>
 
 ## The brief
 
-**Two targets, one plan.** The brief set two goals for Binance in Taiwan: grow the user base by 25% within a year, and grow trading volume by 70% within three.
+**Two targets, one plan.**
 
-The team built the case on two questions. *Why now?* The global crypto market had grown from $776.4B in early 2021 to $4.38T by October 2025, and Taiwan's regulator was moving toward a dedicated virtual-asset law that would widen what exchanges could offer. *Why Taiwan?* Crypto ownership there sat at 7.6%, below the 9.9% global average, but was growing at 15% a year — fourth-fastest in East Asia. A small market, on the way up.
+<figure class="fig bn">
+<div class="goals">
+<div><small>User growth · within 1 year</small><b>+25%</b><span>Grow Binance's user base in Taiwan.</span></div>
+<div><small>Trading volume · within 3 years</small><b>+70%</b><span>Grow the volume traded on Binance in Taiwan.</span></div>
+</div>
+</figure>
 
-<figure class="fig">
+The team built the case on two questions. *Why now?* The market had grown more than fivefold since 2021, and Taiwan's regulator was moving toward a dedicated virtual-asset law that would widen what exchanges could offer. *Why Taiwan?* Ownership sat below the global average but was growing at 15% a year, fourth-fastest in East Asia: a small market, on the way up.
+
+<figure class="fig bn">
 <span class="fig__t">Why now, why Taiwan</span>
 <span class="fig__s">The market context the team opened with</span>
 <div class="cols">
 <div><span class="cols__t">Global crypto market cap, US$</span><div class="plot"><div class="plot__c"><span class="plot__v">$776.4B</span><div class="plot__b" style="height:23px;background:var(--g-2)" tabindex="0" data-tip="January 2021: $776.4B"></div></div><div class="plot__c"><span class="plot__v">$4.38T</span><div class="plot__b" style="height:130px;background:var(--accent)" tabindex="0" data-tip="October 2025: $4.38T, an all-time high"></div></div></div><div class="plot__x"><span>Jan 2021</span><span>Oct 2025</span></div></div>
 <div><span class="cols__t">Share of people who own crypto</span><div class="plot"><div class="plot__c"><span class="plot__v">7.6%</span><div class="plot__b" style="height:100px;background:var(--accent)" tabindex="0" data-tip="Taiwan: 7.6%, growing 15% a year"></div></div><div class="plot__c"><span class="plot__v">9.9%</span><div class="plot__b" style="height:130px;background:var(--g-2)" tabindex="0" data-tip="Global average: 9.9%"></div></div></div><div class="plot__x"><span>Taiwan</span><span>Global</span></div></div>
 </div>
-<span class="fig__src">Taiwan's holders were growing 15% a year, 4th-fastest in East Asia. Source: the team's research (CoinGecko, Chainalysis).</span>
+<span class="fig__src">Source: the team's research (CoinGecko, Chainalysis).</span>
 </figure>
 
 ## First answer
 
-**One customer for everything.** At the first review, the team proposed one target segment for both goals: 18-to-29-year-olds, the age group with the highest rate of first entry into crypto.
+**One customer for everything.** At the first review, the team proposed a single target for both goals: 18-to-29-year-olds, the age group with the highest rate of first entry into crypto.
 
-The groundwork underneath it was solid. The team mapped the competition in layers — global exchanges such as OKX and Bybit, Taiwan's local platforms BitoPro and MAX, and traditional banks as potential B2B2C partners — and compared fees, app-store rankings and which yield products users actually trusted. What it had not yet done was test its hypotheses against real investors.
+<figure class="fig bn">
+<span class="fig__t">The competitive landscape the team mapped</span>
+<div class="layers">
+<div><small>Global exchanges</small><b>OKX, Bybit</b><span>Compared on fees and app-store rankings.</span></div>
+<div><small>Local platforms</small><b>BitoPro, MAX</b><span>Compared on the yield products users trusted.</span></div>
+<div><small>Traditional banks</small><b>Potential partners</b><span>Considered for a B2B2C channel.</span></div>
+</div>
+</figure>
+
+The groundwork was solid. What the team had not yet done was test its hypotheses against real investors.
 
 ## The turn
 
-**The survey split the problem in two.** Between the first and second reviews, the team ran 191 valid survey responses to verify — or overturn — its hypotheses. The data did not support one customer for both goals.
+**The survey split the problem in two.** Between the first and second reviews, the team ran a survey with 191 valid responses. New users and new volume turned out to come from different people.
 
-New users and new volume came from different people, so the team divided the market the same way:
+<figure class="fig bn">
+<span class="fig__t">One customer became two</span>
+<div class="split">
+<div class="split__one"><small>Review 1</small><b>One customer: ages 18–29</b></div>
+<i class="split__fork" aria-hidden="true"></i>
+<div class="split__two">
+<div><small>Goal · +25% users</small><b>People not yet investing</b><dl><div><dt>Who</dt><dd>Know about crypto, but hesitate</dd></div><div><dt>Segmented by</dt><dd>Position in the marketing funnel</dd></div></dl></div>
+<div class="on"><small>Goal · +70% volume</small><b>Existing investors aged 26–50</b><dl><div><dt>Who</dt><dd>Willing to commit NT$10K–1M</dd></div><div><dt>Segmented by</dt><dd>Age × amount willing to invest</dd></div></dl></div>
+</div>
+</div>
+</figure>
 
-| Goal | Who it comes from | How they were segmented |
-| --- | --- | --- |
-| +25% users | People not yet investing, who know about crypto but hesitate | By position in the marketing funnel |
-| +70% volume | Existing investors aged 26–50 willing to commit NT$10K–1M | By age × amount willing to invest |
+A revenue model drove the second split. Crossing two age bands with three investable-asset bands gave six segments, and the 26-to-50 band carried about 84% of projected revenue. These investors mostly held long-term to diversify, and wealth products, which suit that behaviour, carry an exchange's highest margins.
 
-The second split was driven by a revenue model. Crossing two age bands with three investable-asset bands gave six segments; in the team's own model, the 26-to-50 band carried roughly 84% of projected revenue. These investors were mostly long-term holders aiming to diversify — and wealth products, which suit exactly that behaviour, carry the highest margins for an exchange.
-
-<figure class="fig">
+<figure class="fig bn">
 <span class="fig__t">Where the projected revenue sits</span>
 <span class="fig__s">Each block's area is its share of the team's six-segment revenue model</span>
 <div class="tree"><div class="tree__t on big" style="flex:69.3 1 0;background:var(--seq-4)" tabindex="0" data-tip="Segment F: 115 × 25.3% × 33/25 × 418,500 × 60% = 9,643,595"><span>F · age 26–50 · NT$100K–1M</span><b>69.3%</b></div><div class="tree__col" style="flex:30.7 1 0"><div class="tree__t " style="flex:14.1 1 0;background:var(--seq-2)" tabindex="0" data-tip="Segment E: 115 × 34.4% × 33/25 × 45,970 × 82% = 1,968,423"><span>E · age 26–50 · NT$10K–100K</span><b>14.1%</b></div><div class="tree__t " style="flex:10.9 1 0;background:var(--g-2)" tabindex="0" data-tip="Segment C: 115 × 3.9% × 33/8 × 164,062 × 50% = 1,517,624"><span>C · age 18–25 · NT$100K–1M</span><b>10.9%</b></div><div class="tree__t row" style="flex:5.7 1 0;background:var(--g-1)" tabindex="0" data-tip="B 4.3% (598,684) · A 0.7% (98,145) · D 0.7% (91,894)"><span>B, A, D · 5.7%</span></div></div></div>
@@ -66,44 +100,57 @@ The second split was driven by a revenue model. Crossing two age bands with thre
 
 ## The plan
 
-**Different levers for different customers.** The final proposal treated the two goals as separate strategies.
+**Different levers for different customers.**
 
-For **user growth**, the survey showed the main barrier for non-investors was simply not understanding crypto. So the plan led with trust and education rather than trading:
+<figure class="fig bn">
+<span class="fig__t">User growth: trust and education before trading</span>
+<span class="fig__s">The survey's main barrier for non-investors: not understanding crypto</span>
+<ol class="seq seq--plain">
+<li><b>Borrow trust from traditional finance</b><span>Partner with finance creators on YouTube, this audience's leading research source at 41%</span></li>
+<li><b>Teach before selling</b><span>Offer a risk-control course as the sign-up incentive</span></li>
+<li><b>Make the product feel familiar</b><span>Offer a balanced-fund-style portfolio: 70% stable yield, 30% major coins</span></li>
+</ol>
+</figure>
 
-1. **Borrow trust from traditional finance** — partner with established finance creators on the channels this audience already uses. YouTube was its leading research source, at 41%.
-2. **Teach before selling** — an exclusive course on risk control as the sign-up incentive, aimed at the "I don't know where to start" barrier.
-3. **A product that feels familiar** — a crypto portfolio modelled on a balanced fund: 70% stable yield, 30% exposure to major coins, for investors who expect ETF-like returns.
+<figure class="fig bn">
+<span class="fig__t">Trading volume: one lever per driver</span>
+<div class="formula">
+<div class="on"><small>Target</small><b>Volume</b></div>
+<i aria-hidden="true">=</i>
+<div><small>Users</small><b>More bank channels</b><span>Ease moving money in and out</span></div>
+<i aria-hidden="true">×</i>
+<div><small>Amount traded</small><b>A VIP ladder</b><span>Add relationship managers, a family-office desk and a Family Summit</span></div>
+<i aria-hidden="true">×</i>
+<div><small>How often they trade</small><b>A streak-based reward loop</b><span>Reward automated investing</span></div>
+</div>
+</figure>
 
-For **trading volume**, the team broke the target into its drivers — volume is users × amount traded × how often they trade — and gave each driver its own lever:
+The frequency lever started from a weakness. Most 26-to-50 investors hold long-term, and that is exactly the group that loses heavily in a bear market and stops investing.
 
-| Driver | Lever |
-| --- | --- |
-| Users | More local bank channels for moving money in and out, reducing the friction new users face |
-| Amount traded | A VIP ladder with relationship managers, a family-office desk and a Family Summit for high-net-worth clients |
-| How often they trade | A streak-based reward loop on automated investing |
-
-The frequency lever is the most interesting, because it started from a weakness. Most investors in the 26-to-50 segment hold long-term — 51.7% of them — and that is exactly the group that loses heavily in a bear market and stops investing. So the team designed a habit loop, built on Binance's Megadrop rewards, to keep them in.
-
-<figure class="fig">
+<figure class="fig bn">
 <span class="fig__t">How 26-to-50 investors hold crypto</span>
 <span class="fig__s">Survey respondents aged 26–50 who already invest</span>
 <div class="donut"><svg viewBox="0 0 120 120" role="img" aria-label="Long-term holding 51.7%, medium-to-long term 27.5%, short-term trading 20.6%"><circle cx="60" cy="60" r="48" fill="none" stroke="var(--accent)" stroke-width="18" stroke-dasharray="153.92 147.67" stroke-dashoffset="-0.00" transform="rotate(-90 60 60)"><title>Long-term holding: 51.7%</title></circle><circle cx="60" cy="60" r="48" fill="none" stroke="var(--g-2)" stroke-width="18" stroke-dasharray="80.94 220.65" stroke-dashoffset="-155.92" transform="rotate(-90 60 60)"><title>Medium-to-long term: 27.5%</title></circle><circle cx="60" cy="60" r="48" fill="none" stroke="var(--g-1)" stroke-width="18" stroke-dasharray="60.13 241.46" stroke-dashoffset="-238.86" transform="rotate(-90 60 60)"><title>Short-term trading: 20.6%</title></circle><text x="60" y="62" text-anchor="middle" class="donut__c">51.7%</text><text x="60" y="75" text-anchor="middle" class="donut__s">hold long-term</text></svg><ul><li><i style="background:var(--accent)"></i><b>51.7%</b>Long-term holding</li><li><i style="background:var(--g-2)"></i><b>27.5%</b>Medium-to-long term</li><li><i style="background:var(--g-1)"></i><b>20.6%</b>Short-term trading</li></ul></div>
 <span class="fig__src">Source: the team's survey (191 valid responses).</span>
 </figure>
 
-The loop works in three steps:
+So the team designed a habit loop, built on Binance's Megadrop rewards, to keep them investing through the downturn and still on the platform when the market turns.
 
-1. **A streak, not a sale** — users set their own weekly amount for automated dollar-cost averaging, then commit to investing once a week for eight consecutive weeks. No extra money, just no gaps.
-2. **Points for consistency** — each completed week earns points, and rewards are split in proportion to each user's share of all points earned.
-3. **Funded by new listings** — in the proposal, a share of each newly listed coin's supply, 20–25%, funds the rewards, so the platform buys loyalty at almost no marketing cost.
-
-The point of the mechanic is timing: it keeps people investing through the downturn, so they are still on the platform when the market turns.
+<figure class="fig bn">
+<span class="fig__t">The habit loop</span>
+<div class="loop">
+<div><small>1 · Streak</small><b>Commit, don't spend</b><span>Set a weekly automated amount and invest for eight weeks in a row.</span></div>
+<div><small>2 · Points</small><b>Reward consistency</b><span>Earn points each week; share rewards by points earned.</span></div>
+<div><small>3 · Funding</small><b>Fund it from new listings</b><span>Use 20–25% of each new coin's supply, at almost no marketing cost.</span></div>
+</div>
+<span class="loop__back">↻ Repeats every eight weeks</span>
+</figure>
 
 ## The numbers
 
 **Every target, priced.** The team turned both goals into absolute numbers before choosing a single tactic.
 
-<figure class="fig">
+<figure class="fig bn">
 <span class="fig__t">What the two goals meant in absolute terms</span>
 <span class="fig__s">From the cost–benefit section of the final review</span>
 <div class="eq"><b>436k<small>existing Binance users in Taiwan</small></b><i><span>×</span><b>25%<small>one-year user goal</small></b></i><i><span>=</span><b class="res">109k<small>new registrations needed</small></b></i></div>
@@ -111,9 +158,9 @@ The point of the mechanic is timing: it keeps people investing through the downt
 <div class="eq"><b>NT$858B<small>Binance's yearly volume in Taiwan</small></b><i><span>×</span><b>20%<small>first-year growth</small></b></i><i><span>=</span><b class="res">NT$171.6B<small>extra volume in year one</small></b></i></div>
 </figure>
 
-It valued each user across a full market cycle rather than a single good year. Benchmarking Coinbase's revenue per user in the 2021 bull market and the 2022 bear market, it assumed 18 months of each, then divided by five for Binance's much lower trading fees. That gave a lifetime value of about US$307, or NT$9,216.
+It valued each user across a full market cycle rather than one good year: Coinbase's revenue per user in the 2021 bull and 2022 bear markets, 18 months of each, divided by five for Binance's lower fees.
 
-<figure class="fig">
+<figure class="fig bn">
 <span class="fig__t">Lifetime value of one user</span>
 <span class="fig__s">US$, built up over one bear-and-bull cycle, then adjusted for fees</span>
 <div class="plot plot--wf"><div class="plot__c" style="padding-bottom:0px"><span class="plot__v">+$375</span><div class="plot__b" style="height:32px;background:var(--g-2)" tabindex="0" data-tip="Bear market 2022: $20.8 a month × 18 months"></div></div><div class="plot__c" style="padding-bottom:32px"><span class="plot__v">+$1,161</span><div class="plot__b" style="height:98px;background:var(--g-2)" tabindex="0" data-tip="Bull market 2021: $64.5 a month × 18 months"></div></div><div class="plot__c" style="padding-bottom:0px"><span class="plot__v">$1,536</span><div class="plot__b" style="height:130px;background:var(--g-1)" tabindex="0" data-tip="Coinbase-based lifetime value, before fees"></div></div><div class="plot__c" style="padding-bottom:26px"><span class="plot__v">−$1,229</span><div class="plot__b" style="height:104px;background:var(--g-1)" tabindex="0" data-tip="Divided by 5 for Binance's lower trading fees"></div></div><div class="plot__c" style="padding-bottom:0px"><span class="plot__v"><b>$307</b></span><div class="plot__b" style="height:26px;background:var(--accent)" tabindex="0" data-tip="$1,536 ÷ 5 = $307.2 ≈ NT$9,216"></div></div></div><div class="plot__x"><span>Bear 2022<br>18 months</span><span>Bull 2021<br>18 months</span><span>Before<br>fees</span><span>÷ 5<br>fee gap</span><span>Lifetime<br>value</span></div>
@@ -121,27 +168,33 @@ It valued each user across a full market cycle rather than a single good year. B
 <details><summary>View as table</summary><table><tr><th>Step</th><th class="num">US$</th></tr><tr><td>Bear market, $20.8 × 18 months</td><td class="num">375</td></tr><tr><td>Bull market, $64.5 × 18 months</td><td class="num">1,161</td></tr><tr><td>Unadjusted lifetime value</td><td class="num">1,536</td></tr><tr><td>÷ 5 for Binance's fees</td><td class="num">307</td></tr></table></details>
 </figure>
 
-Each strategy then carried its own cost and return — click-through and conversion assumptions for paid placement, cost per acquisition for creator partnerships — so the plan could be defended line by line.
+Each strategy then carried its own cost and return, from click-through and conversion assumptions for paid placement to cost per acquisition for creator partnerships, so the plan could be defended line by line.
 
 ## Result
 
-**Ranked 1st of all teams** at the final review.
+**Ranked 1st of all teams at the final review.**
 
 ## My contribution
 
-I was one of two Teaching Supervisors on the team, alongside a mentor. TAs did not do the research. Our job was to review the work and keep its direction sound.
+<div class="credit">
+<div><small>My co-TA</small><p>Pressure-tested the numbers, asking for the formula behind every figure.</p></div>
+<div><small>Me</small><p>Pressure-tested the logic, and coached how the analysis was presented.</p></div>
+</div>
 
-My co-TA pressure-tested the numbers, asking for the formula behind every figure. I pressure-tested the logic. At each round I read the deck the way a judge would and asked the questions a judge would ask: does this recommendation actually follow from that evidence? Why should I believe this segment matters most? How would the bank partnership really work? Where an argument jumped a step, I sent it back.
+I was one of two Teaching Supervisors on the team, alongside a mentor. TAs did not do the research; our job was to review the work and keep its direction sound. At each round I read the deck the way a judge would and asked a judge's questions: does this recommendation follow from that evidence? Why should I believe this segment matters most? How would the bank partnership really work? Where an argument jumped a step, I sent it back.
 
-I also coached how the analysis was presented: lead every slide with its insight, agree the colour rules before anyone builds a chart, highlight the one figure that matters and grey out the rest, and cut the text until the argument reads top to bottom. The research and the strategy were the team's. My part was making sure they held together, and that they landed in a twenty-minute review.
+On presentation, I pushed four rules: lead every slide with its insight, agree the colour rules before anyone builds a chart, highlight the one figure that matters and grey out the rest, and cut the text until the argument reads top to bottom. The research and the strategy were the team's. My part was making sure they held together, and that they landed in a twenty-minute review.
 
 ## What I took from it
 
-Supervising the team required me to move deliberately between two perspectives. The first was that of an external reviewer. The team's domain knowledge exceeded what any judge would bring, and that proximity made it easy to lose sight of the top-down narrative: a slide could be accurate in every detail yet disrupt the overall storyline, because its logic held only for an audience that already shared the team's expertise. Reviewing as a third party allowed me to identify where the argument lost coherence and where the information no longer connected.
+**Two perspectives, one question: why?**
 
-The second perspective was the reverse. Before flagging an issue, I first sought to understand the mentee's reasoning and how they had arrived at their conclusion. Only then could I pinpoint the gap I saw, discuss it with them, and articulate my own rationale in full rather than simply issuing a judgement.
+<div class="credit">
+<div><small>The external reviewer</small><p>The team's domain knowledge exceeded what any judge would bring, and that proximity made it easy to lose sight of the top-down narrative: a slide could be accurate in every detail yet disrupt the overall storyline, because its logic held only for an audience that already shared the team's expertise. Reviewing as a third party allowed me to identify where the argument lost coherence and where the information no longer connected.</p></div>
+<div><small>The mentee's side</small><p>Before flagging an issue, I first sought to understand the mentee's reasoning and how they had arrived at their conclusion. Only then could I pinpoint the gap I saw, discuss it with them, and articulate my own rationale in full rather than simply issuing a judgement.</p></div>
+</div>
 
-Alternating between the two strengthened my ability to think bidirectionally, and instilled the habit of challenging my own reasoning with the same question I put to the team: why?
+Supervising the team required me to move deliberately between these two perspectives. Alternating between them strengthened my ability to think bidirectionally, and instilled the habit of challenging my own reasoning with the same question I put to the team: why?
 
 ---
 

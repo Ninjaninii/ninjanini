@@ -14,6 +14,7 @@ const featured = [...projects, ...artworks]
 
 <Base title={site.name}>
   <section class="hero">
+    <div class="home-glow" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="shell">
       <span class="eyebrow reveal"><i></i>Taipei &middot; Singapore</span>
 
@@ -78,9 +79,97 @@ const featured = [...projects, ...artworks]
   </section>
 </Base>
 
+<style is:global>
+  /* the homepage wears mint: page, card trays and accent; dark mode keeps the site default */
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme='dark']):has(.home-glow) {
+      --paper: #f2f8f5;
+      --paper-2: #e6f2ec;
+      --plate: #d3e9de;
+      --accent: #23866d;
+      --accent-soft: rgba(53, 200, 180, 0.14);
+    }
+  }
+  :root[data-theme='light']:has(.home-glow) {
+    --paper: #f2f8f5;
+    --paper-2: #e6f2ec;
+    --plate: #d3e9de;
+    --accent: #23866d;
+    --accent-soft: rgba(53, 200, 180, 0.14);
+  }
+  /* a little more grain on the homepage, like risograph paper */
+  :root:has(.home-glow) body::after {
+    opacity: 0.05;
+  }
+</style>
+
 <style>
   .hero {
+    position: relative;
+    isolation: isolate;
     padding: clamp(80px, 13vw, 170px) 0 clamp(50px, 7vw, 90px);
+  }
+  /* soft, out-of-focus light behind the hero: mist, mint and lemonade */
+  .home-glow {
+    position: absolute;
+    inset: -10% 0 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .home-glow i {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.55;
+  }
+  .home-glow i:nth-child(1) {
+    width: 46vw;
+    height: 30vw;
+    right: -6vw;
+    top: 8%;
+    background: #c2f2e4;
+  }
+  .home-glow i:nth-child(2) {
+    width: 26vw;
+    height: 20vw;
+    right: 18vw;
+    top: 34%;
+    background: #35c8b4;
+    opacity: 0.22;
+  }
+  .home-glow i:nth-child(3) {
+    width: 22vw;
+    height: 16vw;
+    right: 2vw;
+    top: 52%;
+    background: #edf7be;
+    opacity: 0.6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .home-glow {
+      display: none;
+    }
+  }
+  :root[data-theme='dark'] .home-glow {
+    display: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .home-glow i {
+      animation: glow-drift 18s ease-in-out infinite alternate;
+    }
+    .home-glow i:nth-child(2) {
+      animation-duration: 23s;
+      animation-direction: alternate-reverse;
+    }
+    .home-glow i:nth-child(3) {
+      animation-duration: 27s;
+    }
+  }
+  @keyframes glow-drift {
+    to {
+      transform: translate(-4vw, 3vw) scale(1.12);
+    }
   }
   .hero__title {
     margin: 26px 0 0;

@@ -61,7 +61,7 @@ const d = entry.data;
     </header>
 
     {
-      d.cover && !d.heroImage && (
+      d.cover && !d.heroImage && !d.coverCutout && (
         <div class="shell reveal">
           <div class="plate plate--wide">
             <div class="plate__in">
@@ -104,7 +104,7 @@ const d = entry.data;
     const prose = document.querySelector<HTMLElement>('.prose');
     if (!prose) return;
     const STAGGER =
-      '.chips > span, .chain > *, .shift > *, .shift__label, .crowd > *, .scenes > div, .persona__traits li, .vflow li, ' +
+      '.chips > span, .goals > *, .layers > *, .split__one, .split__fork, .split__two > *, .formula > *, .loop > *, .chain > *, .shift > *, .shift__label, .crowd > *, .scenes > div, .persona__traits li, .vflow li, ' +
       '.match > *, .seq li, .shots > figure, .cmp > *, .hmw';
     prose.querySelectorAll<HTMLElement>('.fig').forEach((fig) => {
       fig.querySelectorAll<HTMLElement>(STAGGER).forEach((el, i) => el.style.setProperty('--i', String(Math.min(i, 14))));
@@ -810,12 +810,9 @@ const d = entry.data;
     --paper: #1f1d16;
     --paper-2: #2a2720;
   }
-  .jx .scenes > div,
-  .jx .chain > div:not(.on),
-  .jx .match > div:not(.on),
-  .jx .seq li,
-  .jx .cmp__c:not(.on):not(.cmp__c--gap),
-  .jx .vflow li:not(.on):not(.off) {
+  :is(.jx, .bn) :is(.scenes > div, .chain > div:not(.on), .match > div:not(.on), .seq li,
+  .cmp__c:not(.on):not(.cmp__c--gap), .vflow li:not(.on):not(.off), .goals > div, .layers > div,
+  .split__one, .split__two > div, .formula > div:not(.on), .loop > div) {
     box-shadow: 0 1px 2px rgba(35, 35, 33, 0.04), 0 8px 18px -12px rgba(35, 35, 33, 0.18);
   }
   /* a case study with Jianxu figures takes the same ivory-beige for the whole page,
@@ -832,6 +829,275 @@ const d = entry.data;
     --paper: #f3efe8;
     --paper-2: #f9f7f3;
   }
+  /* Binance case study: warm paper with a muted exchange gold; same layering rules as Jianxu */
+  .prose .bn {
+    --accent: #c4950f;
+    --jx-strong: #8a6400;
+    --jx-soft: #f6ebc8;
+    --g-1: #e6e0cf;
+    --g-2: #cdc4ab;
+    --seq-1: #f4e9c6;
+    --seq-2: #e3c66e;
+    --seq-3: #c4950f;
+    --seq-4: #7d5b00;
+    --seq-on: #fffaf0;
+    --glow: 0 1px 2px rgba(138, 100, 0, 0.08), 0 14px 30px -14px rgba(196, 149, 15, 0.5);
+    --paper: #f2f0ea;
+    --paper-2: #f9f8f4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .prose .bn {
+      --accent: #e2b84a;
+      --jx-strong: #e9c86a;
+      --jx-soft: #3a3220;
+      --g-1: #3a372e;
+      --g-2: #57513f;
+      --seq-1: #3a3220;
+      --seq-2: #6b5a26;
+      --seq-3: #b08a24;
+      --seq-4: #e2b84a;
+      --seq-on: #17150f;
+      --paper: #1d1b15;
+      --paper-2: #27241d;
+    }
+  }
+  :root[data-theme='dark'] .prose .bn {
+    --accent: #e2b84a;
+    --jx-strong: #e9c86a;
+    --jx-soft: #3a3220;
+    --g-1: #3a372e;
+    --g-2: #57513f;
+    --seq-1: #3a3220;
+    --seq-2: #6b5a26;
+    --seq-3: #b08a24;
+    --seq-4: #e2b84a;
+    --seq-on: #17150f;
+    --paper: #1d1b15;
+    --paper-2: #27241d;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme='dark']):has(.prose .bn) {
+      --accent: #c4950f;
+      --paper: #f2f0ea;
+      --paper-2: #f9f8f4;
+    }
+  }
+  :root[data-theme='light']:has(.prose .bn) {
+    --accent: #c4950f;
+    --paper: #f2f0ea;
+    --paper-2: #f9f8f4;
+  }
+  :has(.prose .bn) .prose {
+    --jx-strong: #8a6400;
+    --jx-soft: #f6ebc8;
+  }
+
+  /* shared small labels for the Binance diagrams */
+  :is(.goals, .layers, .split, .formula, .loop) small {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--jx-strong);
+    margin-bottom: 6px;
+  }
+  :is(.goals, .layers, .split, .formula, .loop) b {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  :is(.goals, .layers, .split, .formula, .loop) span {
+    display: block;
+    margin-top: 4px;
+    font-size: 13.5px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  /* the brief: two goals */
+  .goals {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .goals > div {
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: var(--paper-2);
+  }
+  .goals b {
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  /* first answer: the competitive layers */
+  .layers {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .layers > div {
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: var(--paper-2);
+  }
+  /* the turn: one customer splits into two */
+  .split__one {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: transparent;
+    text-align: center;
+  }
+  .split__one b {
+    color: var(--ink-3);
+    text-decoration: line-through;
+    text-decoration-color: var(--accent);
+  }
+  .split__fork {
+    display: block;
+    width: 52%;
+    height: 34px;
+    margin: 6px auto;
+    border: 1.5px solid var(--accent);
+    border-bottom: 0;
+    border-radius: 12px 12px 0 0;
+  }
+  .split__two {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .split__two > div {
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: var(--paper-2);
+  }
+  .split__two > div.on {
+    background: var(--jx-soft);
+    box-shadow: var(--glow);
+  }
+  .split__two dl {
+    margin: 10px 0 0;
+    display: grid;
+    gap: 6px;
+    font-size: 13.5px;
+  }
+  .split__two dl > div {
+    display: grid;
+    grid-template-columns: 100px minmax(0, 1fr);
+    gap: 10px;
+  }
+  .split__two dt {
+    color: var(--ink-3);
+  }
+  .split__two dd {
+    margin: 0;
+    color: var(--ink);
+  }
+  /* the plan: volume = users x amount x frequency */
+  .formula {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 10px;
+    align-items: stretch;
+  }
+  .formula > div {
+    padding: 16px 16px;
+    border-radius: 12px;
+    background: var(--paper-2);
+  }
+  .formula > div.on {
+    background: var(--accent);
+    box-shadow: var(--glow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .formula > div.on small,
+  .formula > div.on b {
+    color: #fffaf0;
+  }
+  .formula > div.on b {
+    font-size: 20px;
+  }
+  .formula i {
+    align-self: center;
+    font-style: normal;
+    font-size: 20px;
+    color: var(--accent);
+  }
+  /* a numbered list of steps without the question column */
+  .prose .seq.seq--plain li {
+    grid-template-columns: 26px 300px minmax(0, 1fr);
+  }
+  .prose .seq.seq--plain span {
+    grid-column: auto;
+  }
+  @media (max-width: 760px) {
+    .prose .seq.seq--plain li {
+      grid-template-columns: 26px minmax(0, 1fr);
+    }
+    .prose .seq.seq--plain li > * {
+      grid-column: 2;
+    }
+  }
+
+  /* the habit loop: three steps that repeat */
+  .loop {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    position: relative;
+  }
+  .loop > div {
+    position: relative;
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: var(--paper-2);
+  }
+  .loop > div:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -21px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+  }
+  .loop__back {
+    display: block;
+    margin-top: 12px;
+    font-size: 12.5px;
+    color: var(--jx-strong);
+    text-align: center;
+  }
+  @media (max-width: 760px) {
+    .goals,
+    .layers,
+    .split__two,
+    .loop {
+      grid-template-columns: 1fr;
+    }
+    .split__fork {
+      display: none;
+    }
+    .formula {
+      grid-template-columns: 1fr;
+    }
+    .formula i {
+      justify-self: center;
+    }
+    .loop > div:not(:last-child)::after {
+      right: 50%;
+      top: auto;
+      bottom: -24px;
+      transform: rotate(90deg);
+    }
+  }
+
   .jx .shots figcaption {
     color: var(--jx-ink);
   }
@@ -1569,7 +1835,7 @@ const d = entry.data;
   .motion .prose > h2.is-in::before {
     width: 26px;
   }
-  .motion .prose .fig :is(.chips > span, .chain > *, .shift > *, .shift__label, .crowd > *, .scenes > div, .persona__traits li, .vflow li, .match > *, .seq li, .shots > figure, .cmp > *, .hmw) {
+  .motion .prose .fig :is(.chips > span, .goals > *, .layers > *, .split__one, .split__fork, .split__two > *, .formula > *, .loop > *, .chain > *, .shift > *, .shift__label, .crowd > *, .scenes > div, .persona__traits li, .vflow li, .match > *, .seq li, .shots > figure, .cmp > *, .hmw) {
     opacity: 0;
     transform: translateY(14px) scale(0.98);
     transition:
@@ -1581,7 +1847,7 @@ const d = entry.data;
     transition-duration: 1.1s, 1.3s;
     transition-delay: calc(1.2s + var(--i, 0) * 0.45s);
   }
-  .motion .prose .fig.is-in :is(.chips > span, .chain > *, .shift > *, .shift__label, .crowd > *, .scenes > div, .persona__traits li, .vflow li, .match > *, .seq li, .shots > figure, .cmp > *, .hmw) {
+  .motion .prose .fig.is-in :is(.chips > span, .goals > *, .layers > *, .split__one, .split__fork, .split__two > *, .formula > *, .loop > *, .chain > *, .shift > *, .shift__label, .crowd > *, .scenes > div, .persona__traits li, .vflow li, .match > *, .seq li, .shots > figure, .cmp > *, .hmw) {
     opacity: 1;
     transform: none;
   }
@@ -1613,6 +1879,10 @@ const d = entry.data;
     gap: 0 40px;
     margin: 4px 0 26px;
     max-width: 68ch;
+  }
+  /* long two-sided reflections get the full width */
+  .prose > .credit:has(p:nth-of-type(1)) {
+    max-width: 1000px;
   }
   .credit > div {
     padding-left: 18px;

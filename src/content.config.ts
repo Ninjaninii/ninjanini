@@ -24,6 +24,10 @@ const work = z.object({
   skills: z.array(z.string()).default([]),
   cover: z.string().optional(),
   coverAlt: z.string().optional(),
+  // the cover is a transparent cut-out, shown floating on the card tray
+  coverCutout: z.boolean().default(false),
+  // width of a cut-out cover, as a percentage of the card
+  coverWidth: z.number().optional(),
   // shown beside the title on the detail page, instead of the wide cover plate
   heroImage: z.string().optional(),
   // reading aids over the first characters of the title, e.g. pinyin over Chinese

@@ -11,7 +11,8 @@ tools: ['Figma']
 skills: ['UX research', 'Product concept', 'UI design']
 featured: true
 order: 2
-cover: /work/jianxu/cover.webp
+cover: /work/jianxu/card.webp
+coverCutout: true
 coverAlt: Jianxu on a desktop screen, a one-minute meditation timer over rippling water with a koi
 heroImage: /work/jianxu/hero.webp
 heroAlt: Jianxu on a desktop screen, a meditation timer over rippling water with a koi
