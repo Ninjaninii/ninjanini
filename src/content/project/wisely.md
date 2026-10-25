@@ -10,6 +10,7 @@ context: NCCU Creative Ideas Hackathon 2025 · Innovation Star Award
 tools: []
 skills: ['Business model', 'Financial projection', 'Product concept']
 featured: false
+folderPapers: ['/work/wisely/card.webp']
 order: 3
 cover: /work/wisely/card.webp
 coverAlt: Wisely on a laptop, a grid of older consultants with ratings and a message button

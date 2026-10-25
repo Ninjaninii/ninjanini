@@ -28,6 +28,10 @@ const work = z.object({
   coverCutout: z.boolean().default(false),
   // width of a cut-out cover, as a percentage of the card
   coverWidth: z.number().optional(),
+  // homepage folder: the image on this piece's sheet (defaults to the cover)
+  folderPapers: z.array(z.string()).optional(),
+  // inner padding of that sheet image, as a percentage (default 13)
+  folderPad: z.number().optional(),
   // shown beside the title on the detail page, instead of the wide cover plate
   heroImage: z.string().optional(),
   // reading aids over the first characters of the title, e.g. pinyin over Chinese

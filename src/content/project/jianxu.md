@@ -10,6 +10,7 @@ context: OpenHCI 2025 · Best Research Award
 tools: ['Figma']
 skills: ['UX research', 'Product concept', 'UI design']
 featured: true
+folderPapers: ['/work/jianxu/card.webp']
 order: 2
 cover: /work/jianxu/card.webp
 coverCutout: true

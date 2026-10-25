@@ -10,6 +10,8 @@ context: NTHU Consulting Group · simulated consulting project, three judged rev
 tools: []
 skills: ['Go-to-market strategy', 'Strategy review', 'Storytelling']
 featured: true
+folderPapers: ['/work/binance/logo.webp']
+folderPad: 28
 order: 1
 cover: /work/binance/logo.webp
 coverAlt: Logo of the NTHU Consulting Group, the student club that ran the project

@@ -1,0 +1,383 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type Entry = CollectionEntry<'project'> | CollectionEntry<'artwork'>;
+interface Props {
+  /** shown on the folder and as its heading, e.g. "Projects" */
+  label: string;
+  /** the list page this folder stands for, e.g. "/project" */
+  base: string;
+  entries: Entry[];
+  /** what to say when the folder has nothing in it yet */
+  empty: string;
+  delay?: number;
+}
+const { label, base, entries, empty, delay = 0 } = Astro.props;
+const items = entries.map((e) => ({
+  href: `${base}/${e.id}/`,
+  title: e.data.title,
+  summary: e.data.summary,
+  tag: e.data.metric ? `${e.data.metric} · ${e.data.year}` : e.data.year,
+  img: e.data.folderPapers?.[0] ?? e.data.cover ?? '',
+  // a flat logo reads better small; screens and objects fill more of the sheet
+  pad: e.data.folderPad,
+}));
+// an empty folder still holds three blank sheets, so it opens the same way
+const sheets = items.length ? items : [null, null, null];
+---
+
+<!--
+  A section of the site as a folder, after the Framer "Folder" component: a back panel with a tab,
+  sheets inside and a two-part front flap. Hover lifts it and tilts the flap; a tap opens it and
+  fans the sheets out, one sheet per piece of work. While it is open, tapping a sheet (or the
+  arrows) brings that piece to the front, and the caption below switches to it.
+-->
+<li class="fcard reveal" data-delay={delay}>
+  <div class="folder" data-folder data-count={items.length}>
+    <button class="folder__hit" type="button" aria-expanded="false" aria-label={`Open the ${label} folder`}>
+      <span class="folder__back">
+        <span class="folder__tab" aria-hidden="true"></span>
+        {
+          sheets.map((it, i) => (
+            <span class="folder__paper" data-paper={i} style={`--i:${i}`}>
+              {it?.img && <img src={it.img} alt="" loading="lazy" style={it.pad ? `padding:${it.pad}%` : undefined} />}
+            </span>
+          ))
+        }
+        <span class="folder__front folder__front--l" aria-hidden="true"></span>
+        <span class="folder__front folder__front--r" aria-hidden="true">
+          <span class="folder__label">{label}</span>
+        </span>
+      </span>
+    </button>
+  </div>
+
+  <div class="fcard__caption" aria-live="polite">
+    <div class="fcard__item" data-caption="closed">
+      <span class="fcard__tag">{items.length ? `${items.length} ${items.length === 1 ? 'piece' : 'pieces'}` : 'Coming soon'}</span>
+      <h3>{label}</h3>
+      <p>{items.length ? 'Tap the folder to open it, then pick a piece to look at.' : empty}</p>
+      <a class="fcard__go" href={base}>See all {label.toLowerCase()} <span aria-hidden="true">&#8594;</span></a>
+    </div>
+    {
+      items.map((it, i) => (
+        <div class="fcard__item" data-caption={i} hidden>
+          <span class="fcard__tag">{it.tag}</span>
+          <h3>{it.title}</h3>
+          <p>{it.summary}</p>
+          <div class="fcard__row">
+            <a class="fcard__go" href={it.href}>Read the case study <span aria-hidden="true">&#8594;</span></a>
+            {items.length > 1 && (
+              <span class="fcard__nav">
+                <button type="button" data-step="-1" aria-label="Previous piece">‹</button>
+                <span>{i + 1} / {items.length}</span>
+                <button type="button" data-step="1" aria-label="Next piece">›</button>
+              </span>
+            )}
+          </div>
+        </div>
+      ))
+    }
+    {
+      !items.length && (
+        <div class="fcard__item" data-caption="0" hidden>
+          <span class="fcard__tag">Coming soon</span>
+          <h3>{label}</h3>
+          <p>{empty}</p>
+        </div>
+      )
+    }
+  </div>
+</li>
+
+<style>
+  .fcard {
+    list-style: none;
+    display: grid;
+    gap: 26px;
+    align-content: start;
+  }
+  .folder {
+    --folder: #86d3c6;
+    --folder-edge: #6fc3b5;
+    --w: 260px;
+    --h: 208px;
+    --r: 18px;
+    --dur: 0.45s;
+    height: calc(var(--h) + 150px);
+    display: grid;
+    place-items: end center;
+    padding-bottom: 6px;
+  }
+  .folder__hit {
+    all: unset;
+    cursor: pointer;
+    display: block;
+    transition: transform var(--dur) var(--ease);
+  }
+  .folder__hit:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 10px;
+    border-radius: var(--r);
+  }
+  .folder__back {
+    position: relative;
+    display: block;
+    width: var(--w);
+    height: var(--h);
+    background: var(--folder-edge);
+    border-radius: 0 var(--r) var(--r) var(--r);
+    box-shadow: 0 6px 18px -6px rgba(35, 110, 95, 0.35);
+  }
+  .folder__tab {
+    position: absolute;
+    bottom: 98%;
+    left: 0;
+    width: 32%;
+    height: 12%;
+    background: var(--folder-edge);
+    border-radius: calc(var(--r) / 2) calc(var(--r) / 2) 0 0;
+  }
+
+  /* sheets: stacked inside when closed, fanned out above the folder when open */
+  .folder__paper {
+    --tx: -50%;
+    --ty: 10%;
+    --rot: 0deg;
+    --sc: 1;
+    position: absolute;
+    z-index: 2;
+    bottom: 10%;
+    left: 50%;
+    width: 82%;
+    height: 66%;
+    border-radius: calc(var(--r) - 4px);
+    overflow: hidden;
+    isolation: isolate;
+    /* one sheet of matte frosted glass: a faint mint tint, and whatever sits behind it
+       (the other sheets, the folder, their shadows) shows through as a soft blur */
+    background: linear-gradient(155deg, rgba(255, 255, 255, 0.34), rgba(196, 236, 222, 0.22));
+    -webkit-backdrop-filter: blur(14px) saturate(1.1);
+    backdrop-filter: blur(14px) saturate(1.1);
+    box-shadow: 0 16px 30px -18px rgba(40, 120, 100, 0.32);
+    transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--sc));
+    transition: transform var(--dur) var(--ease), height var(--dur) var(--ease), box-shadow var(--dur);
+  }
+  /* a faint light along the top edge, no frame */
+  .folder__paper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 28%);
+    pointer-events: none;
+  }
+  .folder__paper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 13%;
+    box-sizing: border-box;
+    pointer-events: none;
+    display: block;
+    filter: drop-shadow(0 8px 14px rgba(40, 120, 100, 0.22));
+  }
+  .folder__front {
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    width: 100%;
+    top: 12%;
+    height: 88%;
+    background: var(--folder);
+    border-radius: calc(var(--r) - 5px) var(--r) var(--r) var(--r);
+    transform-origin: bottom;
+    transition: transform var(--dur) var(--ease);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    pointer-events: none;
+  }
+  .folder__label {
+    position: absolute;
+    left: 18px;
+    bottom: 16px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #1f5a50;
+  }
+
+  @media (hover: hover) {
+    .folder:not(.is-open):hover .folder__hit {
+      transform: translateY(-8px);
+    }
+    .folder:not(.is-open):hover .folder__paper {
+      --ty: 0%;
+    }
+    .folder:not(.is-open):hover .folder__front--l {
+      transform: skew(15deg) scaleY(0.6);
+    }
+    .folder:not(.is-open):hover .folder__front--r {
+      transform: skew(-15deg) scaleY(0.6);
+    }
+  }
+  .folder.is-open .folder__front--l {
+    transform: skew(15deg) scaleY(0.6);
+  }
+  .folder.is-open .folder__front--r {
+    transform: skew(-15deg) scaleY(0.6);
+  }
+  .folder.is-open .folder__paper {
+    height: 80%;
+    cursor: pointer;
+  }
+  .folder.is-open .folder__paper.is-current {
+    box-shadow: 0 14px 30px -12px rgba(35, 35, 33, 0.35);
+  }
+  .folder.is-open .folder__label {
+    opacity: 0;
+  }
+
+  /* caption under the folder: the folder itself when closed, the chosen piece when open */
+  .fcard__item {
+    display: grid;
+    gap: 8px;
+    max-width: 46ch;
+  }
+  .fcard__item[hidden] {
+    display: none;
+  }
+  .fcard__tag {
+    justify-self: start;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--ink-2);
+    padding: 4px 11px;
+    border-radius: 99px;
+    background: var(--accent-soft);
+  }
+  .fcard__item h3 {
+    margin: 4px 0 0;
+    font-size: clamp(22px, 2.4vw, 28px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .fcard__item p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .fcard__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 6px;
+  }
+  .fcard__go {
+    margin-top: 6px;
+    font-size: 13.5px;
+    color: var(--ink);
+    text-decoration: none;
+    display: inline-flex;
+    gap: 8px;
+    transition: gap 0.5s var(--ease);
+  }
+  .fcard__row .fcard__go {
+    margin-top: 0;
+  }
+  .fcard__go:hover {
+    gap: 12px;
+  }
+  .fcard__nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .fcard__nav button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--hair);
+    background: var(--panel);
+    color: var(--ink);
+    font: inherit;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 760px) {
+    .folder {
+      --w: 210px;
+      --h: 168px;
+      height: calc(var(--h) + 130px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .folder {
+      --dur: 0s;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-folder]').forEach((folder) => {
+    const card = folder.closest('.fcard')!;
+    const hit = folder.querySelector<HTMLButtonElement>('.folder__hit')!;
+    const papers = [...folder.querySelectorAll<HTMLElement>('[data-paper]')];
+    const captions = [...card.querySelectorAll<HTMLElement>('[data-caption]')];
+    const n = papers.length;
+    let current = 0;
+
+    // fan the sheets out: the chosen one at the front and centre, the rest leaning away on either side
+    const layout = () => {
+      const open = folder.classList.contains('is-open');
+      papers.forEach((p, i) => {
+        p.classList.toggle('is-current', open && i === current);
+        if (!open) {
+          p.style.removeProperty('--tx');
+          p.style.removeProperty('--ty');
+          p.style.removeProperty('--rot');
+          p.style.removeProperty('--sc');
+          p.style.zIndex = '';
+          return;
+        }
+        const k = i - current;
+        const far = Math.abs(k);
+        p.style.setProperty('--tx', `${-50 + k * 46}%`);
+        p.style.setProperty('--ty', `${i === current ? -92 : -62 + far * 6}%`);
+        p.style.setProperty('--rot', `${k * 11}deg`);
+        p.style.setProperty('--sc', `${i === current ? 1 : 0.86}`);
+        p.style.zIndex = String(10 - far);
+      });
+      const show = open ? String(current) : 'closed';
+      captions.forEach((c) => (c.hidden = c.dataset.caption !== show));
+    };
+
+    hit.addEventListener('click', (e) => {
+      const paper = (e.target as HTMLElement).closest<HTMLElement>('[data-paper]');
+      if (folder.classList.contains('is-open') && paper) {
+        const i = Number(paper.dataset.paper);
+        if (i !== current) {
+          current = i;
+          layout();
+          return;
+        }
+      }
+      const open = folder.classList.toggle('is-open');
+      hit.setAttribute('aria-expanded', String(open));
+      layout();
+    });
+    card.querySelectorAll<HTMLButtonElement>('[data-step]').forEach((b) =>
+      b.addEventListener('click', () => {
+        current = (current + Number(b.dataset.step) + n) % n;
+        layout();
+      })
+    );
+    layout();
+  });
+</script>
