@@ -391,6 +391,13 @@ main {
   --cta-glow: rgba(192, 97, 58, 0.16);
   --cta-shadow: rgba(140, 70, 40, 0.5);
 }
+:root:has(.prose .ws) {
+  --cta-a: rgba(253, 232, 210, 0.85);
+  --cta-b: rgba(224, 131, 42, 0.38);
+  --cta-c: rgba(252, 236, 214, 0.85);
+  --cta-glow: rgba(224, 131, 42, 0.16);
+  --cta-shadow: rgba(163, 86, 15, 0.45);
+}
 :root:has(.prose .bn) {
   --cta-a: rgba(249, 240, 210, 0.85);
   --cta-b: rgba(196, 149, 15, 0.38);

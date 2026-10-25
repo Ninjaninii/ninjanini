@@ -929,7 +929,7 @@ const d = entry.data;
     --paper: #1f1d16;
     --paper-2: #2a2720;
   }
-  :is(.jx, .bn) :is(.scenes > div, .chain > div:not(.on), .match > div:not(.on), .seq li,
+  :is(.jx, .bn, .ws) :is(.scenes > div, .chain > div:not(.on), .match > div:not(.on), .seq li,
   .cmp__c:not(.on):not(.cmp__c--gap), .vflow li:not(.on):not(.off), .goals > div, .layers > div,
   .split__one, .split__two > div, .formula > div:not(.on), .loop > div) {
     box-shadow: 0 1px 2px rgba(35, 35, 33, 0.04), 0 8px 18px -12px rgba(35, 35, 33, 0.18);
@@ -948,6 +948,73 @@ const d = entry.data;
     --paper: #f3efe8;
     --paper-2: #f9f7f3;
   }
+  /* Wisely case study: warm cream with the deck's orange; same layering rules as Jianxu */
+  .prose .ws {
+    --accent: #e0832a;
+    --jx-strong: #a3560f;
+    --jx-soft: #fde8d2;
+    --g-1: #eee3d6;
+    --g-2: #cdb9a4;
+    --glow: 0 1px 2px rgba(163, 86, 15, 0.08), 0 14px 30px -14px rgba(224, 131, 42, 0.5);
+    --paper: #f6f1ea;
+    --paper-2: #fcf9f5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .prose .ws {
+      --accent: #f0a35a;
+      --jx-strong: #f5b97d;
+      --jx-soft: #3c2b1c;
+      --g-1: #3a342d;
+      --g-2: #5c5145;
+      --paper: #1d1a16;
+      --paper-2: #27231e;
+    }
+  }
+  :root[data-theme='dark'] .prose .ws {
+    --accent: #f0a35a;
+    --jx-strong: #f5b97d;
+    --jx-soft: #3c2b1c;
+    --g-1: #3a342d;
+    --g-2: #5c5145;
+    --paper: #1d1a16;
+    --paper-2: #27231e;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme='dark']):has(.prose .ws) {
+      --accent: #e0832a;
+      --paper: #f6f1ea;
+      --paper-2: #fcf9f5;
+    }
+  }
+  :root[data-theme='light']:has(.prose .ws) {
+    --accent: #e0832a;
+    --paper: #f6f1ea;
+    --paper-2: #fcf9f5;
+  }
+  :has(.prose .ws) .prose {
+    --jx-strong: #a3560f;
+    --jx-soft: #fde8d2;
+  }
+
+  /* line chart drawn as inline SVG */
+  .linechart {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .linechart .ax {
+    font-size: 11px;
+    fill: var(--ink-3);
+  }
+  .linechart .ax--on {
+    fill: var(--jx-strong);
+    font-weight: 600;
+  }
+  .linechart rect:focus-visible {
+    outline: 2px solid var(--accent);
+  }
+
   /* Binance case study: warm paper with a muted exchange gold; same layering rules as Jianxu */
   .prose .bn {
     --accent: #c4950f;
@@ -1037,7 +1104,7 @@ const d = entry.data;
   /* the brief: two goals */
   .goals {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 12px;
   }
   .goals > div {
