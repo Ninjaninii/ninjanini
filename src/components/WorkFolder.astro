@@ -39,7 +39,7 @@ const sheets = items.length ? items : [null, null, null];
         <span class="folder__tab" aria-hidden="true"></span>
         {
           sheets.map((it, i) => (
-            <span class="folder__paper" data-paper={i} style={`--i:${i}`}>
+            <span class="folder__paper" data-paper={i} data-href={it?.href} style={`--i:${i}`}>
               {it?.img && <img src={it.img} alt="" loading="lazy" style={it.pad ? `padding:${it.pad}%` : undefined} />}
             </span>
           ))
@@ -56,7 +56,7 @@ const sheets = items.length ? items : [null, null, null];
     <div class="fcard__item" data-caption="closed">
       <span class="fcard__tag">{items.length ? `${items.length} ${items.length === 1 ? 'piece' : 'pieces'}` : 'Coming soon'}</span>
       <h3>{label}</h3>
-      <p>{items.length ? 'Tap the folder to open it, then pick a piece to look at.' : empty}</p>
+      <p>{items.length ? 'Open the folder, then move across it to flip through the pieces.' : empty}</p>
       <a class="fcard__go" href={base}>See all {label.toLowerCase()} <span aria-hidden="true">&#8594;</span></a>
     </div>
     {
@@ -358,7 +358,32 @@ const sheets = items.length ? items : [null, null, null];
       captions.forEach((c) => (c.hidden = c.dataset.caption !== show));
     };
 
+    // with a mouse, the folder opens on hover and the pointer's position across it picks the
+    // piece: left third, middle, right third (for three pieces). A click then opens that case study.
+    let mouse = false;
+    folder.addEventListener('pointerenter', (e) => {
+      mouse = e.pointerType === 'mouse';
+      if (!mouse || folder.classList.contains('is-open')) return;
+      folder.classList.add('is-open');
+      hit.setAttribute('aria-expanded', 'true');
+      layout();
+    });
+    folder.addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse' || !folder.classList.contains('is-open') || n < 2) return;
+      const r = folder.getBoundingClientRect();
+      const i = Math.min(n - 1, Math.max(0, Math.floor(((e.clientX - r.left) / r.width) * n)));
+      if (i !== current) {
+        current = i;
+        layout();
+      }
+    });
+
     hit.addEventListener('click', (e) => {
+      if (mouse && folder.classList.contains('is-open')) {
+        const href = papers[current]?.dataset.href;
+        if (href) location.href = href;
+        return;
+      }
       const paper = (e.target as HTMLElement).closest<HTMLElement>('[data-paper]');
       if (folder.classList.contains('is-open') && paper) {
         const i = Number(paper.dataset.paper);
@@ -370,6 +395,14 @@ const sheets = items.length ? items : [null, null, null];
       }
       const open = folder.classList.toggle('is-open');
       hit.setAttribute('aria-expanded', String(open));
+      layout();
+    });
+    // with a mouse, the folder closes as soon as the pointer leaves the card (folder and caption);
+    // the caption stays inside the card so its arrows and link are still reachable
+    card.addEventListener('pointerleave', (e) => {
+      if (e.pointerType !== 'mouse' || !folder.classList.contains('is-open')) return;
+      folder.classList.remove('is-open');
+      hit.setAttribute('aria-expanded', 'false');
       layout();
     });
     card.querySelectorAll<HTMLButtonElement>('[data-step]').forEach((b) =>
