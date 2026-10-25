@@ -72,14 +72,21 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
               Open to marketing, product and design roles in <span class="serif-it">Singapore</span>.
             </h2>
           </div>
+          <div class="foot__side">
+          <div class="magnet" data-magnet>
+            <a class="contact-btn" href={site.linkedin} rel="me noopener" target="_blank" data-magnet-target>
+              <span>Contact me</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                <path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </a>
+          </div>
           <ul class="foot__links">
             <li>
               <a href={`mailto:${site.email}`}>{site.email}<span aria-hidden="true">&#8599;</span></a>
             </li>
-            <li>
-              <a href={site.linkedin} rel="me noopener" target="_blank">LinkedIn<span aria-hidden="true">&#8599;</span></a>
-            </li>
           </ul>
+          </div>
         </div>
         <p class="fine">
           <span>&copy; {new Date().getFullYear()} {site.name}</span>
@@ -116,6 +123,34 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
           document.documentElement.classList.add('reveal-all');
         }, 1600);
       })();
+    </script>
+    <script>
+      // contact button: a constant wiggle, plus a magnetic pull toward the pointer.
+      // overwrite: 'auto' lets the pull take x/y without killing the wiggle's rotation.
+      import { gsap } from 'gsap';
+      import { CustomEase } from 'gsap/CustomEase';
+      import { CustomWiggle } from 'gsap/CustomWiggle';
+
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.registerPlugin(CustomEase, CustomWiggle);
+        CustomWiggle.create('contactWiggle', { wiggles: 8, type: 'easeOut' });
+        document.querySelectorAll<HTMLElement>('[data-magnet]').forEach((zone) => {
+          const btn = zone.querySelector<HTMLElement>('[data-magnet-target]');
+          if (!btn) return;
+          const strength = 0.45;
+          gsap.to(btn, { rotation: 12, duration: 1.5, repeat: -1, repeatDelay: 1.2, ease: 'contactWiggle' });
+          if (!matchMedia('(hover: hover)').matches) return;
+          zone.addEventListener('mousemove', (e) => {
+            const r = zone.getBoundingClientRect();
+            const x = gsap.utils.mapRange(r.left, r.right, -r.width / 2, r.width / 2, e.clientX);
+            const y = gsap.utils.mapRange(r.top, r.bottom, -r.height / 2, r.height / 2, e.clientY);
+            gsap.to(btn, { x: x * strength, y: y * strength, duration: 0.4, ease: 'power2.out', overwrite: 'auto' });
+          });
+          zone.addEventListener('mouseleave', () => {
+            gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' });
+          });
+        });
+      }
     </script>
   </body>
 </html>
