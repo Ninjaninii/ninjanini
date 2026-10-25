@@ -34,6 +34,8 @@ const work = z.object({
   phonetic: z.array(z.string()).optional(),
   // a small image that swims in to sit after the title
   titleMark: z.string().optional(),
+  // an image whose pixels become an interactive particle figure at the top of the page
+  particles: z.string().optional(),
   heroAlt: z.string().optional(),
   link: z.string().url().optional(),
   /** Pulled onto the landing page. */

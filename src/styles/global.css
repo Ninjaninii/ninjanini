@@ -375,7 +375,29 @@ main {
   padding: 28px;
   margin: -28px;
 }
-/* a glass pill: translucent mint-to-lemonade gradient, frosted, with a light rim and sheen */
+/* a glass pill: a translucent gradient in the page's own colours, frosted, with a light rim and sheen.
+   Mint by default; each case study swaps in its palette. */
+:root {
+  --cta-a: rgba(194, 242, 228, 0.78);
+  --cta-b: rgba(53, 200, 180, 0.42);
+  --cta-c: rgba(237, 247, 190, 0.8);
+  --cta-glow: rgba(53, 200, 180, 0.18);
+  --cta-shadow: rgba(35, 110, 95, 0.55);
+}
+:root:has(.prose .jx) {
+  --cta-a: rgba(247, 232, 222, 0.85);
+  --cta-b: rgba(192, 97, 58, 0.36);
+  --cta-c: rgba(243, 222, 205, 0.85);
+  --cta-glow: rgba(192, 97, 58, 0.16);
+  --cta-shadow: rgba(140, 70, 40, 0.5);
+}
+:root:has(.prose .bn) {
+  --cta-a: rgba(249, 240, 210, 0.85);
+  --cta-b: rgba(196, 149, 15, 0.38);
+  --cta-c: rgba(246, 235, 200, 0.85);
+  --cta-glow: rgba(196, 149, 15, 0.16);
+  --cta-shadow: rgba(125, 91, 0, 0.45);
+}
 .contact-btn {
   position: relative;
   display: inline-flex;
@@ -390,17 +412,14 @@ main {
   font-size: 16px;
   font-weight: 500;
   letter-spacing: -0.01em;
-  background: linear-gradient(120deg,
-      rgba(194, 242, 228, 0.78) 0%,
-      rgba(53, 200, 180, 0.42) 48%,
-      rgba(237, 247, 190, 0.8) 100%);
+  background: linear-gradient(120deg, var(--cta-a) 0%, var(--cta-b) 48%, var(--cta-c) 100%);
   -webkit-backdrop-filter: blur(14px) saturate(1.4);
   backdrop-filter: blur(14px) saturate(1.4);
   border: 1px solid rgba(255, 255, 255, 0.7);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -8px 16px rgba(53, 200, 180, 0.18),
-    0 18px 34px -18px rgba(35, 110, 95, 0.55);
+    inset 0 -8px 16px var(--cta-glow),
+    0 18px 34px -18px var(--cta-shadow);
   will-change: transform;
 }
 /* the sheen: a soft white band across the top half */

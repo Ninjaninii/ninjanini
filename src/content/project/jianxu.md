@@ -17,6 +17,7 @@ coverAlt: Jianxu on a desktop screen, a one-minute meditation timer over ripplin
 heroImage: /work/jianxu/hero.webp
 heroAlt: Jianxu on a desktop screen, a meditation timer over rippling water with a koi
 phonetic: ['jiàn', 'xù']
+particles: /work/jianxu/koi.webp
 draft: false
 ---
 

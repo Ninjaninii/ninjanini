@@ -20,6 +20,7 @@ const d = entry.data;
 <Base title={d.title} description={d.summary}>
   <article>
     <header class="sec sec--tight whead">
+      {d.particles && <canvas class="particles" data-src={d.particles} aria-hidden="true"></canvas>}
       <div class="shell">
         <p class="backrow reveal">
           <a class="back" href="/project"><span aria-hidden="true">&#8592;</span> Projects</a>
@@ -94,6 +95,113 @@ const d = entry.data;
     </div>
   </article>
 </Base>
+
+<script>
+  // particle figure: the image is sampled into a few thousand coloured points that hold
+  // their shape, scatter away from the pointer and drift back. Static (but still drawn) for
+  // reduced-motion users; paused while the header is off screen.
+  (() => {
+    const canvas = document.querySelector<HTMLCanvasElement>('canvas.particles');
+    if (!canvas?.dataset.src) return;
+    const ctx = canvas.getContext('2d')!;
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    type Pt = { hx: number; hy: number; x: number; y: number; vx: number; vy: number; c: string };
+    let pts: Pt[] = [];
+    let W = 0, H = 0, dpr = 1, running = false, raf = 0;
+    const mouse = { x: -9999, y: -9999 };
+    const img = new Image();
+    img.src = canvas.dataset.src;
+
+    const build = (scatter: boolean) => {
+      const r = canvas.getBoundingClientRect();
+      dpr = Math.min(devicePixelRatio || 1, 2);
+      W = r.width; H = r.height;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      // the fish swims behind the hero image (right half, upper part); smaller on phones
+      const size = Math.min(W < 760 ? 170 : 300, W * 0.5);
+      // the koi is turned 135° anticlockwise so its head points left
+      const turn = (-135 * Math.PI) / 180;
+      const scale = size / Math.max(img.width, img.height);
+      const iw = img.width * scale, ih = img.height * scale;
+      const cos = Math.abs(Math.cos(turn)), sin = Math.abs(Math.sin(turn));
+      const w = Math.round(iw * cos + ih * sin), h = Math.round(iw * sin + ih * cos);
+      const off = document.createElement('canvas');
+      off.width = w; off.height = h;
+      const o = off.getContext('2d')!;
+      o.translate(w / 2, h / 2);
+      o.rotate(turn);
+      o.drawImage(img, -iw / 2, -ih / 2, iw, ih);
+      const data = o.getImageData(0, 0, w, h).data;
+      const hero = canvas.parentElement!.querySelector('.heroimg');
+      let ox = W - w - 16, oy = 24;
+      if (hero && W >= 760) {
+        const hr = hero.getBoundingClientRect();
+        ox = hr.left - r.left + hr.width * 0.68 - w / 2;
+        oy = hr.top - r.top - h * 0.7;
+      }
+      const step = W < 760 ? 3 : 2.6;
+      pts = [];
+      for (let y = 0; y < h; y += step) for (let x = 0; x < w; x += step) {
+        const i = (Math.floor(y) * w + Math.floor(x)) * 4;
+        if (data[i + 3] < 90) continue;
+        const hx = ox + x, hy = oy + y;
+        const spread = scatter ? 200 : 0;
+        pts.push({ hx, hy, x: hx + (Math.random() - 0.5) * spread, y: hy + (Math.random() - 0.5) * spread, vx: 0, vy: 0,
+          // pale grey-green, keeping the image's light and shade
+          c: (() => {
+            const l = (data[i] * 0.3 + data[i + 1] * 0.59 + data[i + 2] * 0.11) / 255;
+            const k = 0.82 + l * 0.18;
+            return `rgba(${Math.round(176 * k)},${Math.round(198 * k)},${Math.round(188 * k)},0.85)`;
+          })() });
+      }
+      if (still) pts.forEach((p) => { p.x = p.hx; p.y = p.hy; });
+    };
+
+    const draw = (t: number) => {
+      ctx.clearRect(0, 0, W, H);
+      for (const p of pts) {
+        // the fish holds still; only the pointer disturbs it
+        const tx = p.hx, ty = p.hy;
+        if (!still) {
+          const dx = p.x - mouse.x, dy = p.y - mouse.y, d2 = dx * dx + dy * dy;
+          if (d2 < 30 * 30) {
+            const f = (1 - Math.sqrt(d2) / 30) * 2.4;
+            const a = Math.atan2(dy, dx);
+            p.vx += Math.cos(a) * f; p.vy += Math.sin(a) * f;
+          }
+          p.vx += (tx - p.x) * 0.045; p.vy += (ty - p.y) * 0.045;
+          p.vx *= 0.86; p.vy *= 0.86;
+          p.x += p.vx; p.y += p.vy;
+        }
+        ctx.fillStyle = p.c;
+        ctx.fillRect(p.x, p.y, 1.7, 1.7);
+      }
+      if (running && !still) raf = requestAnimationFrame(draw);
+    };
+
+    const start = () => { if (!running) { running = true; raf = requestAnimationFrame(draw); } };
+    const stop = () => { running = false; cancelAnimationFrame(raf); };
+
+    img.onload = () => {
+      build(true);
+      if (still) { draw(0); return; }
+      new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop())).observe(canvas);
+      let lastW = W;
+      addEventListener('resize', () => {
+        // only a real width change re-lays the figure, and it re-forms in place
+        if (Math.abs(canvas.getBoundingClientRect().width - lastW) < 2) return;
+        build(false);
+        lastW = W;
+      });
+      addEventListener('pointermove', (e) => {
+        const r = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+      }, { passive: true });
+      addEventListener('pointerleave', () => { mouse.x = mouse.y = -9999; });
+    };
+  })();
+</script>
 
 <script>
   // case-study motion: each block rises in as it scrolls into view, the parts inside a
@@ -175,7 +283,18 @@ const d = entry.data;
 
 <style>
   .whead {
+    position: relative;
+    isolation: isolate;
     padding-top: clamp(70px, 10vw, 130px);
+  }
+  .particles {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.88;
   }
   .backrow {
     margin: 0 0 26px;
