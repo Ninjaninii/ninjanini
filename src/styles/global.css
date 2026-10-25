@@ -486,3 +486,22 @@ main {
   border-radius: 999px;
   border: 1px solid var(--hair);
 }
+
+/* ─────────── phones ───────────
+   iOS Safari flashes black when it runs out of GPU memory. On touch devices, drop the
+   full-screen fixed grain layer and live backdrop blurs, and use solid tints instead. */
+@media (hover: none), (pointer: coarse) {
+  body::after {
+    display: none;
+  }
+  .nav__pill {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: color-mix(in srgb, var(--panel) 94%, transparent);
+  }
+  .contact-btn {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    will-change: auto;
+  }
+}
