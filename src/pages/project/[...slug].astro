@@ -104,7 +104,10 @@ const d = entry.data;
     const canvas = document.querySelector<HTMLCanvasElement>('canvas.particles');
     if (!canvas?.dataset.src) return;
     const ctx = canvas.getContext('2d')!;
-    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // touch devices get a single static drawing: a continuous particle loop is too heavy for
+    // phones and made iOS Safari stall and flash black
+    const touch = matchMedia('(hover: none), (pointer: coarse)').matches;
+    const still = touch || matchMedia('(prefers-reduced-motion: reduce)').matches;
     type Pt = { hx: number; hy: number; x: number; y: number; vx: number; vy: number; c: string };
     let pts: Pt[] = [];
     let W = 0, H = 0, dpr = 1, running = false, raf = 0;
@@ -158,8 +161,9 @@ const d = entry.data;
       if (still) pts.forEach((p) => { p.x = p.hx; p.y = p.hy; });
     };
 
-    const draw = (t: number) => {
+    const draw = () => {
       ctx.clearRect(0, 0, W, H);
+      let moving = false;
       for (const p of pts) {
         // the fish holds still; only the pointer disturbs it
         const tx = p.hx, ty = p.hy;
@@ -173,30 +177,36 @@ const d = entry.data;
           p.vx += (tx - p.x) * 0.045; p.vy += (ty - p.y) * 0.045;
           p.vx *= 0.86; p.vy *= 0.86;
           p.x += p.vx; p.y += p.vy;
+          if (!moving && (Math.abs(p.vx) > 0.02 || Math.abs(p.vy) > 0.02 || Math.abs(tx - p.x) > 0.3 || Math.abs(ty - p.y) > 0.3)) moving = true;
         }
         ctx.fillStyle = p.c;
         ctx.fillRect(p.x, p.y, 1.7, 1.7);
       }
-      if (running && !still) raf = requestAnimationFrame(draw);
+      // once every point has settled the loop sleeps; the pointer wakes it again
+      if (running && !still && moving) raf = requestAnimationFrame(draw);
+      else running = false;
     };
 
-    const start = () => { if (!running) { running = true; raf = requestAnimationFrame(draw); } };
+    let visible = false;
+    const start = () => { if (!running && visible) { running = true; raf = requestAnimationFrame(draw); } };
     const stop = () => { running = false; cancelAnimationFrame(raf); };
 
     img.onload = () => {
       build(true);
-      if (still) { draw(0); return; }
-      new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop())).observe(canvas);
+      if (still) { draw(); return; }
+      new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? start() : stop(); }).observe(canvas);
       let lastW = W;
       addEventListener('resize', () => {
         // only a real width change re-lays the figure, and it re-forms in place
         if (Math.abs(canvas.getBoundingClientRect().width - lastW) < 2) return;
         build(false);
         lastW = W;
+        start();
       });
       addEventListener('pointermove', (e) => {
         const r = canvas.getBoundingClientRect();
         mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+        if (mouse.x > -40 && mouse.y > -40 && mouse.x < W + 40 && mouse.y < H + 40) start();
       }, { passive: true });
       addEventListener('pointerleave', () => { mouse.x = mouse.y = -9999; });
     };
@@ -363,16 +373,13 @@ const d = entry.data;
   @keyframes koi-path {
     0% {
       opacity: 0;
-      filter: blur(5px);
       transform: translate(-7.2em, 1.1em) rotate(40deg) scale(0.62);
     }
     18% {
       opacity: 0.55;
-      filter: blur(2px);
     }
     40% {
       opacity: 0.9;
-      filter: blur(0);
       transform: translate(-4.6em, 0.35em) rotate(22deg) scale(0.82);
     }
     65% {
@@ -383,7 +390,6 @@ const d = entry.data;
     }
     100% {
       opacity: 1;
-      filter: blur(0);
       transform: none;
     }
   }
@@ -2142,16 +2148,13 @@ const d = entry.data;
   @keyframes koi-swim {
     0% {
       opacity: 0;
-      filter: blur(5px);
       transform: translate(-12em, 1.4em) rotate(40deg) scale(0.6);
     }
     18% {
       opacity: 0.55;
-      filter: blur(2px);
     }
     40% {
       opacity: 0.9;
-      filter: blur(0);
       transform: translate(-7.5em, 0.4em) rotate(22deg) scale(0.82);
     }
     65% {
@@ -2162,7 +2165,6 @@ const d = entry.data;
     }
     100% {
       opacity: 1;
-      filter: blur(0);
       transform: none;
     }
   }

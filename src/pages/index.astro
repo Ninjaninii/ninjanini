@@ -130,7 +130,7 @@ artworks.sort(byOrder);
   :root[data-theme='dark'] .home-glow {
     display: none;
   }
-  @media (prefers-reduced-motion: no-preference) {
+  @media (prefers-reduced-motion: no-preference) and (hover: hover) {
     .home-glow i {
       animation: glow-drift 18s ease-in-out infinite alternate;
     }

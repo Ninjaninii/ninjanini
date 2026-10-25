@@ -317,6 +317,14 @@ const sheets = items.length ? items : [null, null, null];
       height: calc(var(--h) + 130px);
     }
   }
+  /* phones: no live backdrop blur on moving sheets (iOS Safari flashes black); a frosted tint instead */
+  @media (hover: none), (pointer: coarse) {
+    .folder__paper {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      background: linear-gradient(155deg, rgba(250, 253, 252, 0.94), rgba(214, 240, 231, 0.9));
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
     .folder {
       --dur: 0s;
