@@ -121,13 +121,20 @@ const d = entry.data;
       W = r.width; H = r.height;
       canvas.width = W * dpr; canvas.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      // the fish swims behind the hero image (right half, upper part); smaller on phones
+      // smaller on phones, where it sits in the top-right corner
+      const hero = canvas.parentElement!.querySelector('.heroimg');
+      const hr0 = hero && W >= 760 ? hero.getBoundingClientRect() : null;
+      // on wide screens the whole fish fits in the open space above the monitor, never behind it
+      // (the image may still be mid-reveal, up to ~26px low, so leave that much clearance)
+      const room = hr0 ? hr0.top - r.top - 40 : Infinity;
       const size = Math.min(W < 760 ? 170 : 300, W * 0.5);
       // the koi is turned 135° anticlockwise so its head points left
       const turn = (-135 * Math.PI) / 180;
-      const scale = size / Math.max(img.width, img.height);
-      const iw = img.width * scale, ih = img.height * scale;
+      let scale = size / Math.max(img.width, img.height);
+      let iw = img.width * scale, ih = img.height * scale;
       const cos = Math.abs(Math.cos(turn)), sin = Math.abs(Math.sin(turn));
+      const fitH = (img.width * sin + img.height * cos) * scale;
+      if (fitH > room) { scale *= room / fitH; iw = img.width * scale; ih = img.height * scale; }
       const w = Math.round(iw * cos + ih * sin), h = Math.round(iw * sin + ih * cos);
       const off = document.createElement('canvas');
       off.width = w; off.height = h;
@@ -136,12 +143,10 @@ const d = entry.data;
       o.rotate(turn);
       o.drawImage(img, -iw / 2, -ih / 2, iw, ih);
       const data = o.getImageData(0, 0, w, h).data;
-      const hero = canvas.parentElement!.querySelector('.heroimg');
       let ox = W - w - 16, oy = 24;
-      if (hero && W >= 760) {
-        const hr = hero.getBoundingClientRect();
-        ox = hr.left - r.left + hr.width * 0.68 - w / 2;
-        oy = hr.top - r.top - h * 0.7;
+      if (hr0) {
+        ox = hr0.left - r.left + hr0.width * 0.55 - w / 2;
+        oy = hr0.top - r.top - h - 30;
       }
       const step = W < 760 ? 3 : 2.6;
       pts = [];
@@ -935,7 +940,7 @@ const d = entry.data;
     --paper: #1f1d16;
     --paper-2: #2a2720;
   }
-  :is(.jx, .bn, .ws) :is(.scenes > div, .chain > div:not(.on), .match > div:not(.on), .seq li,
+  :is(.jx, .bn, .ws, .kk) :is(.scenes > div, .chain > div:not(.on), .match > div:not(.on), .seq li,
   .cmp__c:not(.on):not(.cmp__c--gap), .vflow li:not(.on):not(.off), .goals > div, .layers > div,
   .split__one, .split__two > div, .formula > div:not(.on), .loop > div) {
     box-shadow: 0 1px 2px rgba(35, 35, 33, 0.04), 0 8px 18px -12px rgba(35, 35, 33, 0.18);
@@ -954,6 +959,66 @@ const d = entry.data;
     --paper: #f3efe8;
     --paper-2: #f9f7f3;
   }
+  /* Resus Tray case study: clinical soft blue, after the team's testing deck */
+  .prose .kk {
+    --accent: #2f6fb3;
+    --jx-strong: #22568c;
+    --jx-soft: #e0edf9;
+    --g-1: #dde6ee;
+    --g-2: #b4c6d8;
+    --glow: 0 1px 2px rgba(34, 86, 140, 0.08), 0 14px 30px -14px rgba(47, 111, 179, 0.45);
+    --paper: #f0f4f7;
+    --paper-2: #f9fbfd;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .prose .kk {
+      --accent: #7fb2e6;
+      --jx-strong: #a5c9ef;
+      --jx-soft: #1f2d3c;
+      --g-1: #2c3540;
+      --g-2: #46525f;
+      --paper: #161b20;
+      --paper-2: #1f252c;
+    }
+  }
+  :root[data-theme='dark'] .prose .kk {
+    --accent: #7fb2e6;
+    --jx-strong: #a5c9ef;
+    --jx-soft: #1f2d3c;
+    --g-1: #2c3540;
+    --g-2: #46525f;
+    --paper: #161b20;
+    --paper-2: #1f252c;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme='dark']):has(.prose .kk) {
+      --accent: #2f6fb3;
+      --paper: #f0f4f7;
+      --paper-2: #f9fbfd;
+    }
+  }
+  :root[data-theme='light']:has(.prose .kk) {
+    --accent: #2f6fb3;
+    --paper: #f0f4f7;
+    --paper-2: #f9fbfd;
+  }
+  :has(.prose .kk) .prose {
+    --jx-strong: #22568c;
+    --jx-soft: #e0edf9;
+  }
+  .shots--6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .shots--6 figcaption {
+    text-align: center;
+  }
+  @media (max-width: 760px) {
+    .shots--6 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
   /* Wisely case study: warm cream with the deck's orange; same layering rules as Jianxu */
   .prose .ws {
     --accent: #e0832a;
