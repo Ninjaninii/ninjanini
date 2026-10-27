@@ -123,7 +123,9 @@ const d = entry.data;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       // smaller on phones, where it sits in the top-right corner
       const hero = canvas.parentElement!.querySelector('.heroimg');
-      const hr0 = hero && W >= 760 ? hero.getBoundingClientRect() : null;
+      let hr0 = hero && W >= 760 ? hero.getBoundingClientRect() : null;
+      // too little room above the monitor (e.g. a mid-width window): use the corner placement
+      if (hr0 && hr0.top - r.top < 140) hr0 = null;
       // on wide screens the whole fish fits in the open space above the monitor, never behind it
       // (the image may still be mid-reveal, up to ~26px low, so leave that much clearance)
       const room = hr0 ? hr0.top - r.top - 40 : Infinity;
@@ -135,7 +137,7 @@ const d = entry.data;
       const cos = Math.abs(Math.cos(turn)), sin = Math.abs(Math.sin(turn));
       const fitH = (img.width * sin + img.height * cos) * scale;
       if (fitH > room) { scale *= room / fitH; iw = img.width * scale; ih = img.height * scale; }
-      const w = Math.round(iw * cos + ih * sin), h = Math.round(iw * sin + ih * cos);
+      const w = Math.max(1, Math.round(iw * cos + ih * sin)), h = Math.max(1, Math.round(iw * sin + ih * cos));
       const off = document.createElement('canvas');
       off.width = w; off.height = h;
       const o = off.getContext('2d')!;
