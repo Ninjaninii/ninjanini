@@ -1,0 +1,127 @@
+---
+// A grid of tiny four-point sparkles that wake up near the cursor, after the Framer
+// "Interactive Dots" component: faint everywhere, glinting and slowly turning
+// within reach of the pointer, then fading out once it moves on.
+---
+
+<canvas class="sparkles" aria-hidden="true"></canvas>
+
+<script>
+  const canvas = document.querySelector<HTMLCanvasElement>('canvas.sparkles');
+  const ctx = canvas?.getContext('2d');
+  if (canvas && ctx) {
+    const SPACING = 56;
+    const SIZE = 3.2; // half the arm length at rest
+    const RADIUS = 160;
+    const BASE = 0.16;
+    const FADE = 700; // ms for a sparkle to settle after the pointer leaves
+    const live = matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches;
+
+    let w = 0, h = 0, dpr = 1, color = '#4a5bb8';
+    let pts: { x: number; y: number; heat: number; phase: number }[] = [];
+    let mx = -1e4, my = -1e4, last = 0, raf = 0;
+
+    // the line boxes of every piece of text in the same section, padded, so no sparkle sits on a word
+    const PAD = 18;
+    const textBoxes = () => {
+      const host = canvas.parentElement!;
+      const origin = canvas.getBoundingClientRect();
+      const boxes: DOMRect[] = [];
+      const walk = document.createTreeWalker(host, NodeFilter.SHOW_TEXT);
+      const range = document.createRange();
+      for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+        if (!n.textContent!.trim()) continue;
+        range.selectNodeContents(n);
+        for (const r of range.getClientRects())
+          boxes.push(new DOMRect(r.left - origin.left - PAD, r.top - origin.top - PAD, r.width + PAD * 2, r.height + PAD * 2));
+      }
+      return boxes;
+    };
+
+    const layout = () => {
+      const r = canvas.getBoundingClientRect();
+      dpr = Math.min(devicePixelRatio || 1, 2);
+      w = r.width; h = r.height;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      color = getComputedStyle(canvas).color;
+      const boxes = textBoxes();
+      const clear = (x: number, y: number) => !boxes.some((b) => x > b.left && x < b.right && y > b.top && y < b.bottom);
+      pts = [];
+      for (let y = SPACING / 2; y < h; y += SPACING)
+        for (let x = SPACING / 2; x < w; x += SPACING) if (clear(x, y)) pts.push({ x, y, heat: 0, phase: Math.random() * 6.28 });
+      draw(0);
+    };
+
+    // a four-point star: two thin diamonds crossed, waisted towards the centre
+    const star = (x: number, y: number, s: number, rot: number) => {
+      const t = s * 0.22;
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rot);
+      ctx.beginPath();
+      ctx.moveTo(0, -s);
+      ctx.quadraticCurveTo(t, -t, s, 0);
+      ctx.quadraticCurveTo(t, t, 0, s);
+      ctx.quadraticCurveTo(-t, t, -s, 0);
+      ctx.quadraticCurveTo(-t, -t, 0, -s);
+      ctx.fill();
+      ctx.restore();
+    };
+
+    const draw = (now: number) => {
+      const dt = last ? Math.min(now - last, 50) : 16;
+      last = now;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = color;
+      let busy = false;
+      for (const p of pts) {
+        const d = Math.hypot(mx - p.x, my - p.y);
+        const near = d < RADIUS ? 1 - d / RADIUS : 0;
+        // heat rises at once and decays over FADE, so a trail lingers behind the pointer
+        p.heat = near > p.heat ? near : Math.max(near, p.heat - dt / FADE);
+        if (p.heat > 0.001) busy = true;
+        const k = p.heat * p.heat;
+        const twinkle = k ? 0.85 + 0.15 * Math.sin(now / 260 + p.phase) : 1;
+        // the sparkle keeps its size and colour near the pointer; it only turns a little and glints
+        ctx.globalAlpha = (BASE + k * 0.3) * twinkle;
+        star(p.x, p.y, SIZE, k * 0.6);
+      }
+      raf = busy ? requestAnimationFrame(draw) : 0;
+    };
+
+    const wake = () => { if (!raf) { last = 0; raf = requestAnimationFrame(draw); } };
+
+    layout();
+    new ResizeObserver(layout).observe(canvas);
+    // measure again once the webfont has swapped in and the reveal motion has settled the text in place
+    document.fonts.ready.then(layout);
+    setTimeout(layout, 1600);
+    // repaint in the new ink when the theme toggles
+    new MutationObserver(() => { color = getComputedStyle(canvas).color; draw(performance.now()); })
+      .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    if (live) {
+      addEventListener('pointermove', (e) => {
+        const r = canvas.getBoundingClientRect();
+        mx = e.clientX - r.left; my = e.clientY - r.top;
+        wake();
+      }, { passive: true });
+      document.addEventListener('pointerleave', () => { mx = my = -1e4; wake(); });
+    }
+  }
+</script>
+
+<style>
+  .sparkles {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    color: var(--accent);
+    /* fade the grid out towards the bottom so it never meets the work below with a hard edge */
+    mask-image: linear-gradient(to bottom, #000 60%, transparent);
+  }
+</style>

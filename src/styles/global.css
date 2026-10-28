@@ -91,6 +91,13 @@
 html {
   -webkit-text-size-adjust: 100%;
 }
+/* on a desktop-sized window the whole site is drawn at 85%, as if the browser were zoomed out:
+   at 100% the type and images feel oversized on a full screen. Phones and tablets keep 100%. */
+@media (min-width: 1024px) {
+  html {
+    zoom: 0.85;
+  }
+}
 
 body {
   margin: 0;
@@ -422,6 +429,13 @@ main {
   --cta-c: rgba(230, 241, 250, 0.85);
   --cta-glow: rgba(47, 111, 179, 0.16);
   --cta-shadow: rgba(34, 86, 140, 0.45);
+}
+:root:has(.prose .rm) {
+  --cta-a: rgba(52, 54, 46, 0.85);
+  --cta-b: rgba(167, 174, 140, 0.3);
+  --cta-c: rgba(44, 46, 39, 0.85);
+  --cta-glow: rgba(167, 174, 140, 0.12);
+  --cta-shadow: rgba(0, 0, 0, 0.55);
 }
 :root:has(.prose .bn) {
   --cta-a: rgba(249, 240, 210, 0.85);

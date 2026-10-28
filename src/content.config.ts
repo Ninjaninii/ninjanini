@@ -41,6 +41,9 @@ const work = z.object({
   // an image whose pixels become an interactive particle figure at the top of the page
   particles: z.string().optional(),
   heroAlt: z.string().optional(),
+  // artwork wall label: who made it and what it is made of, shown in place of the role/team block
+  artists: z.string().optional(),
+  medium: z.string().optional(),
   link: z.string().url().optional(),
   /** Pulled onto the landing page. */
   featured: z.boolean().default(false),
