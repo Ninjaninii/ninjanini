@@ -87,7 +87,8 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
           </div>
           <ul class="foot__links">
             <li>
-              <a href={`mailto:${site.email}`}>{site.email}<span aria-hidden="true">&#8599;</span></a>
+              <!-- opens a Gmail draft addressed to me in a new tab, rather than the visitor's default mail app (Outlook on most Windows PCs) -->
+              <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${site.email}`} target="_blank" rel="noopener">{site.email}<span aria-hidden="true">&#8599;</span></a>
             </li>
           </ul>
           </div>
