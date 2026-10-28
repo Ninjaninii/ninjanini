@@ -97,6 +97,10 @@ html {
   html {
     zoom: 0.85;
   }
+  /* except the navigation pill, which stays at its full size */
+  .nav {
+    zoom: calc(1 / 0.85);
+  }
 }
 
 body {

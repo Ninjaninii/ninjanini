@@ -31,28 +31,22 @@ draft: false
 
 ## The Story
 
-<figure class="fig rm">
-<span class="fig__t">About ten minutes, from the script</span>
-<div class="tl">
-<div style="--s:10"><b>Intro</b><span>10s</span></div>
-<div style="--s:60"><b>Request</b><span>1m</span></div>
-<div style="--s:60"><b>Hallway</b><span>1m</span></div>
-<div style="--s:60"><b>Room</b><span>1m</span></div>
-<div class="on" style="--s:120"><b>Cigarettes</b><span>2m</span></div>
-<div class="on" style="--s:120"><b>Controller</b><span>2m</span></div>
-<div class="on" style="--s:120"><b>Pet</b><span>2m</span></div>
-<div style="--s:60"><b>End</b><span>1m</span></div>
-</div>
-<span class="fig__src">Highlighted: the three memories, more than half the piece.</span>
-</figure>
-
-<div class="fig rm">
-<div class="story">
-<figure><img src="/work/room-624/request.webp" alt="In VR, the cleaner's red-gloved hand holds a phone at the door of 624; Ms. Wang's message reads: I told him someone would come to clean today" width="1600" height="897" loading="lazy" /><figcaption><small>I · The request</small><b>A job like any other</b><em>Routine, unknowing</em><span>The key is under the mat. The door closes behind you.</span></figcaption></figure>
-<figure><img src="/work/room-624/hall.webp" alt="The cramped hallway, crates and boxes stacked on both sides" width="812" height="452" loading="lazy" /><figcaption><small>II · The hallway</small><b>A path, one bag at a time</b><em>Cramped, airless</em><span>Each thing you bag crumbles into sand.</span></figcaption></figure>
-<figure><img src="/work/room-624/boxes.webp" alt="Crates of household goods packed against the walls" width="959" height="470" loading="lazy" /><figcaption><small>III · The room</small><b>Full, but in order</b><em>Quiet, watched</em><span>No one is home. Certain objects glow.</span></figcaption></figure>
-<figure><img src="/work/room-624/controller.webp" alt="A desk of old game controllers, one glowing yellow" width="956" height="463" loading="lazy" /><figcaption><small>IV · The memory</small><b>The second controller</b><em>Warm, then lonely</em><span>A friend left behind in a move; years of playing alone.</span></figcaption></figure>
-<figure><img src="/work/room-624/memory.webp" alt="Illustration of one hand passing a small object into another" width="1500" height="651" loading="lazy" /><figcaption><small>V · The discard</small><b>No other choice</b><em>Release</em><span>One bin. The controller dissolves into light.</span></figcaption></figure>
+<div class="walk rm">
+<ol class="walk__time" aria-label="The story, beat by beat">
+<li style="--s:120" data-for="request"><b>Request</b><span>Set-up</span></li>
+<li style="--s:60" data-for="room"><b>Room</b><span>Exploration</span></li>
+<li class="on" style="--s:120" data-for="cigarettes"><b>Cigarettes</b><span>Memory · Family</span></li>
+<li class="on" style="--s:120" data-for="controller"><b>Controller</b><span>Memory · Friendship</span></li>
+<li class="on" style="--s:120" data-for="pet"><b>Pet</b><span>Memory · Companionship</span></li>
+<li style="--s:60" data-for="end"><b>End</b><span>Reveal</span></li>
+</ol>
+<div class="walk__steps">
+<section class="walk__step" data-step="request"><img src="/work/room-624/request.webp" alt="In VR, the cleaner's red-gloved hand holds a phone at the door of 624; Ms. Wang's message reads: I told him someone would come to clean today" width="1600" height="897" loading="lazy" /><p><small>I · The request</small><b>A job like any other.</b><span>The key is under the mat. The door closes behind you.</span></p></section>
+<section class="walk__step" data-step="room"><img src="/work/room-624/hall.webp" alt="The room: crates stacked high around a gaming chair" width="812" height="452" loading="lazy" /><p><small>II · The room</small><b>Full, but in order.</b><span>No one is home. Certain objects glow.</span></p></section>
+<section class="walk__step walk__step--mem" data-step="cigarettes"><img src="/work/room-624/cigarettes.webp" alt="Red-gloved hands reach for a glowing cigarette on the floor; beside it, a crate packed with cigarette boxes" width="1600" height="766" loading="lazy" /><figure class="walk__flash"><img src="/work/room-624/cigarettes-memory.webp" alt="Live-action memory: a boy in grey joggers walking beside his father along a pavement" width="1600" height="464" loading="lazy" /><figcaption>The memory it holds: walking beside his father.</figcaption></figure><p><small>Memory 1 · Cigarettes</small><b>His father, and family.</b><span>The bond he has held since he was a boy.</span></p></section>
+<section class="walk__step walk__step--mem" data-step="controller"><img src="/work/room-624/controller.webp" alt="A desk of old game controllers, one glowing yellow" width="956" height="463" loading="lazy" /><p><small>Memory 2 · Controller</small><b>The friend who left.</b><span>They grew up together, until he suddenly left.</span></p></section>
+<section class="walk__step walk__step--mem" data-step="pet"><img src="/work/room-624/pet.webp" alt="A red cat collar lies on the bed; cat portraits hang above it and a water dispenser and food bowl wait beside it" width="1600" height="900" loading="lazy" /><p><small>Memory 3 · Pet</small><b>Company that could not speak.</b><span>It stayed with him, without a word.</span></p></section>
+<section class="walk__step" data-step="end"><img src="/work/room-624/memory.webp" alt="Illustration of one hand passing a small object into another" width="1500" height="651" loading="lazy" /><p><small>III · The end</small><b>Under the rubbish, him.</b><span>You came to clear his room. You leave understanding him.</span></p></section>
 </div>
 </div>
 
