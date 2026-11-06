@@ -11,40 +11,63 @@ const education = [
     org: 'National University of Singapore',
     role: 'Exchange student, Industrial Design',
     dates: 'Aug – Dec 2026',
+    proof: 'Courses include Interaction Design and UX, and Product Design and Innovation.',
   },
   {
     org: 'National Tsing Hua University',
     role: 'B.A., Interdisciplinary Program of Technology and Art',
     dates: '2022 – Dec 2026',
+    proof: 'Courses include Marketing Management, Statistics I and II, and User Experience Design.',
     note: 'One of Taiwan’s leading research universities.',
   },
 ];
 
+// each role: the title, then one line of what changed because of the work
 const experience = [
   {
     org: 'LINE Taiwan',
     role: 'B2B Marketing Intern, Brand Communication Group',
     dates: 'Aug 2025 – Mar 2026',
+    proof: 'Analysed a year of data from 386 SME accounts. Healthcare beat Retail on engagement by 20%, so the next year’s plan moved to industry-specific marketing.',
     note: 'LINE is the dominant messaging platform in Taiwan, Japan and Thailand.',
   },
-  { org: 'Tang Cheng Goose Restaurant', role: 'Freelance Marketing', dates: 'Sep 2026 – present' },
-  { org: 'NTHU Consulting Group', role: 'Teaching Supervisor', dates: 'Aug 2025 – Jun 2026' },
-  { org: 'NTHU Consulting Group', role: 'Director of Marketing', dates: 'Jul 2024 – Aug 2025' },
+  {
+    org: 'Tang Cheng Goose Restaurant',
+    role: 'Freelance Marketing',
+    dates: 'Sep 2026 – present',
+    proof: 'Help run a LINE Official Account with 4,732 friends: messages, menus and the social media plan.',
+  },
+  {
+    org: 'NTHU Consulting Group',
+    role: 'Teaching Supervisor',
+    dates: 'Aug 2025 – Jun 2026',
+    proof: 'One of two TAs for a 5-person team that ranked 1st of all teams in a simulated consulting project.',
+    note: 'A student consulting club.',
+  },
   {
     org: 'NTHU Technology & Art Graduation Exhibition',
     role: 'Director of Public Relations',
     dates: 'Jul 2025 – May 2026',
+    proof: 'Researched 216 potential sponsors and used past post data to choose whom to approach: 16 partners, about NT$150,000 in kind.',
   },
   {
     org: 'OpenHCI',
     role: 'Academic Team',
     dates: 'Mar – Jul 2026',
+    proof: 'Designed the curriculum of a 6-day workshop for 60 participants, and mentored them in design thinking, presenting and Figma.',
     note: 'Organising team of Taiwan’s longest-running student HCI workshop.',
+  },
+  {
+    org: 'NTHU Consulting Group',
+    role: 'Director of Marketing',
+    dates: 'Jul 2024 – Aug 2025',
+    proof: 'Grew followers by 25% in a year; a recruitment campaign drew 75 applicants for 32 places.',
   },
   {
     org: 'Taipei Art Book Fair',
     role: 'Exhibition Coordination & Arts Administration Intern',
     dates: 'Apr – Jun 2025',
+    proof: 'Set up the full exhibition in 3 weeks in a team of four, and built the team’s art-book database in Notion.',
   },
 ];
 
@@ -53,10 +76,27 @@ const recognition = [
     org: 'TAICHI 2026',
     role: 'First author, poster and demo',
     dates: 'Aug 2026',
+    proof: 'Douleur Minime: Material Speculation of the AI Between Us.',
     note: 'Taiwan’s annual conference on human–computer interaction.',
   },
-  { org: 'OpenHCI 2025', role: 'Best Research Award', dates: 'Jul 2025' },
-  { org: 'NCCU Creative Ideas Hackathon', role: 'Innovation Star Award', dates: '2025' },
+  { org: 'OpenHCI 2025', role: 'Best Research Award', dates: 'Jul 2025', proof: 'For Jianxu, a focus-recovery concept grounded in 20 interviews.' },
+  { org: 'NCCU Creative Ideas Hackathon', role: 'Innovation Star Award', dates: '2025', proof: 'For Wisely, among 32 teams. I built the business model and the projections.' },
+];
+
+// three strengths, each with evidence a stranger can check further down the page or in the work
+const strengths = [
+  {
+    title: 'Find the real problem',
+    body: 'Data and interviews before decisions. At LINE, 386 accounts changed a year’s plan; on Jianxu, 20 interviews changed the product.',
+  },
+  {
+    title: 'Make the numbers work',
+    body: 'A business case behind the idea: Wisely’s break-even projection, and a sponsorship plan that brought in 16 partners.',
+  },
+  {
+    title: 'Get it done with people',
+    body: 'Leading and coaching teams: the four-person team behind Room 624, a workshop for 60 participants, a team I helped reach 1st.',
+  },
 ];
 
 const groups = [
@@ -68,27 +108,38 @@ const groups = [
 
 <Base
   title="About"
-  description="Chia Ni Chen — marketing, product design and research. Technology and Art at NTHU, on exchange at NUS Singapore."
+  description="Chia Ni Chen: research, product design and marketing strategy. Technology and Art at NTHU, on exchange at NUS Singapore."
 >
   <section class="sec sec--tight">
     <div class="shell">
       <span class="eyebrow reveal"><i></i>About</span>
       <h1 class="display reveal" data-delay="60" style="margin-top:22px; font-size:clamp(34px,5.6vw,64px)">
-        Research, design and strategy,<br /><span class="serif-it">in one person.</span>
+        Curious about why,<br /><span class="serif-it">practical about how.</span>
       </h1>
 
       <div class="intro">
         <p class="lede reveal" data-delay="130">
-          I'm a final-year undergraduate in the <strong>Interdisciplinary Program of Technology and Art</strong>
-          at National Tsing Hua University, graduating December 2026, and currently on exchange in Industrial
-          Design at the <strong>National University of Singapore</strong>.
+          I'm a final-year undergraduate in <strong>Technology and Art</strong> at National Tsing Hua University,
+          graduating December 2026, and on exchange in Industrial Design at the <strong>National University of Singapore</strong>.
+          I have worked in B2B marketing at LINE, run sponsorship
+          for a graduation show, and designed products in teams of three to six.
         </p>
         <p class="lede reveal" data-delay="180">
-          I'm strongest in three places: research that changes what gets built, turning an idea into a business
-          case with numbers behind it, and testing a team's reasoning before it reaches a client or a judge. I'm
-          usually also the one running the production that gets the work out the door: budgets, vendors, launch day.
+          I don't trust the first answer. I check why before I decide what, then I see it through: budgets,
+          vendors, launch day. That habit is the thread through everything below.
         </p>
       </div>
+
+      <ul class="strengths">
+        {
+          strengths.map((st, i) => (
+            <li class="reveal" data-delay={220 + i * 60}>
+              <b>{st.title}</b>
+              <p>{st.body}</p>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 
@@ -105,6 +156,7 @@ const groups = [
                   <div class="cv__body">
                     <p class="cv__role">{it.role}</p>
                     <p class="cv__org">{it.org}</p>
+                    {it.proof && <p class="cv__proof">{it.proof}</p>}
                     {it.note && <p class="cv__note">{it.note}</p>}
                   </div>
                 </li>
@@ -122,6 +174,47 @@ const groups = [
     display: grid;
     gap: 18px;
     margin-top: 30px;
+  }
+
+  .strengths {
+    list-style: none;
+    margin: clamp(40px, 5vw, 64px) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    background: var(--panel);
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(35, 35, 33, 0.04), 0 14px 34px -16px rgba(35, 35, 33, 0.16);
+  }
+  .strengths li {
+    display: grid;
+    align-content: start;
+    gap: 10px;
+    padding: 24px 26px 26px;
+  }
+  .strengths li + li {
+    border-left: 1px solid var(--hair);
+  }
+  .strengths b {
+    font-size: clamp(19px, 1.9vw, 23px);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .strengths p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  @media (max-width: 760px) {
+    .strengths {
+      grid-template-columns: 1fr;
+    }
+    .strengths li + li {
+      border-left: 0;
+      border-top: 1px solid var(--hair);
+    }
   }
 
   .group {
@@ -192,6 +285,13 @@ const groups = [
     font-size: 14.5px;
     color: var(--ink-2);
     margin-top: 2px;
+  }
+  .cv__proof {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: 8px;
+    max-width: 62ch;
   }
   .cv__note {
     font-size: 13px;
