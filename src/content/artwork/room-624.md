@@ -1,7 +1,7 @@
 ---
 title: 'Cleaning Request: Room 624'
 hook: You are hired to clear out a hoarder's flat. Every object you throw away was holding a memory.
-summary: A VR installation in which the viewer plays a cleaner sent to a hoarder's room, and learns why each object was kept only as they are made to throw it away.
+summary: 'A VR piece where you come to understand a hoarder by clearing his room. I led the four-person team and wrote the concept and script.'
 year: '2024'
 artists: Chen Chia-Ni, Chen Shih-Yang, Shih Tsung-Hsuan, Tai Jie-Yin
 medium: VR installation, Meta Quest 3 · about 10-minute narrative
@@ -9,7 +9,7 @@ role: Project management, concept and statement, script and memory stories
 team: Chen Chia-Ni, Chen Shih-Yang, Shih Tsung-Hsuan, Tai Jie-Yin
 context: NTHU Interdisciplinary Program of Arts and Technology
 tools: ['Unity', 'Meta Quest 3', 'Blender']
-skills: ['Concept development', 'Scriptwriting', 'Project management']
+skills: ['Storytelling', 'Leadership']
 cover: /work/room-624/hero.webp
 coverAlt: The hoarder's room in Room 624, lit green, with a gaming chair, stacked crates and a glowing yellow controller on the desk
 folderPapers: ['/work/room-624/hero.webp']

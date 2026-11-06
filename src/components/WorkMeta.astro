@@ -16,7 +16,8 @@ const rows = [
   { label: 'Team', value: data.team },
   { label: 'Year', value: data.year },
   { label: 'Context', value: data.context },
-  { label: 'Tools', value: data.tools?.length ? data.tools.join(', ') : undefined },
+  // a single tool says little; the row only earns its place with two or more
+  { label: 'Tools', value: (data.tools?.length ?? 0) > 1 ? data.tools!.join(', ') : undefined },
 ].filter((r) => r.value);
 ---
 

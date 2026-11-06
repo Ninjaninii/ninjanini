@@ -20,7 +20,8 @@ const work = z.object({
   /** Where it happened, glossed for a reader outside Taiwan. */
   context: z.string().optional(),
   tools: z.array(z.string()).default([]),
-  /** Cross-tab capability tags, so a hiring manager can scan by skill. */
+  /** Cross-tab capability tags, so a hiring manager can scan by skill: Research, Product design,
+      Business strategy, Storytelling or Leadership (the homepage lists only these five). */
   skills: z.array(z.string()).default([]),
   cover: z.string().optional(),
   coverAlt: z.string().optional(),
@@ -45,6 +46,8 @@ const work = z.object({
   artists: z.string().optional(),
   medium: z.string().optional(),
   link: z.string().url().optional(),
+  /** Three lines at the top of a case study, so a stranger sees the reasoning in seconds. */
+  glance: z.object({ problem: z.string(), turn: z.string(), result: z.string() }).optional(),
   /** Pulled onto the landing page. */
   featured: z.boolean().default(false),
   /** Listing order; lower comes first. Falls back to year. */

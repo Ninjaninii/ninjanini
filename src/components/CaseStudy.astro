@@ -15,6 +15,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
 
 <Base title={d.title} description={d.summary}>
   <article>
+    {!d.medium && <div class="readbar" aria-hidden="true"><i></i></div>}
     <header class="sec sec--tight whead">
       {d.medium && <Sparkles />}
       {d.particles && <canvas class="particles" data-src={d.particles} aria-hidden="true"></canvas>}
@@ -73,6 +74,16 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
             )
           }
         </div>
+
+        {
+          d.glance && (
+            <dl class="glance reveal" data-delay="240" aria-label="At a glance">
+              <div><dt>Problem</dt><dd>{d.glance.problem}</dd></div>
+              <div><dt>The turn</dt><dd>{d.glance.turn}</dd></div>
+              <div><dt>Result</dt><dd>{d.glance.result}</dd></div>
+            </dl>
+          )
+        }
       </div>
     </header>
 
@@ -114,6 +125,20 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
 <script>
   // the walk-through: the step in the middle of the screen is lit, and the time rail beside it
   // marks where in the ten minutes the reader is
+  // reading progress: a thin bar across the top fills as the case study is read
+  const readbar = document.querySelector<HTMLElement>('.readbar i');
+  if (readbar) {
+    let ticking = false;
+    const fill = () => {
+      ticking = false;
+      const max = document.documentElement.scrollHeight - innerHeight;
+      readbar.style.transform = `scaleX(${max > 0 ? Math.min(1, scrollY / max) : 0})`;
+    };
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(fill); } }, { passive: true });
+    addEventListener('resize', fill);
+    fill();
+  }
+
   const walk = document.querySelector<HTMLElement>('.walk');
   if (walk) {
     const steps = [...walk.querySelectorAll<HTMLElement>('.walk__step')];
@@ -358,7 +383,10 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   .backrow {
     margin: 0 0 26px;
   }
+  /* the link stays small, its tap area is 52px tall (44px once the desktop zoom applies) */
   .back {
+    padding: 15px 0;
+    margin: -15px 0;
     font-size: 13.5px;
     color: var(--ink-2);
     text-decoration: none;
@@ -468,6 +496,63 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
       transform: translate(-50%, -50%) scale(2.4);
     }
   }
+  .readbar {
+    position: fixed;
+    inset: 0 0 auto;
+    height: 3px;
+    z-index: 60;
+    pointer-events: none;
+  }
+  .readbar i {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  /* at a glance: problem, the turn, result, side by side; one card, a shadow rather than a border */
+  .glance {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    margin: 28px 0 0;
+    padding: 0;
+    background: var(--panel);
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(35, 35, 33, 0.04), 0 14px 34px -16px rgba(35, 35, 33, 0.16);
+  }
+  .glance div {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+    padding: 20px 22px 22px;
+  }
+  .glance div + div {
+    border-left: 1px solid var(--hair);
+  }
+  .glance dt {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .glance dd {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  @media (max-width: 760px) {
+    .glance {
+      grid-template-columns: 1fr;
+    }
+    .glance div + div {
+      border-left: 0;
+      border-top: 1px solid var(--hair);
+    }
+  }
+
   .hook {
     font-size: clamp(19px, 2.5vw, 27px);
     line-height: 1.33;
@@ -1059,7 +1144,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     --plate: #262722;
     --ink: #e6e6de;
     --ink-2: #a2a398;
-    --ink-3: #74756c;
+    --ink-3: #8a8b81;
     --line: rgba(230, 230, 222, 0.14);
     --hair: rgba(230, 230, 222, 0.12);
     --hair-2: rgba(230, 230, 222, 0.07);

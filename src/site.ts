@@ -11,7 +11,7 @@ export const site = {
   linkedin: 'https://www.linkedin.com/in/ninjanini',
 
   nav: [
-    { href: '/project', label: 'Project' },
+    { href: '/project', label: 'Projects' },
     { href: '/artwork', label: 'Artwork' },
     { href: '/about', label: 'About' },
     // { href: '/lab', label: 'Lab' },  ← uncomment when /lab exists

@@ -1,14 +1,14 @@
 ---
 title: 澗序 Jianxu
-hook: Every productivity tool tries to stop you being interrupted. None of them help you come back.
+hook: Every focus tool blocks interruptions. Our interviews showed the damage comes after.
 metric: Best Research Award
-summary: A focus-recovery concept for knowledge workers — designing the moment after an interruption, not the interruption itself.
+summary: 'Our interviews showed people blame themselves after being interrupted. I researched the literature and designed a short guided reset for getting back to work.'
 year: '2025'
 role: UI design and research; pitch deck and poster
 team: 6 students, 2 teaching assistants
-context: OpenHCI 2025 · Best Research Award
+context: OpenHCI 2025, a student-led HCI workshop in Taiwan
 tools: ['Figma']
-skills: ['UX research', 'Product concept', 'UI design']
+skills: ['Research', 'Product design', 'Storytelling']
 featured: true
 folderPapers: ['/work/jianxu/card.webp']
 order: 2
@@ -19,8 +19,21 @@ heroImage: /work/jianxu/hero.webp
 heroAlt: Jianxu on a desktop screen, a meditation timer over rippling water with a koi
 phonetic: ['jiàn', 'xù']
 particles: /work/jianxu/koi.webp
+glance:
+  problem: Focus tools all try to block interruptions, and the category is crowded.
+  turn: We dropped our own blocker plug-in. Interviews showed the harm comes after the interruption, so we designed for the return.
+  result: Best Research Award, OpenHCI 2025.
 draft: false
 ---
+
+## My contribution
+
+<div class="credit">
+<div><small>Together, all six of us</small><p>Developed the concept and the literature review — reading, arguing and consolidating as one team.</p></div>
+<div><small>My part</small><p>Designed the UI, and produced the pitch deck and the poster.</p></div>
+</div>
+
+The decision I argued for hardest was dropping our first version, a distraction-blocking plugin. It is the reason the project stopped being a focus tool and became something about recovery.
 
 ## Context
 
@@ -200,15 +213,6 @@ So we went back to the research.
 ## Result
 
 **Best Research Award, OpenHCI 2025.** The judges' stated reason was the depth of the literature grounding behind the concept.
-
-## My contribution
-
-<div class="credit">
-<div><small>Together, all six of us</small><p>Developed the concept and the literature review — reading, arguing and consolidating as one team.</p></div>
-<div><small>My part</small><p>Designed the UI, and produced the pitch deck and the poster.</p></div>
-</div>
-
-The decision I argued for hardest was dropping the plugin. It is the reason the project stopped being a focus tool and became something about recovery.
 
 ## What I took from it
 

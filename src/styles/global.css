@@ -14,7 +14,7 @@
   /* ink — warm-biased neutrals, not pure grey */
   --ink: #232321;
   --ink-2: #4d4d49;
-  --ink-3: #8c8c88;
+  --ink-3: #6b6b66; /* 4.5:1 or better on every light page ground, for small text */
   --hair: rgba(35, 35, 33, 0.1);
   --hair-2: rgba(35, 35, 33, 0.06);
 
@@ -49,7 +49,7 @@
     --plate: #1c1c18;
     --ink: #f2f2ec;
     --ink-2: #a6a69c;
-    --ink-3: #78786f;
+    --ink-3: #8f8f86;
     --hair: rgba(242, 242, 236, 0.12);
     --hair-2: rgba(242, 242, 236, 0.07);
     --accent: #93a0ec;
@@ -70,7 +70,7 @@
   --plate: #1c1c18;
   --ink: #f2f2ec;
   --ink-2: #a6a69c;
-  --ink-3: #78786f;
+  --ink-3: #8f8f86;
   --hair: rgba(242, 242, 236, 0.12);
   --hair-2: rgba(242, 242, 236, 0.07);
   --accent: #93a0ec;
@@ -393,6 +393,11 @@ main {
 }
 .foot h2 {
   font-size: clamp(30px, 5.4vw, 58px);
+}
+.foot__lede {
+  margin: 18px 0 0;
+  font-size: 17px;
+  color: var(--ink-2);
 }
 .foot__side {
   display: grid;

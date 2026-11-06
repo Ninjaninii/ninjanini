@@ -1,14 +1,14 @@
 ---
 title: Wisely
-hook: Older people hold the stories researchers can't find. Nobody had built the way in.
+hook: 'Retired people hold knowledge nobody can find. A marketplace only works if the numbers do.'
 metric: Innovation Star Award
-summary: A matching platform that turns retired people's experience into bookable knowledge, and the business model that would pay for it.
+summary: 'A platform for booking retired people''s experience like a consultation. I built the business model and the financial projection: break-even at about 18,000 bookings a year.'
 year: '2025'
 role: Business model and financial projections
 team: 3 students
-context: NCCU Creative Ideas Hackathon 2025 · Innovation Star Award
+context: NCCU Creative Ideas Hackathon 2025
 tools: []
-skills: ['Business model', 'Financial projection', 'Product concept']
+skills: ['Business strategy', 'Product design']
 featured: false
 folderPapers: ['/work/wisely/card.webp']
 order: 3
@@ -17,8 +17,19 @@ coverAlt: Wisely on a laptop, a grid of older consultants with ratings and a mes
 coverCutout: true
 heroImage: /work/wisely/hero.webp
 heroAlt: Wisely on a laptop, a grid of older consultants with ratings and a message button
+glance:
+  problem: Researchers cannot reach the experience retired people hold, and there is no way to book it.
+  turn: Treat that experience as a paid consultation, so every booking funds the platform.
+  result: Break-even at about 18,000 bookings a year, and the Innovation Star Award.
 draft: false
 ---
+
+## My contribution
+
+<div class="credit">
+<div><small>My teammates</small><p>Research, the user flow and the product mockups.</p></div>
+<div><small>Me</small><p>The Business Model Canvas, and the revenue, cost and break-even projection.</p></div>
+</div>
 
 ## Context
 
@@ -105,13 +116,6 @@ Older workers are mostly concentrated in manual jobs their bodies no longer suit
 ## Result
 
 **Innovation Star Award, NCCU Creative Ideas Hackathon 2025.**
-
-## My contribution
-
-<div class="credit">
-<div><small>My teammates</small><p>Research, the user flow and the product mockups.</p></div>
-<div><small>Me</small><p>The Business Model Canvas, and the revenue, cost and break-even projection.</p></div>
-</div>
 
 ---
 

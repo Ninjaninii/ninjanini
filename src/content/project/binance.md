@@ -1,14 +1,14 @@
 ---
 title: Binance in Taiwan
-hook: Growing users and growing volume sound like one goal. They needed two different customers.
+hook: One plan, two goals. The data showed they needed two different customers.
 metric: Ranked 1st of all teams
-summary: A simulated go-to-market case where the data split one growth plan into two customers. I reviewed every round as one of two TAs.
+summary: 'In a simulated go-to-market case, the team''s survey split one growth plan into two customers. As one of two TAs, I reviewed every round and asked the team to back each choice with evidence.'
 year: '2025'
 role: Teaching Supervisor — one of two TAs; reviewed the work and set direction
 team: 5 mentees, 2 TAs, 1 mentor
 context: NTHU Consulting Group · simulated consulting project, three judged reviews
 tools: []
-skills: ['Go-to-market strategy', 'Strategy review', 'Storytelling']
+skills: ['Business strategy', 'Storytelling', 'Leadership']
 featured: true
 folderPapers: ['/work/binance/logo.webp']
 folderPad: 28
@@ -17,8 +17,23 @@ cover: /work/binance/logo.webp
 coverAlt: Logo of the NTHU Consulting Group, the student club that ran the project
 coverCutout: true
 coverWidth: 30
+glance:
+  problem: Grow both users and trading volume for Binance in Taiwan, in a simulated consulting case.
+  turn: A survey of 191 people showed new users and new volume come from different people, so one plan became two.
+  result: Ranked 1st of all teams at the final review.
 draft: false
 ---
+
+## My contribution
+
+<div class="credit">
+<div><small>My co-TA</small><p>Pressure-tested the numbers, asking for the formula behind every figure.</p></div>
+<div><small>Me</small><p>Pressure-tested the logic, and coached how the analysis was presented.</p></div>
+</div>
+
+I was one of two Teaching Supervisors on the team, alongside a mentor. TAs did not do the research; our job was to review the work and keep its direction sound. At each round I read the deck the way a judge would and asked a judge's questions: does this recommendation follow from that evidence? Why should I believe this segment matters most? How would the bank partnership really work? Where an argument jumped a step, I sent it back.
+
+On presentation, I pushed four rules: lead every slide with its insight, agree the colour rules before anyone builds a chart, highlight the one figure that matters and grey out the rest, and cut the text until the argument reads top to bottom. The research and the strategy were the team's. My part was making sure they held together, and that they landed in a twenty-minute review.
 
 ## What this was
 
@@ -175,17 +190,6 @@ Each strategy then carried its own cost and return, from click-through and conve
 ## Result
 
 **Ranked 1st of all teams at the final review.**
-
-## My contribution
-
-<div class="credit">
-<div><small>My co-TA</small><p>Pressure-tested the numbers, asking for the formula behind every figure.</p></div>
-<div><small>Me</small><p>Pressure-tested the logic, and coached how the analysis was presented.</p></div>
-</div>
-
-I was one of two Teaching Supervisors on the team, alongside a mentor. TAs did not do the research; our job was to review the work and keep its direction sound. At each round I read the deck the way a judge would and asked a judge's questions: does this recommendation follow from that evidence? Why should I believe this segment matters most? How would the bank partnership really work? Where an argument jumped a step, I sent it back.
-
-On presentation, I pushed four rules: lead every slide with its insight, agree the colour rules before anyone builds a chart, highlight the one figure that matters and grey out the rest, and cut the text until the argument reads top to bottom. The research and the strategy were the team's. My part was making sure they held together, and that they landed in a twenty-minute review.
 
 ## What I took from it
 

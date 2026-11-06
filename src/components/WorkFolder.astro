@@ -299,6 +299,7 @@ const sheets = items.length ? items : [null, null, null];
     font-variant-numeric: tabular-nums;
   }
   .fcard__nav button {
+    position: relative;
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -308,6 +309,12 @@ const sheets = items.length ? items : [null, null, null];
     font: inherit;
     font-size: 15px;
     cursor: pointer;
+  }
+  /* a 52px tap area around the 30px circle (44px once the desktop zoom applies) */
+  .fcard__nav button::after {
+    content: '';
+    position: absolute;
+    inset: -11px;
   }
 
   @media (max-width: 760px) {
