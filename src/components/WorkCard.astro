@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { listTitle } from '../lib/title';
 
 interface Props {
   entry: CollectionEntry<'project'> | CollectionEntry<'artwork'>;
@@ -35,7 +36,7 @@ const href = `${base}/${entry.id}/`;
     <div class="card__top">
       <div class="card__words">
         <span class="card__metric">{d.metric ? `${d.metric} · ${d.year}` : d.year}</span>
-        <h3>{d.title}</h3>
+        <h3>{listTitle(d.title)}</h3>
         <p class="card__sum">{d.summary}</p>
       </div>
       <span class="card__go" aria-hidden="true">

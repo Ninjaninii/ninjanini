@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { listTitle } from '../lib/title';
 import Base from '../layouts/Base.astro';
 import WorkFolder from '../components/WorkFolder.astro';
 import { site } from '../site';
@@ -12,8 +13,8 @@ artworks.sort(byOrder);
 
 // skills bubbles: every skill tag across the published work, and which pieces show it
 const pieces = [
-  ...projects.map((e) => ({ id: e.id, href: `/project/${e.id}/`, title: e.data.title, skills: e.data.skills })),
-  ...artworks.map((e) => ({ id: e.id, href: `/artwork/${e.id}/`, title: e.data.title, skills: e.data.skills })),
+  ...projects.map((e) => ({ id: e.id, href: `/project/${e.id}/`, title: listTitle(e.data.title), skills: e.data.skills })),
+  ...artworks.map((e) => ({ id: e.id, href: `/artwork/${e.id}/`, title: listTitle(e.data.title), skills: e.data.skills })),
 ];
 // five skills that don't overlap; every piece's tags come from this list
 const SKILLS = ['Research', 'Product design', 'Business strategy', 'Storytelling', 'Leadership'];
@@ -278,6 +279,8 @@ const skills = SKILLS.filter((name) => pieces.some((p) => p.skills.includes(name
     padding-top: 26px;
     border-top: 1px solid var(--hair);
     gap: 10px 28px;
+    /* holds a line's height while empty, so the page doesn't jump when the work appears */
+    min-height: 58px;
   }
   .piece {
     display: inline-flex;
@@ -286,11 +289,30 @@ const skills = SKILLS.filter((name) => pieces.some((p) => p.skills.includes(name
     letter-spacing: -0.015em;
     color: var(--ink);
     text-decoration: none;
-    transition: color 0.35s var(--ease), opacity 0.35s var(--ease);
   }
-  /* while something is pointed at, everything else steps back */
-  .skills.is-active .bubble:not(.is-lit),
-  .skills.is-active .piece:not(.is-lit) {
+  /* the work stays hidden until a skill is pointed at; then only that skill's pieces fade up, one after another.
+     Without the script every piece simply shows. */
+  :global(.js) .piece {
+    display: none;
+  }
+  :global(.js) .piece.is-lit {
+    display: inline-flex;
+    animation: piece-in 0.5s var(--ease) both;
+    animation-delay: calc(var(--k, 0) * 80ms);
+  }
+  @keyframes piece-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) .piece.is-lit {
+      animation: none;
+    }
+  }
+  /* while a skill is pointed at, the other skills step back */
+  .skills.is-active .bubble:not(.is-lit) {
     opacity: 0.35;
   }
   .bubble.is-lit {
@@ -303,52 +325,56 @@ const skills = SKILLS.filter((name) => pieces.some((p) => p.skills.includes(name
     background: rgba(255, 255, 255, 0.22);
     color: var(--paper);
   }
-  .piece.is-lit {
+  .piece:hover {
     color: var(--accent);
   }
 </style>
 
 <script>
-  // skills bubbles: light up the pieces behind a skill, or the skills behind a piece
+  // skills bubbles: pointing at a skill lights it and fades in the pieces that show it
   const box = document.querySelector<HTMLElement>('.skills');
   if (box) {
     const bubbles = [...box.querySelectorAll<HTMLElement>('.bubble')];
     const pieces = [...box.querySelectorAll<HTMLElement>('.piece')];
+    let current: HTMLElement | null = null;
     const clear = () => {
+      current = null;
       box.classList.remove('is-active');
       [...bubbles, ...pieces].forEach((el) => el.classList.remove('is-lit'));
     };
-    // skill: light it and its pieces; work: light it and its skills
-    const light = (skill: HTMLElement | null, work: string | null) => {
+    const light = (skill: HTMLElement) => {
+      if (skill === current) return;
       clear();
+      current = skill;
       box.classList.add('is-active');
-      bubbles.forEach((b) => {
-        const ws = b.dataset.works!.split(' ');
-        b.classList.toggle('is-lit', b === skill || (work !== null && ws.includes(work)));
+      skill.classList.add('is-lit');
+      const works = skill.dataset.works!.split(' ');
+      let k = 0;
+      pieces.forEach((p) => {
+        const on = works.includes(p.dataset.work!);
+        p.classList.toggle('is-lit', on);
+        if (on) p.style.setProperty('--k', String(k++));
       });
-      pieces.forEach((p) => p.classList.toggle('is-lit', skill ? skill.dataset.works!.split(' ').includes(p.dataset.work!) : p.dataset.work === work));
     };
     bubbles.forEach((b) => {
-      b.addEventListener('pointerenter', () => light(b, null));
-      b.addEventListener('focus', () => light(b, null));
-      // a tap on a phone lights it; a second tap on the same bubble clears it
-      b.addEventListener('click', () => {
-        if (box.dataset.tapped === b.textContent) {
+      b.addEventListener('pointerenter', () => light(b));
+      b.addEventListener('focus', () => light(b));
+      // a tap on a phone shows the work; a second tap on the same bubble hides it
+      b.addEventListener('click', (e) => {
+        if ((e as PointerEvent).pointerType === 'mouse') return;
+        if (box.dataset.tapped === b.dataset.works) {
           clear();
           delete box.dataset.tapped;
         } else {
-          light(b, null);
-          box.dataset.tapped = b.textContent!;
+          light(b);
+          box.dataset.tapped = b.dataset.works;
         }
       });
     });
-    pieces.forEach((p) => {
-      p.addEventListener('pointerenter', () => light(null, p.dataset.work!));
-      p.addEventListener('focus', () => light(null, p.dataset.work!));
+    // the work stays up while the pointer travels down to it, and goes once it leaves the section
+    box.addEventListener('pointerleave', (e) => {
+      if (e.pointerType === 'mouse') clear();
     });
-    box.querySelectorAll('.bubbles, .pieces').forEach((list) => list.addEventListener('pointerleave', (e) => {
-      if ((e as PointerEvent).pointerType === 'mouse') clear();
-    }));
     box.addEventListener('focusout', (e) => { if (!box.contains(e.relatedTarget as Node)) clear(); });
   }
 </script>

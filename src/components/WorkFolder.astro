@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { listTitle } from '../lib/title';
 
 type Entry = CollectionEntry<'project'> | CollectionEntry<'artwork'>;
 interface Props {
@@ -15,7 +16,7 @@ interface Props {
 const { label, base, entries, empty, delay = 0 } = Astro.props;
 const items = entries.map((e) => ({
   href: `${base}/${e.id}/`,
-  title: e.data.title,
+  title: listTitle(e.data.title),
   summary: e.data.summary,
   tag: e.data.metric ? `${e.data.metric} · ${e.data.year}` : e.data.year,
   img: e.data.folderPapers?.[0] ?? e.data.cover ?? '',
