@@ -8,7 +8,7 @@ role: Business model and financial projections
 team: 3 students
 context: NCCU Creative Ideas Hackathon 2025
 tools: []
-skills: ['Business strategy', 'Product design']
+skills: ['Business strategy']
 featured: false
 folderPapers: ['/work/wisely/card.webp']
 order: 3
