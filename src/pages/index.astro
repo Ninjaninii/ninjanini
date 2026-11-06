@@ -90,7 +90,6 @@ const skills = SKILLS.filter((name) => pieces.some((p) => p.skills.includes(name
             <li>
               <a class="piece" href={p.href} data-work={p.id}>
                 {p.title}
-                <span aria-hidden="true">&#8594;</span>
               </a>
             </li>
           ))
@@ -282,17 +281,12 @@ const skills = SKILLS.filter((name) => pieces.some((p) => p.skills.includes(name
   }
   .piece {
     display: inline-flex;
-    gap: 8px;
     font-size: clamp(18px, 1.8vw, 22px);
     font-weight: 500;
     letter-spacing: -0.015em;
     color: var(--ink);
     text-decoration: none;
     transition: color 0.35s var(--ease), opacity 0.35s var(--ease);
-  }
-  .piece span {
-    color: var(--ink-3);
-    transition: transform 0.35s var(--ease), color 0.35s var(--ease);
   }
   /* while something is pointed at, everything else steps back */
   .skills.is-active .bubble:not(.is-lit),
@@ -311,10 +305,6 @@ const skills = SKILLS.filter((name) => pieces.some((p) => p.skills.includes(name
   }
   .piece.is-lit {
     color: var(--accent);
-  }
-  .piece.is-lit span {
-    color: var(--accent);
-    transform: translateX(4px);
   }
 </style>
 
