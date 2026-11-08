@@ -139,6 +139,19 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     fill();
   }
 
+  // horizontal fold: opening one stage closes the others
+  document.querySelectorAll<HTMLElement>('[data-fold-x]').forEach((fold) => {
+    const panels = [...fold.querySelectorAll<HTMLElement>('.fold__p')];
+    panels.forEach((p) => {
+      p.querySelector('.fold__tab')!.addEventListener('click', () => {
+        panels.forEach((q) => {
+          q.classList.toggle('is-open', q === p);
+          q.querySelector('.fold__tab')!.setAttribute('aria-expanded', String(q === p));
+        });
+      });
+    });
+  });
+
   const walk = document.querySelector<HTMLElement>('.walk');
   if (walk) {
     const steps = [...walk.querySelectorAll<HTMLElement>('.walk__step')];
@@ -160,6 +173,27 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
       { rootMargin: '-45% 0px -45% 0px' },
     );
     steps.forEach((s) => io.observe(s));
+
+    // Chat to Escape: reading down the steps charges the meter, and the last step releases the lock
+    if (walk.classList.contains('ce')) {
+      let queued = false;
+      const charge = () => {
+        queued = false;
+        const mid = innerHeight / 2;
+        const box = (el: HTMLElement) => el.getBoundingClientRect();
+        const first = box(steps[0]);
+        const last = box(steps[steps.length - 1]);
+        const from = first.top + first.height / 2;
+        const to = last.top + last.height / 2;
+        const k = Math.max(0, Math.min(1, (mid - from) / (to - from)));
+        walk.style.setProperty('--charge', String(k));
+        walk.style.setProperty('--pct', String(Math.round(k * 100)));
+        walk.classList.toggle('is-free', k >= 0.995);
+      };
+      addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(charge); } }, { passive: true });
+      addEventListener('resize', charge);
+      charge();
+    }
   }
 </script>
 
@@ -1135,6 +1169,23 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     --jx-strong: #22568c;
     --jx-soft: #e0edf9;
   }
+  /* Chat to Escape: a black room, with the installation's red as the only colour */
+  :root:has(.prose .ce) {
+    --paper: #111110;
+    --paper-2: #1a1918;
+    --panel: #1a1918;
+    --plate: #1f1e1c;
+    --ink: #efeae4;
+    --ink-2: #aaa59e;
+    --ink-3: #8f8a84;
+    --line: rgba(239, 234, 228, 0.14);
+    --hair: rgba(239, 234, 228, 0.12);
+    --hair-2: rgba(239, 234, 228, 0.07);
+    --accent: #e8483f;
+    --accent-soft: rgba(232, 72, 63, 0.14);
+    color-scheme: dark;
+  }
+
   /* Room 624: a dim gallery room in every theme. The page stays darker and greyer than the
      artwork's own muted greens, so the work is always the brightest thing on screen. */
   :root:has(.prose .rm) {
@@ -1430,6 +1481,345 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   .walk__time li.on.is-now b {
     color: #f2c14e;
+  }
+  /* Chat to Escape: the rail is the installation's meter, charged by reading down the page */
+  .walk.ce {
+    counter-reset: charge var(--pct, 0);
+  }
+  .ce .walk__time li::before {
+    display: none;
+  }
+  .ce .walk__time::before {
+    content: 'Locked ' counter(charge) '%';
+    position: absolute;
+    bottom: -34px;
+    left: 16px;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .ce .walk__time::after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: scaleY(var(--charge, 0));
+    transform-origin: top;
+  }
+  .ce.is-free .walk__time::before {
+    content: 'Released';
+    color: var(--ink);
+  }
+  .ce.is-free .walk__time::after {
+    background: var(--ink);
+    transition: background 0.6s var(--ease);
+  }
+  /* photo sets: a uniform crop, in twos and (for the build) threes */
+  .ce .shots img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+  .shots--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  @media (max-width: 560px) {
+    .shots--3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  /* the finding as a sentence under the small section label */
+  .prose .lead {
+    font-size: clamp(26px, 3vw, 38px);
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 16px;
+    max-width: 24ch;
+  }
+  /* annotated photographs: a dot on the object, a line out to its label */
+  .pins {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .pinned {
+    position: relative;
+    border-radius: var(--radius-inner);
+    overflow: hidden;
+  }
+  .prose .pinned img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0;
+  }
+  .pin {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 -5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px rgba(232, 72, 63, 0.3);
+  }
+  .pin::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 10px;
+    width: 26px;
+    height: 2px;
+    background: var(--accent);
+  }
+  .pin b {
+    position: absolute;
+    top: -9px;
+    left: 36px;
+    padding: 4px 9px;
+    border-radius: 99px;
+    font-size: 12.5px;
+    font-weight: 500;
+    white-space: nowrap;
+    color: #fff;
+    background: rgba(17, 17, 16, 0.82);
+  }
+  .pin--l::after {
+    left: auto;
+    right: 10px;
+  }
+  .pin--l b {
+    left: auto;
+    right: 36px;
+  }
+  /* for a narrow photo: the line goes up and the label sits centred above the dot */
+  .pin--up::after {
+    top: auto;
+    bottom: 10px;
+    left: 4px;
+    width: 2px;
+    height: 26px;
+  }
+  .pin--up b {
+    top: auto;
+    left: 50%;
+    bottom: 36px;
+    transform: translateX(-50%);
+  }
+  /* process as a horizontal fold: every stage is a tab, one stands open */
+  .prose > .fold {
+    max-width: none;
+    display: flex;
+    gap: 8px;
+    height: clamp(460px, 62vh, 620px);
+    margin-top: 24px;
+    container-type: inline-size;
+  }
+  .fold__p {
+    flex: 0 0 68px;
+    display: flex;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    background: var(--panel);
+    transition: flex-grow 0.6s var(--ease), flex-basis 0.6s var(--ease), background 0.4s var(--ease);
+  }
+  .fold__p.is-open {
+    flex: 1 1 0;
+  }
+  .fold__tab {
+    flex: 0 0 68px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    font: inherit;
+    color: var(--ink-2);
+    background: none;
+    border: 0;
+    cursor: pointer;
+    transition: color 0.3s var(--ease);
+  }
+  .fold__tab:hover,
+  .fold__p.is-open .fold__tab {
+    color: var(--accent);
+  }
+  .fold__tab:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -4px;
+    border-radius: 14px;
+  }
+  .fold__tab i {
+    font-style: normal;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+  .fold__tab b {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  /* the body keeps its width while the panel opens, so the text never rewraps mid-motion */
+  .fold__body {
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    width: calc(100cqw - 6 * 68px - 5 * 8px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 26px 30px 26px 6px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s var(--ease), visibility 0s 0.3s;
+  }
+  .fold__p.is-open .fold__body {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s var(--ease) 0.2s;
+  }
+  .fold__body small {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .prose .fold__body h3 {
+    margin: 0;
+    font-size: clamp(28px, 3.2vw, 42px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .prose .fold__body p {
+    margin: 0;
+    max-width: 46ch;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .fold__body em {
+    display: block;
+    margin-top: 10px;
+    font-style: normal;
+    color: var(--accent);
+  }
+  .fold__imgs {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .prose .fold__imgs img {
+    flex: 1 1 0;
+    min-width: 0;
+    width: 0;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 0;
+  }
+  .prose .fold__hint {
+    margin: 12px 0 0;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  @media (max-width: 760px) {
+    .pins {
+      grid-template-columns: 1fr;
+    }
+    /* phones: too narrow to fold sideways, so the same stages fold downwards */
+    .prose > .fold {
+      flex-direction: column;
+      height: auto;
+    }
+    .fold__p,
+    .fold__p.is-open {
+      flex: none;
+      flex-direction: column;
+    }
+    .fold__tab {
+      flex: none;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 14px;
+      min-height: 56px;
+      padding: 0 18px;
+    }
+    .fold__tab b {
+      writing-mode: horizontal-tb;
+      transform: none;
+    }
+    .fold__body {
+      display: none;
+      width: auto;
+      padding: 0 18px 20px;
+    }
+    .fold__p.is-open .fold__body {
+      display: flex;
+    }
+    .fold__imgs {
+      height: 200px;
+      flex: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fold__p,
+    .fold__body,
+    .fold__p.is-open .fold__body {
+      transition: none;
+    }
+  }
+  /* a way on to the next piece */
+  .prose .nextwork {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 4px 20px;
+    margin-top: 48px;
+    padding: 26px 30px;
+    border-radius: 16px;
+    background: var(--panel);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nextwork small {
+    grid-column: 1;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .nextwork b {
+    grid-column: 1;
+    font-size: clamp(22px, 2.6vw, 32px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .nextwork span {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    font-size: 24px;
+    color: var(--accent);
+    transition: transform 0.4s var(--ease);
+  }
+  .nextwork:hover span {
+    transform: translateX(6px);
+  }
+  .walk__step--free b {
+    font-size: clamp(36px, 5vw, 64px);
   }
   .walk__step {
     min-height: 78vh;
