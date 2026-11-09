@@ -33,69 +33,35 @@ draft: false
 
 ## Context
 
-<b>The NCCU Creative Ideas Hackathon</b> (政大創意點子黑客松) is a student competition run at National Chengchi University in Taipei. Our team of three answered a brief on second careers for older workers and won the Innovation Star Award.
+<b>The NCCU Creative Ideas Hackathon</b> is a student competition run at National Chengchi University in Taipei. Our team of three answered a brief on second careers for older workers.
 
 <p class="jx-topic"><small>Our question</small>In a super-aged society, how might we create second careers that suit what older people are actually good at?</p>
 
-## The problem
-
-**Experience that flows one way, and is lost.**
-
-<figure class="fig ws">
-<span class="fig__t">Trend, pain points and goals</span>
-<span class="fig__s">From the team's final deck, in the original Mandarin</span>
-<img class="fig__img" src="/work/wisely/slide-4.webp" alt="Diagram: background trend, three pain points and three matching goals, and the overall strategy" width="1800" height="911" loading="lazy" />
-<span class="fig__src">Trend: applications from over-45s grew 39% in three years. Pain points: 64.3% of older learners have no chance to use their expertise; age-friendly jobs remain scarce despite subsidies; collecting cultural stories is costly and unreliable. Goals, in the same columns: use older people's real strength, their experience and stories; offer friendly, flexible, high-value work; give culture and experience an easy channel. Strategy: an online matching ecosystem for passing on experience.</span>
-</figure>
-
-Local history and life stories, meanwhile, are recorded one way, by experts and creators, and are hard to put to use.
-
 ## The obvious answer
 
-**More age-friendly jobs.** Senior-job services and hiring subsidies already push in this direction, yet age-friendly openings remain scarce and the work on offer often does not fit: 33.7% of older workers are in production and manual roles, and 36% of employers name weaker physical strength as a drawback. The same employers name experience and networks as the main strength of older workers. More listings would still leave that strength unused, so the better question was how to make the experience itself bookable.
+**More age-friendly jobs.** Senior-job services and hiring subsidies already push in this direction, yet age-friendly openings remain scarce.
 
-## Who it serves
+## Why it falls short
 
-**Two sides that could not find each other.**
-
-<figure class="fig ws">
-<span class="fig__t">Operating model</span>
-<span class="fig__s">From the team's final deck, in the original Mandarin</span>
-<img class="fig__img" src="/work/wisely/slide-26.webp" alt="Operating model: researchers and companies buy services from the platform, which pays older consultants for part-time work" width="1800" height="881" loading="lazy" />
-<span class="fig__src">Left: researchers and companies register, search for a suitable consultant and book a time. Centre: the platform assigns work by each person's background, trains them on the tools, passes bookings on and writes industry white papers from the material. Right: people aged 45 and over register as consultants, set their own hours and meet online.</span>
-</figure>
-
-## The idea
-
-**Book an older person's experience like a consultation.** Wisely is an online platform where older people become paid consultants for oral history, local knowledge and working experience, and anyone who needs that knowledge can search, filter and book them.
+**The missing piece was a use for experience.** Employers name experience and networks as the main strength of older workers, but the work on offer rarely uses them. More listings would leave that strength unused.
 
 <figure class="fig ws">
-<span class="fig__t">User flow</span>
-<span class="fig__s">From the team's final deck, in the original Mandarin</span>
-<img class="fig__img" src="/work/wisely/slide-13.webp" alt="User flow chart from entering the platform to booking, matching, the session and feedback" width="1800" height="770" loading="lazy" />
-<span class="fig__src">Enter → browse consultants → found one? If not, filter again → book and describe the need → consultant accepts? If not, choose another → matched → hold the session → completed? If not, reschedule → leave feedback.</span>
-</figure>
-
-## What makes it different
-
-**Built around stories, not job listings.**
-
-<figure class="fig ws">
-<span class="fig__t">Competitive analysis</span>
-<span class="fig__s">From the team's final deck, in the original Mandarin</span>
-<div class="car">
-<div class="car__track">
-<figure><img src="/work/wisely/slide-7.webp" alt="Comparison table of Wisely and 104 高年級 across six criteria" width="1800" height="941" loading="lazy" /><figcaption><b>1 · Against 104 高年級</b>Wisely offers oral history and cultural exploration rather than business advice and group classes; more work for older people, built on their stories; advice tailored to each question; booking filtered by topic, place and era instead of fixed timetables; individuals, companies and researchers as users; NT$500–700 an hour against NT$800–1,000. That price is Wisely's basic tier; its mid and senior tiers start at NT$800 and NT$1,500.</figcaption></figure>
-<figure><img src="/work/wisely/slide-8.webp" alt="Positioning map: how easy a story is to get against how well it fits the need" width="1800" height="941" loading="lazy" /><figcaption><b>2 · Positioning map</b>Existing local-story platforms are easy to reach but one-way, shaped by the creator's taste. Arranging an interview yourself fits the need but depends on contacts, time and place. Wisely aims for the corner neither reaches: stories that are both easy to find and tailored to you.</figcaption></figure>
+<span class="fig__t">Older workers, and the work on offer</span>
+<div class="goals">
+<div><small>Where they work</small><b>33.7%</b><span>in production and manual roles</span></div>
+<div><small>What employers see</small><b>36%</b><span>name weaker physical strength as a drawback</span></div>
+<div><small>What goes unused</small><b>64.3%</b><span>of older learners have no chance to use their expertise</span></div>
 </div>
-<div class="car__nav"><button class="car__prev" type="button" aria-label="Previous slide">‹</button><button class="car__next" type="button" aria-label="Next slide">›</button><span class="car__count">1 / 2</span></div>
-</div>
-<span class="fig__src">104 高年級 is the senior-jobs service of 104, Taiwan's largest job bank.</span>
+<span class="fig__src">Source: 104 Job Bank and Ministry of Labor surveys cited in the team's deck.</span>
 </figure>
 
-## The business model
+## What we proposed
 
-**Every booking pays for the platform.**
+**Book an older person's experience like a consultation.** Wisely is an online platform where people aged 45 and over become paid consultants for oral history, local knowledge and working experience. Researchers, companies and curious individuals filter by topic, place and era, then book a session.
+
+## What I built
+
+**A business model where every booking pays for the platform.**
 
 <figure class="fig ws">
 <span class="fig__t">Business Model Canvas</span>
@@ -118,7 +84,7 @@ Local history and life stories, meanwhile, are recorded one way, by experts and 
 
 ## Result
 
-**Innovation Star Award, NCCU Creative Ideas Hackathon 2025.**
+**Innovation Star Award among 32 teams, NCCU Creative Ideas Hackathon 2025.**
 
 ---
 

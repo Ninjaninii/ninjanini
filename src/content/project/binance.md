@@ -119,11 +119,11 @@ I was one of two Teaching Supervisors on the team, alongside a mentor. TAs did n
 **Two perspectives, one question: why?**
 
 <div class="credit">
-<div><small>The external reviewer</small><p>The team's domain knowledge exceeded what any judge would bring, and that proximity made it easy to lose sight of the top-down narrative: a slide could be accurate in every detail yet disrupt the overall storyline, because its logic held only for an audience that already shared the team's expertise. Reviewing as a third party allowed me to identify where the argument lost coherence and where the information no longer connected.</p></div>
-<div><small>The mentee's side</small><p>Before flagging an issue, I first sought to understand the mentee's reasoning and how they had arrived at their conclusion. Only then could I pinpoint the gap I saw, discuss it with them, and articulate my own rationale in full rather than simply issuing a judgement.</p></div>
+<div><small>The external reviewer</small><p>The team's domain knowledge exceeded what any judge would bring, and that proximity made it easy to lose sight of the top-down narrative. Reviewing as a third party allowed me to identify where the argument lost coherence.</p></div>
+<div><small>The mentee's side</small><p>Before flagging an issue, I first sought to understand the mentee's reasoning. Only then could I pinpoint the gap I saw and articulate my own rationale rather than simply issuing a judgement.</p></div>
 </div>
 
-Supervising the team required me to move deliberately between these two perspectives. Alternating between them strengthened my ability to think bidirectionally, and instilled the habit of challenging my own reasoning with the same question I put to the team: why?
+Alternating between these two perspectives instilled the habit of challenging my own reasoning with the same question I put to the team: why?
 
 
 ---
