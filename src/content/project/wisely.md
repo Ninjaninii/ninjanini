@@ -24,26 +24,30 @@ glance:
 draft: false
 ---
 
-## My contribution
+## Situation
 
 <div class="credit">
 <div><small>My teammates</small><p>Research, the user flow and the product mockups.</p></div>
 <div><small>Me</small><p>The Business Model Canvas, and the revenue, cost and break-even projection.</p></div>
 </div>
 
-## Context
-
 <b>The NCCU Creative Ideas Hackathon</b> is a student competition run at National Chengchi University in Taipei. Our team of three answered a brief on second careers for older workers.
 
 <p class="jx-topic"><small>Our question</small>In a super-aged society, how might we create second careers that suit what older people are actually good at?</p>
 
-## The obvious answer
-
 **More age-friendly jobs.** Senior-job services and hiring subsidies already push in this direction, yet age-friendly openings remain scarce.
 
-## Why it falls short
+## The turn
 
-**The missing piece was a use for experience.** Employers name experience and networks as the main strength of older workers, but the work on offer rarely uses them. More listings would leave that strength unused.
+**The missing piece was a use for experience.**
+
+<figure class="fig ws">
+<span class="fig__t">What we found, and what we decided</span>
+<div class="pairs">
+<div><div class="pairs__q"><small>Finding</small><b>Employers name experience and networks as the main strength of older workers, but the work on offer rarely uses them.</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Decision</small><span>More listings would leave that strength unused. The missing piece was a use for experience.</span></div></div>
+<div><div class="pairs__q"><small>Finding</small><b>64.3% of older learners have no chance to use their expertise.</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Decision</small><span>Book an older person&rsquo;s experience like a consultation.</span></div></div>
+</div>
+</figure>
 
 <figure class="fig ws">
 <span class="fig__t">Older workers, and the work on offer</span>
@@ -55,11 +59,9 @@ draft: false
 <span class="fig__src">Source: 104 Job Bank and Ministry of Labor surveys cited in the team's deck.</span>
 </figure>
 
-## What we proposed
+## The work
 
 **Book an older person's experience like a consultation.** Wisely is an online platform where people aged 45 and over become paid consultants for oral history, local knowledge and working experience. Researchers, companies and curious individuals filter by topic, place and era, then book a session.
-
-## What I built
 
 **A business model where every booking pays for the platform.**
 
@@ -69,8 +71,6 @@ draft: false
 <img class="fig__img" src="/work/wisely/slide-10.webp" alt="The Business Model Canvas I wrote, nine blocks from key partners to revenue streams" width="1800" height="967" loading="lazy" />
 <span class="fig__src">Value: pass experience on, so older people's real value is used and generations succeed together. Customers: history lovers and travellers, researchers and students, industry researchers and founders, with people aged 45+ as consultants. Revenue: a 20–30% commission on each hour of consultation (the main stream), ads and brand partnerships, and, in the long term, anonymised data and insight licensing. Costs: salaries and platform upkeep (fixed); consultant fees and events (variable). The canvas lists consultant fees as a cost; the break-even below treats them as passing through to the consultant.</span>
 </figure>
-
-## The numbers
 
 **Break-even at about 15,000 bookings a year.** Commission is 30%, 25% or 20% by consultant tier, which comes to about NT$200 a booking. The consultant's fee passes straight through, so it is not a platform cost. After about NT$25 of support, the platform keeps NT$175 a booking against NT$2.6M a year for a three-person team and upkeep.
 
@@ -82,7 +82,7 @@ draft: false
 <details><summary>View as table</summary><table><tr><th>Assumption</th><th class="num">Low cost</th><th class="num">Base</th><th class="num">High cost</th></tr><tr><td>Fixed cost a year, NT$M</td><td class="num">2.22</td><td class="num">2.60</td><td class="num">2.98</td></tr><tr><td>Support cost a booking, NT$</td><td class="num">20</td><td class="num">25</td><td class="num">30</td></tr><tr><td>Platform keeps a booking, NT$</td><td class="num">180</td><td class="num">175</td><td class="num">170</td></tr><tr><td>Break-even bookings a year</td><td class="num">12,300</td><td class="num">14,900</td><td class="num">17,500</td></tr></table></details>
 </figure>
 
-## Result
+## Outcome
 
 **Innovation Star Award among 32 teams, NCCU Creative Ideas Hackathon 2025.**
 

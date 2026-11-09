@@ -24,16 +24,14 @@ glance:
 draft: false
 ---
 
-## My contribution
+## Situation
 
 <div class="credit">
-<div><small>My co-TA</small><p>Pressure-tested the numbers, asking for the formula behind every figure.</p></div>
-<div><small>Me</small><p>Pressure-tested the logic, and coached how the analysis was presented.</p></div>
+<div><small>My co-TA</small><p>Focused on the numbers, asking for the formula behind every figure. We both reviewed the logic.</p></div>
+<div><small>Me</small><p>Reviewed the logic with my co-TA, and led the coaching on how the analysis was presented.</p></div>
 </div>
 
 I was one of two Teaching Supervisors on the team, alongside a mentor. TAs did not do the research; our job was to review the work and keep its direction sound. At each round I read the deck the way a judge would, and where an argument jumped a step, I sent it back.
-
-## What this was
 
 **A simulated consulting case, reviewed three times.** The NTHU Consulting Group, a student consulting club, assigned each team a different real company to grow. Ours was Binance in Taiwan, from September to December 2025. It was a training exercise with no affiliation to Binance. Internal company data was not available, so company-level figures are the team's estimates.
 
@@ -46,8 +44,6 @@ I was one of two Teaching Supervisors on the team, alongside a mentor. TAs did n
 </ol>
 </figure>
 
-## The brief
-
 **Two targets, one plan.**
 
 <figure class="fig bn">
@@ -57,37 +53,19 @@ I was one of two Teaching Supervisors on the team, alongside a mentor. TAs did n
 </div>
 </figure>
 
-## How I reviewed
+## The turn
 
 **One question, every round: why?**
 
 <figure class="fig bn">
-<span class="fig__t">Three questions I asked, and what the next review showed</span>
-<div class="layers">
-<div><small>Is the target right?</small><b>Does this recommendation follow from that evidence?</b><span>Review 2 tested the age target with a 191-response survey. Among non-investors, age barely changed the intent to enter (3.06 against 2.8), so the target was dropped.</span></div>
-<div><small>Is the priority right?</small><b>Why should I believe this segment matters most?</b><span>Review 3 sized six investor segments. Those aged 26–50 held about 84% of the modeled money.</span></div>
-<div><small>Can it be done?</small><b>How would the bank partnership really work?</b><span>Review 3 broke it into API integration, anti-money-laundering checks, compliance and operating costs, each with a budget.</span></div>
+<span class="fig__t">What I asked, and what the next review showed</span>
+<div class="pairs">
+<div><div class="pairs__q"><small>Is the target right?</small><b>Does this recommendation follow from that evidence?</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Review 2</small><span>Rebuilt the page so each hypothesis leads straight to its evidence and strategy. Among non-investors, age barely changed the intent to enter (3.06 against 2.8), so the age target was dropped.</span></div></div>
+<div><div class="pairs__q"><small>Is the priority right?</small><b>Why should I believe this segment matters most?</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Review 3</small><span>Sized six investor segments. Those aged 26–50 held about 84% of the modeled money.</span></div></div>
+<div><div class="pairs__q"><small>Can it be done?</small><b>How would the bank partnership really work?</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Review 3</small><span>Broke it into API integration, anti-money-laundering checks, compliance and operating costs, each with a budget.</span></div></div>
 </div>
 <span class="fig__src">The questions are from my reviews. The analysis that answered them was the team's.</span>
 </figure>
-
-## How I coached the story
-
-**Accurate is not the same as clear.** The research and the strategy were the team's. My part was making sure they held together, and that they landed in a twenty-minute review.
-
-<figure class="fig bn">
-<span class="fig__t">Four presentation rules I coached</span>
-<ol class="seq seq--plain">
-<li><b>Lead every slide with its insight</b></li>
-<li><b>Agree the colour rules before anyone builds a chart</b></li>
-<li><b>Highlight the one figure that matters and grey out the rest</b></li>
-<li><b>Cut the text until the argument reads top to bottom</b></li>
-</ol>
-</figure>
-
-## What the team reached
-
-**From one customer to two priced plans.**
 
 <figure class="fig bn">
 <span class="fig__t">One customer became two</span>
@@ -101,20 +79,38 @@ I was one of two Teaching Supervisors on the team, alongside a mentor. TAs did n
 </div>
 </figure>
 
+## The work
+
+**Accurate is not the same as clear.** The research and the strategy were the team's. My part was making sure they held together, and that they landed in a twenty-minute review.
+
 <figure class="fig bn">
-<span class="fig__t">What the priced plan delivers</span>
-<div class="goals">
-<div><small>User goal · 109k needed</small><b>119.7k</b><span>New sign-ups for NT$118.7M. Each channel acquires a user for NT$951–1,358, below the NT$1,659 the team estimated each sign-up is worth.</span></div>
-<div><small>Volume goal · +70% needed</small><b>+54.7%</b><span>NT$469B of added volume for NT$205M, including legal and AML review. The plan reaches about 78% of the target.</span></div>
+<span class="fig__t">One slide, before and after my review</span>
+<div class="ba">
+<figure><figcaption>Before</figcaption><a href="/work/binance/slide-before.webp" target="_blank" rel="noopener"><img src="/work/binance/slide-before.webp" alt="Mandarin slide with three separate columns for hypotheses, results and strategy" width="1600" height="900" loading="lazy" /></a></figure>
+<figure><figcaption class="on">After my review comments</figcaption><div class="ba__img"><a href="/work/binance/slide-after.webp" target="_blank" rel="noopener"><img src="/work/binance/slide-after.webp" alt="Mandarin slide where each hypothesis runs across one row to its evidence and strategy, with the key finding in yellow" width="1600" height="900" loading="lazy" /></a><i style="--x:44.2%;--y:40%">1</i><i style="--x:69.6%;--y:43%">2</i><i style="--x:38.7%;--y:76%">3</i></div></figure>
 </div>
-<span class="fig__src">Source: the team's cost–benefit section; NT$118.7M is the sum of its three channel costs. Value per sign-up is benchmarked on Coinbase's revenue per active user, adjusted for a 5× fee gap and 18% retention. The model does not separate the plan's effect from market growth of about 15% a year.</span>
+<ol class="ba__notes">
+<li>Hypothesis, evidence and strategy now read across one line</li>
+<li>The key finding is highlighted</li>
+<li>Colours reduced to the team's main palette</li>
+</ol>
+<span class="fig__src">The team made both slides; I gave review comments. Slides are in the original Mandarin.</span>
 </figure>
 
-## Result
+The rules I coached: lead every slide with its insight, agree the colour rules before anyone builds a chart, highlight the one figure that matters and grey out the rest, and cut the text until the argument reads top to bottom.
+
+## Outcome
 
 **Ranked 1st of all teams at the final review.**
 
-## What I took from it
+<figure class="fig bn">
+<span class="fig__t">What the priced plan is projected to deliver</span>
+<div class="goals">
+<div><small>User goal · 109k needed</small><b>119.7k</b><span>Projected new sign-ups for NT$118.7M. Each channel acquires a user for NT$951–1,358, below the NT$1,659 the team estimated each sign-up is worth.</span></div>
+<div><small>Volume goal · +70% needed</small><b>+54.7%</b><span>Projected NT$469B of added volume for NT$205M, including legal and AML review. The plan is projected to reach about 78% of the target.</span></div>
+</div>
+<span class="fig__src">Source: the team's cost–benefit section; NT$118.7M is the sum of its three channel costs. Value per sign-up is benchmarked on Coinbase's revenue per active user, adjusted for a 5× fee gap and 18% retention. The model does not separate the plan's effect from market growth of about 15% a year.</span>
+</figure>
 
 **Two perspectives, one question: why?**
 
@@ -124,7 +120,6 @@ I was one of two Teaching Supervisors on the team, alongside a mentor. TAs did n
 </div>
 
 Alternating between these two perspectives instilled the habit of challenging my own reasoning with the same question I put to the team: why?
-
 
 ---
 

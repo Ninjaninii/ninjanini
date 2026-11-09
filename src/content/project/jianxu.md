@@ -26,14 +26,12 @@ glance:
 draft: false
 ---
 
-## My contribution
+## Situation
 
 <div class="credit">
 <div><small>Together, all six of us</small><p>Developed the concept and the literature review — reading, arguing and consolidating as one team.</p></div>
 <div><small>My part</small><p>Designed the UI, and produced the pitch deck and the poster.</p></div>
 </div>
-
-## Context
 
 <b>OpenHCI</b> is Taiwan's longest-running student-led workshop on human–computer interaction. Mixed teams take an open research brief and turn it into a product concept.
 
@@ -41,13 +39,20 @@ draft: false
 
 <p class="jx-name">澗 <span>jiàn</span> — a mountain stream &nbsp;·&nbsp; 序 <span>xù</span> — order<span class="koi" aria-hidden="true"><img src="/work/jianxu/koi.webp" alt="" width="291" height="322" /></span></p>
 
-## The obvious answer
+**Block the interruption. Most focus tools already do.** Our first version joined the crowd: a browser plugin that blocks distractions before they reach the user.
 
-**Block the interruption. Most focus tools already do.** Our first version joined the crowd: a browser plugin that blocks distractions before they reach the user. We dropped it after our first discussion with the professor. Existing products already covered this without solving the problem, and blocking notifications means asking for access to all of them, a real security risk for a focus tool.
-
-## Why it falls short
+## The turn
 
 **Some interruptions cannot be blocked, and their damage comes after.**
+
+<figure class="fig jx">
+<span class="fig__t">What we found, and what we decided</span>
+<div class="pairs">
+<div><div class="pairs__q"><small>Finding</small><b>Existing products already covered blocking without solving the problem, and blocking notifications means asking for access to all of them.</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Decision</small><span>After our first discussion with the professor, we dropped the plugin.</span></div></div>
+<div><div class="pairs__q"><small>Finding</small><b>14 of 20 interviewees said the negative feeling after an interruption lowered their motivation to return.</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Decision</small><span>We chose negative emotion as the step to design for.</span></div></div>
+<div><div class="pairs__q"><small>Finding</small><b>The meditation literature reports lower stress and stronger attention, though it covers meditation at work in general, not a short session straight after an interruption.</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Decision</small><span>A short guided reset before going back to work.</span></div></div>
+</div>
+</figure>
 
 <figure class="fig jx">
 <span class="fig__t">What an unplanned interruption leaves behind</span>
@@ -82,7 +87,7 @@ draft: false
 <span class="fig__src">Found through the 20 interviews, read against Cognitive Load Theory, Self-Determination Theory and Bandura's self-efficacy.</span>
 </figure>
 
-## What we designed
+## The work
 
 **A short guided reset before going back to work.** Jianxu is for self-paced knowledge workers, who rely on autonomy and tend to blame themselves when interrupted. The meditation literature reports lower stress and stronger attention, though it covers meditation at work in general, not a short session straight after an interruption.
 
@@ -118,11 +123,9 @@ Time Well Spent (Guillou et al., CHI 2020) found that knowledge workers judge th
 <video class="fig__img" src="/work/jianxu/demo.mp4" poster="/work/jianxu/screen-2.webp" controls preload="none" playsinline></video>
 </figure>
 
-## Result
+## Outcome
 
 **Best Research Award, OpenHCI 2025.** The judges' stated reason was the depth of the literature grounding behind the concept. The workshop ended at a concept and demo, so whether Jianxu speeds recovery or restores confidence is still untested; the next step would be to compare it with a simple note of where you left off.
-
-## What I took from it
 
 **The obvious answer is usually the most crowded one.** Blocking interruptions was the first idea we had precisely because it is what the entire productivity market already sells, which also made it the hardest place to stand out.
 
