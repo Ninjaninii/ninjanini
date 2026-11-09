@@ -87,7 +87,7 @@ I was one of two Teaching Supervisors on the team, alongside a mentor. TAs did n
 <li>The key finding is highlighted</li>
 <li>Colours reduced to the team's main palette</li>
 </ol>
-<span class="fig__src">The team made both slides; I gave review comments. Slides are in the original Mandarin.</span>
+<span class="fig__src">The team made both slides; I gave review comments. Slides are in the original Mandarin. The After slide's market-share wording is from Review 2; the final target was +70% trading volume.</span>
 </figure>
 
 The rules I coached: lead every slide with its insight, agree the colour rules before anyone builds a chart, highlight the one figure that matters and grey out the rest, and cut the text until the argument reads top to bottom.

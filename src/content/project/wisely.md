@@ -19,7 +19,7 @@ heroImage: /work/wisely/hero.webp
 heroAlt: Wisely on a laptop, a grid of older consultants with ratings and a message button
 glance:
   problem: Researchers cannot reach the experience people over 45 hold, and there is no way to book it.
-  turn: Instead of more job listings, treat that experience as a paid consultation, so every booking funds the platform.
+  turn: Instead of more job listings, treat that experience as a paid consultation, so every booking contributes to platform costs.
   result: Innovation Star Award among 32 teams, with a model that breaks even at about 15,000 bookings a year.
 draft: false
 ---

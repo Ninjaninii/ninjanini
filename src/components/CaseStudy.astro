@@ -2160,6 +2160,12 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     fill: var(--jx-strong);
     font-weight: 600;
   }
+  /* the chart scales down with the page, so its labels are set larger on phones to stay readable */
+  @media (max-width: 560px) {
+    .linechart .ax {
+      font-size: 22px;
+    }
+  }
   .linechart rect:focus-visible {
     outline: 2px solid var(--accent);
   }
