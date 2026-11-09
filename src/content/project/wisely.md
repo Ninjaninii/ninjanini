@@ -35,7 +35,7 @@ draft: false
 
 <p class="jx-topic"><small>Our question</small>In a super-aged society, how might we create second careers that suit what older people are actually good at?</p>
 
-**More age-friendly jobs.** Senior-job services and hiring subsidies already push in this direction, yet age-friendly openings remain scarce.
+**The obvious answer: more age-friendly jobs.** Senior-job services and hiring subsidies already push in this direction, yet age-friendly openings remain scarce.
 
 ## The turn
 
@@ -44,8 +44,8 @@ draft: false
 <figure class="fig ws">
 <span class="fig__t">What we found, and what we decided</span>
 <div class="pairs">
-<div><div class="pairs__q"><small>Finding</small><b>Employers name experience and networks as the main strength of older workers, but the work on offer rarely uses them.</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Decision</small><span>More listings would leave that strength unused. The missing piece was a use for experience.</span></div></div>
-<div><div class="pairs__q"><small>Finding</small><b>64.3% of older learners have no chance to use their expertise.</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Decision</small><span>Book an older person&rsquo;s experience like a consultation.</span></div></div>
+<div><div class="pairs__q"><small>Finding</small><b>Employers name experience and networks as the main strength of older workers, but the work on offer rarely uses them.</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Decision</small><span>Look beyond job listings.</span></div></div>
+<div><div class="pairs__q"><small>Finding</small><b>Older learners say they rarely get to use their expertise.</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Decision</small><span>Turn that experience into a bookable service.</span></div></div>
 </div>
 </figure>
 
@@ -63,7 +63,7 @@ draft: false
 
 **Book an older person's experience like a consultation.** Wisely is an online platform where people aged 45 and over become paid consultants for oral history, local knowledge and working experience. Researchers, companies and curious individuals filter by topic, place and era, then book a session.
 
-**A business model where every booking pays for the platform.**
+**A business model where every booking contributes to platform costs.**
 
 <figure class="fig ws">
 <span class="fig__t">Business Model Canvas</span>

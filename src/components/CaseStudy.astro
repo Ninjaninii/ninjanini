@@ -2346,6 +2346,31 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     }
   }
 
+  .prose .minor {
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-2);
+  }
+  /* progress against a goal: the fill is the projected result, the tick is the target */
+  .meter {
+    position: relative;
+    display: block;
+    height: 8px;
+    margin: 10px 0 12px;
+    border-radius: 99px;
+    background: linear-gradient(var(--accent), var(--accent)) no-repeat left / var(--v) 100%, var(--hair);
+  }
+  .meter::after {
+    content: '';
+    position: absolute;
+    left: calc(var(--t) - 1px);
+    top: -4px;
+    width: 2px;
+    height: 16px;
+    background: var(--ink);
+  }
+
   /* finding to decision: what was asked on the left, what came of it on the right */
   .pairs {
     display: grid;

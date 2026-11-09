@@ -26,6 +26,8 @@ draft: false
 
 ## Situation
 
+<p class="minor">My role</p>
+
 <div class="credit">
 <div><small>My co-TA</small><p>Focused on the numbers, asking for the formula behind every figure. We both reviewed the logic.</p></div>
 <div><small>Me</small><p>Reviewed the logic with my co-TA, and led the coaching on how the analysis was presented.</p></div>
@@ -40,17 +42,8 @@ I was one of two Teaching Supervisors on the team, alongside a mentor. TAs did n
 <ol class="vflow">
 <li><small>Review 1</small><b>One customer for everything</b><span>Targets 18-to-29-year-olds for both goals, on desk research alone.</span></li>
 <li><small>Review 2</small><b>Two goals, two customers</b><span>Splits the market after a 191-response survey.</span></li>
-<li class="on"><small>Review 3</small><b>A priced plan for each customer</b><span>Sizes every target, values each user and costs each lever. Ranked 1st of all teams.</span></li>
+<li class="on"><small>Review 3</small><b>A priced plan for each customer</b><span>Sizes every target, values each user and costs each lever.</span></li>
 </ol>
-</figure>
-
-**Two targets, one plan.**
-
-<figure class="fig bn">
-<div class="goals">
-<div><small>User growth · within 1 year</small><b>+25%</b><span>Grow Binance's user base in Taiwan.</span></div>
-<div><small>Trading volume · within 3 years</small><b>+70%</b><span>Grow the volume traded on Binance in Taiwan.</span></div>
-</div>
 </figure>
 
 ## The turn
@@ -106,10 +99,10 @@ The rules I coached: lead every slide with its insight, agree the colour rules b
 <figure class="fig bn">
 <span class="fig__t">What the priced plan is projected to deliver</span>
 <div class="goals">
-<div><small>User goal · 109k needed</small><b>119.7k</b><span>Projected new sign-ups for NT$118.7M. Each channel acquires a user for NT$951–1,358, below the NT$1,659 the team estimated each sign-up is worth.</span></div>
-<div><small>Volume goal · +70% needed</small><b>+54.7%</b><span>Projected NT$469B of added volume for NT$205M, including legal and AML review. The plan is projected to reach about 78% of the target.</span></div>
+<div><small>User goal · +25% within 1 year · 109k needed</small><b>119.7k</b><i class="meter" style="--v:100%;--t:91.1%" role="img" aria-label="Projected 119.7k against a target of 109k"></i><span>Projected new sign-ups for NT$118.7M. Each channel acquires a user for NT$951–1,358, below the NT$1,659 the team estimated each sign-up is worth.</span></div>
+<div><small>Volume goal · +70% within 3 years</small><b>+54.7%</b><i class="meter" style="--v:78.1%;--t:100%" role="img" aria-label="Projected +54.7% against a target of +70%"></i><span>Projected NT$469B of added volume for NT$205M, including legal and AML review. The plan is projected to reach about 78% of the target.</span></div>
 </div>
-<span class="fig__src">Source: the team's cost–benefit section; NT$118.7M is the sum of its three channel costs. Value per sign-up is benchmarked on Coinbase's revenue per active user, adjusted for a 5× fee gap and 18% retention. The model does not separate the plan's effect from market growth of about 15% a year.</span>
+<span class="fig__src">The bar shows the projected result; the tick marks the target. Source: the team's cost–benefit section; NT$118.7M is the sum of its three channel costs. Value per sign-up is benchmarked on Coinbase's revenue per active user, adjusted for a 5× fee gap and 18% retention. The model does not separate the plan's effect from market growth of about 15% a year.</span>
 </figure>
 
 **Two perspectives, one question: why?**

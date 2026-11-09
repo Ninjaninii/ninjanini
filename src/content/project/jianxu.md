@@ -48,9 +48,9 @@ draft: false
 <figure class="fig jx">
 <span class="fig__t">What we found, and what we decided</span>
 <div class="pairs">
-<div><div class="pairs__q"><small>Finding</small><b>Existing products already covered blocking without solving the problem, and blocking notifications means asking for access to all of them.</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Decision</small><span>After our first discussion with the professor, we dropped the plugin.</span></div></div>
+<div><div class="pairs__q"><small>Finding</small><b>Existing products already covered blocking without solving the problem, and blocking notifications means asking for access to all of them, a real security risk for a focus tool.</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Decision</small><span>After our first discussion with the professor, we dropped the plugin.</span></div></div>
 <div><div class="pairs__q"><small>Finding</small><b>14 of 20 interviewees said the negative feeling after an interruption lowered their motivation to return.</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Decision</small><span>We chose negative emotion as the step to design for.</span></div></div>
-<div><div class="pairs__q"><small>Finding</small><b>The meditation literature reports lower stress and stronger attention, though it covers meditation at work in general, not a short session straight after an interruption.</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Decision</small><span>A short guided reset before going back to work.</span></div></div>
+<div><div class="pairs__q"><small>Finding</small><b>The meditation literature reports lower stress and stronger attention, though it covers meditation at work in general, not a short session straight after an interruption.</b></div><i aria-hidden="true">&#8594;</i><div class="pairs__a"><small>Decision</small><span>Design a short meditation for the moment after an interruption.</span></div></div>
 </div>
 </figure>
 
@@ -75,7 +75,7 @@ draft: false
 
 <figure class="fig jx">
 <span class="fig__t">The key finding</span>
-<span class="fig__s">The chain 14 of 20 interviewees described</span>
+<span class="fig__s">The chain behind that finding</span>
 <div class="chain">
 <div>Interrupted task</div>
 <i aria-hidden="true">→</i>
@@ -89,7 +89,7 @@ draft: false
 
 ## The work
 
-**A short guided reset before going back to work.** Jianxu is for self-paced knowledge workers, who rely on autonomy and tend to blame themselves when interrupted. The meditation literature reports lower stress and stronger attention, though it covers meditation at work in general, not a short session straight after an interruption.
+**A short guided reset before going back to work.** Jianxu is for self-paced knowledge workers, who rely on autonomy and tend to blame themselves when interrupted.
 
 Time Well Spent (Guillou et al., CHI 2020) found that knowledge workers judge their time on four things: what they worked on, how they worked, how they felt and how they took care of themselves. We turned each into one step of the guided meditation.
 
