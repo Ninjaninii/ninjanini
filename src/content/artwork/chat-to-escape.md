@@ -3,7 +3,7 @@ title: Chat to Escape
 hook: Your hand is locked. To get out, you have to make yourself heard.
 summary: An interactive installation in two parts. One visitor's hand is locked in place, and it is released when a stranger down the corridor picks up a red phone and talks, or, if no one answers, when the visitor shouts.
 year: '2026'
-artists: Chen Chia-Ni, Lin Ting-Yu, 陳昱熙
+artists: Chia Ni Chen, Ting Yu Lin, Min Hsi Chen
 medium: Interactive installation · wood, faux fur, electronics, telephone, screens
 role: To be confirmed
 context: NTHU graduation exhibition, C-LAB, Taipei
@@ -59,7 +59,7 @@ The second person is **deliberately out of the room**. The visitor at the lock h
 
 <p class="lead">Two ends, one conversation.</p>
 
-Shown at the NTHU Technology and Art graduation exhibition at C-LAB (Taiwan Contemporary Culture Lab), Taipei. Advised by Tsai Tsun-Hung.
+Shown at the NTHU Technology and Art graduation exhibition at C-LAB (Taiwan Contemporary Culture Lab), Taipei, with 1,000–1,200 visits. Advised by Tsai Tsun-Hung.
 
 <figure class="fig ce">
 <span class="fig__t">The two ends</span>
@@ -102,6 +102,6 @@ The first answer was about where people sit. The piece only found its form once 
 
 ## About the Artist
 
-Chen Chia-Ni, Arts and Technology, National Tsing Hua University.
+Chia Ni Chen, Arts and Technology, National Tsing Hua University.
 
 <a class="nextwork" href="/artwork/room-624/"><small>See another piece</small><b>Cleaning Request: Room 624</b><span aria-hidden="true">&#8594;</span></a>

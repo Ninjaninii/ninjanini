@@ -3,10 +3,10 @@ title: 'Cleaning Request: Room 624'
 hook: You are hired to clear out a hoarder's flat. Every object you throw away was holding a memory.
 summary: 'A VR piece where you piece together one fictional hoarder''s story by clearing his room. I led the four-person team and wrote the concept and script.'
 year: '2024'
-artists: Chen Chia-Ni, Chen Shih-Yang, Shih Tsung-Hsuan, Tai Jie-Yin
+artists: Chia Ni Chen, Shih Yang Chen, Tsung Hsuan Shih, Jie Yin Tai
 medium: VR installation, Meta Quest 3 · about 10-minute narrative
 role: Project management, concept and statement, script and memory stories
-team: Chen Chia-Ni, Chen Shih-Yang, Shih Tsung-Hsuan, Tai Jie-Yin
+team: Chia Ni Chen, Shih Yang Chen, Tsung Hsuan Shih, Jie Yin Tai
 context: NTHU Interdisciplinary Program of Arts and Technology
 tools: ['Unity', 'Meta Quest 3', 'Blender']
 skills: ['Storytelling']
@@ -106,6 +106,6 @@ Inspired by Ni Hsiang's 2024 solo exhibition *Everyone Has Come to See You* (《
 
 ## About the Artist
 
-**Chen Chia-Ni**
+**Chia Ni Chen**
 
 Arts and Technology, National Tsing Hua University. Project lead, concept, statement, script and memory stories.
