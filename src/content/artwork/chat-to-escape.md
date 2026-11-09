@@ -1,7 +1,7 @@
 ---
 title: Chat to Escape
-hook: Your hand is locked. The only way out is to talk to a stranger.
-summary: An interactive installation in two parts. One visitor's hand is locked in place, and it is released only if a stranger down the corridor picks up a red phone and talks.
+hook: Your hand is locked. To get out, you have to make yourself heard.
+summary: An interactive installation in two parts. One visitor's hand is locked in place, and it is released when a stranger down the corridor picks up a red phone and talks, or, if no one answers, when the visitor shouts.
 year: '2026'
 artists: Chen Chia-Ni, Lin Ting-Yu, 陳昱熙
 medium: Interactive installation · wood, faux fur, electronics, telephone, screens
@@ -35,9 +35,9 @@ draft: false
 </ol>
 <div class="walk__steps">
 <section class="walk__step" data-step="press"><img src="/work/chat-to-escape/press.webp" alt="A visitor's hand reaches into the gap in the pink faux-fur plinth" width="1600" height="1201" loading="lazy" /><p><small>I · Press</small><b>You press the button.</b><span>Your hand is locked in place, and you cannot step away.</span></p></section>
-<section class="walk__step" data-step="ask"><img src="/work/chat-to-escape/ask.webp" alt="With one hand in the plinth, a visitor turns to the screen and gestures, on the screen a person holds a red phone" width="1600" height="1201" loading="lazy" /><p><small>II · Ask</small><b>The only way out is a stranger.</b><span>A screen shows someone in another part of the building. You have to ask first, knowing you may be refused.</span></p></section>
+<section class="walk__step" data-step="ask"><img src="/work/chat-to-escape/ask.webp" alt="With one hand in the plinth, a visitor turns to the screen and gestures, on the screen a person holds a red phone" width="1600" height="1201" loading="lazy" /><p><small>II · Ask</small><b>The first way out is a stranger.</b><span>Someone in another part of the building can pick up a red phone. Only then do they appear on your screen, and you have to ask, knowing you may be refused.</span></p></section>
 <section class="walk__step" data-step="answer"><img src="/work/chat-to-escape/answer.webp" alt="A person with green hair holds the receiver of a red telephone booth to their ear" width="1600" height="1201" loading="lazy" /><p><small>III · Answer</small><b>Down the corridor, a red phone.</b><span>Whoever is passing can walk on, or pick up.</span></p></section>
-<section class="walk__step walk__step--free" data-step="release"><p><small>IV · Release</small><b>The lock lets go.</b><span>Only voices, and the time spent talking, can fill the meter.</span></p></section>
+<section class="walk__step walk__step--free" data-step="release"><p><small>IV · Release</small><b>The lock lets go.</b><span>Only your voice can fill the meter: by talking with the stranger or, if no one answers within 30 seconds, by shouting until it reaches 100%.</span></p></section>
 </div>
 </div>
 
@@ -45,15 +45,15 @@ draft: false
 
 <p class="lead">A polite distance, taken away.</p>
 
-Keeping a seat between ourselves and a stranger is a **social manner** most of us never question. This piece asks how people cope when that boundary disappears and the encounter **cannot be avoided**. It draws on Hall's work on personal space and Goffman's on being watched: both describe the unease that comes with being close to, and seen by, other people.
+There is a **social threshold** between people. Most of us never cross it: we keep a seat between ourselves and a stranger, we do not start talking for no reason, and we avoid doing anything embarrassing in public. This piece pushes you over that threshold, so that you can **feel the connection on the other side**. It began from Hall's work on personal space and Goffman's on being watched, both of which describe the unease of being close to, and seen by, other people. The final piece gives up the chair but keeps what the chair protected: the choice not to engage. That choice is what the lock takes away.
 
 ## Form & Immersion
 
 <p class="lead">Anxiety, made physical.</p>
 
-A phone call can be interrupted, declined or left in silence. By restraining the body, the installation removes that flexibility: social anxiety becomes **something you feel in your hand**, and speaking becomes the only release.
+A phone call can be interrupted, declined or left in silence. By restraining the body, the installation removes that flexibility: the discomfort of approaching a stranger becomes **something you feel in your hand**, and your voice becomes the only release. The lock takes away the usual reason to stay silent, but does not promise an answer. If no one picks up, you have to shout, which crosses the same threshold: it is something you would not normally do in front of strangers.
 
-The second person is **deliberately out of the room**. Inside an exhibition, visitors are braver and ready to play. Someone reached from elsewhere does not share that frame, which keeps the encounter closer to the real anxiety of an unknown social situation.
+The second person is **deliberately out of the room**. The visitor at the lock has chosen to take part. Whoever passes the red phone has not, and can simply walk on, which keeps the outcome uncertain.
 
 ## In the Space
 

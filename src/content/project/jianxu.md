@@ -1,8 +1,8 @@
 ---
 title: 澗序 Jianxu
-hook: Every focus tool blocks interruptions. Our interviews showed the damage comes after.
+hook: Most focus tools try to block interruptions. Our interviews pointed to the damage that comes after.
 metric: Best Research Award
-summary: 'Our interviews showed people blame themselves after being interrupted. I researched the literature and designed a short guided reset for getting back to work.'
+summary: 'In our interviews, 14 of 20 people said the negative feeling after an interruption lowered their motivation. We read the literature as a team, and I designed the interface for a short guided reset.'
 year: '2025'
 role: UI design and research; pitch deck and poster
 team: 6 students, 2 teaching assistants
@@ -20,8 +20,8 @@ heroAlt: Jianxu on a desktop screen, a meditation timer over rippling water with
 phonetic: ['jiàn', 'xù']
 particles: /work/jianxu/koi.webp
 glance:
-  problem: Focus tools all try to block interruptions, and the category is crowded.
-  turn: We dropped our own blocker plug-in. Interviews showed the harm comes after the interruption, so we designed for the return.
+  problem: Most focus tools try to block interruptions, and the category is crowded.
+  turn: After our first discussion with the professor, we dropped our blocker plug-in as crowded and risky. Twenty interviews then pointed to what follows an interruption, so we designed for the return.
   result: Best Research Award, OpenHCI 2025.
 draft: false
 ---
@@ -33,7 +33,7 @@ draft: false
 <div><small>My part</small><p>Designed the UI, and produced the pitch deck and the poster.</p></div>
 </div>
 
-The decision I argued for hardest was dropping our first version, a distraction-blocking plugin. It is the reason the project stopped being a focus tool and became something about recovery.
+We dropped our first version, a distraction-blocking plugin, after our first discussion with the professor and a look at competitors: many known products already did this, yet the problem remained. That is why the project stopped being a focus tool and became something about recovery.
 
 ## Context
 
@@ -49,28 +49,29 @@ The decision I argued for hardest was dropping our first version, a distraction-
 
 ## The problem
 
-**Being interrupted costs more than the time it takes.** Cognitive resources are finite (Cognitive Load Theory), so an unplanned interruption forces an expensive reallocation — felt as frustration and anxiety, not as lost minutes. The damage is the state you are left in afterwards.
+**Being interrupted costs more than the time it takes.** Cognitive resources are finite (Cognitive Load Theory), so an unplanned interruption forces an expensive reallocation — felt as frustration and anxiety as well as lost minutes. Part of the damage is the state you are left in afterwards.
 
 ## The obvious answer
 
-**Block the interruption. Every focus tool already does.**
+**Block the interruption. Most focus tools already do.**
 
 <figure class="fig jx">
-<span class="fig__t">Where focus tools put their effort</span>
+<span class="fig__t">Where the focus tools we compared put their effort</span>
 <div class="crowd">
 <div><small>Before and during the interruption · Crowded</small><div class="chips"><span>Notification blockers</span><span>Website and app blockers</span><span>Focus timers</span><span>Do-not-disturb modes</span><span>Screen-time limits</span><span class="on">Our first version: a distraction-blocking plugin</span></div></div>
 <i class="crowd__arrow" aria-hidden="true">→</i>
-<div class="crowd__empty"><small>After the interruption</small><b>Largely ignored</b><span>No tool helps you come back</span></div>
+<div class="crowd__empty"><small>After the interruption</small><b>The gap we saw</b><span>Little support for coming back</span></div>
 </div>
+<span class="fig__src">Cognitive science has long studied how people resume interrupted tasks (e.g. Altmann &amp; Trafton, 2004). Our focus was the emotional side.</span>
 </figure>
 
-Our first version joined the crowd: a browser plugin that blocks distractions before they reach the user. We dropped it. It added little to a crowded category, and blocking notifications means asking for access to all of them — a real security risk for a focus tool.
+Our first version joined the crowd: a browser plugin that blocks distractions before they reach the user. We dropped it. Existing products already covered this without solving the problem, and blocking notifications means asking for access to all of them — a real security risk for a focus tool.
 
 So we went back to the research.
 
 ## Research
 
-**One layer deeper: twenty interviews, and a pattern nobody names.**
+**One layer deeper: twenty interviews, and a pattern in what people felt.**
 
 <figure class="fig jx">
 <span class="fig__t">What an unplanned interruption leaves behind</span>
@@ -80,28 +81,28 @@ So we went back to the research.
 <ul class="research__legend"><li><i style="background:var(--accent)"></i><b>14</b> lost motivation to return to the task</li><li><i style="background:var(--g-1)"></i><b>6</b> did not report this</li></ul>
 </div>
 <div class="scenes">
-<span class="scenes__t">How they described it — every time, they blamed themselves</span>
-<div><em>Self-doubt</em><p>"I couldn't stop the interruption, so I must lack self-discipline. I start questioning whether I'm good at my job."</p></div>
-<div><em>Abandonment</em><p>"When deep, demanding work gets broken off, I'm so irritated that I just don't go back to it."</p></div>
-<div><em>Guilt</em><p>"The time feels wasted, and I carry it around afterwards as guilt."</p></div>
+<span class="scenes__t">Three typical reactions, summarised from the interviews</span>
+<div><em>Self-doubt</em><p>Cannot control outside interruptions, reads that as a lack of self-discipline, and questions their own effectiveness.</p></div>
+<div><em>Abandonment</em><p>Gets especially irritated when complex, deep work is broken off, and simply does not go back to it.</p></div>
+<div><em>Guilt</em><p>Feels the time was wasted, and is left with guilt.</p></div>
 </div>
 </div>
-<span class="fig__src">Source: the team's interviews, conducted in Mandarin; quotes paraphrased in translation.</span>
+<span class="fig__src">Source: the team's semi-structured interviews, conducted in Mandarin; reactions as summarised in the final presentation.</span>
 </figure>
 
-<p class="theory"><small>Why they blame themselves · Bandura's self-efficacy</small>Self-efficacy is a person's belief that they can complete a given task. An interruption breaks the working context, the person cannot pick it back up, and their belief that they can finish drops. The blame turns inward.</p>
+<p class="theory"><small>One way to read it · Bandura's self-efficacy</small>Self-efficacy is a person's belief that they can complete a given task. An interruption breaks the working context; if the person cannot pick it back up, that belief can drop, and the blame can turn inward.</p>
 
 ## The reframe
 
-**The damage comes after the interruption, not before it.**
+**Some interruptions cannot be blocked, and their damage comes after.**
 
 <figure class="fig jx">
 <span class="fig__t">The key finding</span>
-<span class="fig__s">The same chain appeared across the interviews</span>
+<span class="fig__s">The chain 14 of 20 interviewees described</span>
 <div class="chain">
 <div>Interrupted task</div>
 <i aria-hidden="true">→</i>
-<div class="on">Negative emotion<small>The step no product treats</small></div>
+<div class="on">Negative emotion<small>The step we chose to design for</small></div>
 <i aria-hidden="true">→</i>
 <div>Motivation drops</div>
 </div>
@@ -109,7 +110,7 @@ So we went back to the research.
 <div class="shift">
 <div class="shift__from"><small>From</small><b>Preventing the interruption</b><span>Crowded</span></div>
 <i aria-hidden="true">→</i>
-<div class="shift__to"><small>To</small><b>Repairing what it leaves behind</b><span>Largely untouched</span></div>
+<div class="shift__to"><small>To</small><b>Repairing what it leaves behind</b><span>Less crowded</span></div>
 </div>
 <div class="hmw"><i aria-hidden="true">↓</i><div><small>How might we</small><b>Turn the negative emotion an unplanned interruption leaves behind into a positive experience the user can regulate?</b></div></div>
 <span class="fig__src">Found through the 20 interviews, read against Cognitive Load Theory, Self-Determination Theory and Bandura's self-efficacy.</span>
@@ -137,19 +138,19 @@ So we went back to the research.
 
 ## Why meditation
 
-**With the problem reframed, the vehicle followed.** The research found two things broken; meditation addresses both.
+**With the problem reframed, the vehicle followed.** The research found two things broken, and the meditation literature speaks to both.
 
 <figure class="fig jx">
 <div class="match">
-<div><small>What we found</small><b>Negative emotion lingers after the interruption</b></div><i aria-hidden="true">→</i><div class="on"><small>What meditation offers</small><b>Lower cortisol, better emotional regulation and self-awareness</b></div>
-<div><small>What we found</small><b>Focus is hard to regain afterwards</b></div><i aria-hidden="true">→</i><div class="on"><small>What meditation offers</small><b>Stronger sustained attention, less distraction</b></div>
+<div><small>What we found</small><b>Negative emotion lingers after the interruption</b></div><i aria-hidden="true">→</i><div class="on"><small>What the literature reports</small><b>Lower cortisol, better emotional regulation and self-awareness</b></div>
+<div><small>What we found</small><b>Focus is hard to regain afterwards</b></div><i aria-hidden="true">→</i><div class="on"><small>What the literature reports</small><b>Stronger sustained attention, less distraction</b></div>
 </div>
-<span class="fig__src">Meditation evidence: International Journal of Research in Human Resource Management (2024), cited in the team's final presentation.</span>
+<span class="fig__src">Meditation evidence: International Journal of Research in Human Resource Management (2024), cited in the final presentation. It covers meditation at work in general, not a short session straight after an interruption.</span>
 </figure>
 
 ## The framework
 
-**A research framework became the meditation script.** Time Well Spent (Guillou et al., CHI 2023) found that reflecting on four questions about your time changes how you feel about the work. We turned each question into one step of the guided meditation.
+**A research framework became the meditation script.** Time Well Spent (Guillou et al., CHI 2020) found that knowledge workers judge their time on four things: what they worked on, how they worked, how they felt and how they took care of themselves. We turned each into one step of the guided meditation.
 
 <figure class="fig jx">
 <span class="fig__t">From research questions to meditation steps</span>
@@ -164,7 +165,7 @@ So we went back to the research.
 
 ## What we built
 
-**The pause becomes the resource.** It is where the leftover thoughts from the broken task get released, so returning to work doesn't carry them.
+**The pause becomes the resource.** It is designed as the place to release leftover thoughts from the broken task, before returning to work.
 
 <figure class="fig jx">
 <span class="fig__t">The experience, as a storyboard</span>
@@ -205,21 +206,21 @@ So we went back to the research.
 <img class="fig__img" src="/work/jianxu/compare.webp" alt="Diagram comparing traditional productivity tools with Jianxu across three stages: working, interrupted and resuming" width="1600" height="674" loading="lazy" />
 <div class="cmp">
 <span></span><span class="cmp__h">Working</span><span class="cmp__h">Interrupted</span><span class="cmp__h">Resuming</span>
-<span class="cmp__r">Existing tools</span><div class="cmp__c" style="grid-column:span 2">Avoid the interruption</div><div class="cmp__c cmp__c--gap">Ignore the recovery</div>
+<span class="cmp__r">Tools we compared</span><div class="cmp__c" style="grid-column:span 2">Avoid the interruption</div><div class="cmp__c cmp__c--gap">Little on recovery</div>
 <span class="cmp__r">Jianxu</span><div class="cmp__c">Track progress and checkpoints</div><div class="cmp__c"><small>Negative feeling</small>Catch the unplanned interruption</div><div class="cmp__c on"><small>Opportunity</small>Switch state with a short meditation</div>
 </div>
 </figure>
 
 ## Result
 
-**Best Research Award, OpenHCI 2025.** The judges' stated reason was the depth of the literature grounding behind the concept.
+**Best Research Award, OpenHCI 2025.** The judges' stated reason was the depth of the literature grounding behind the concept. The workshop ended at a concept and demo, so whether Jianxu speeds recovery or restores confidence is still untested; the next step would be to compare it with a simple note of where you left off.
 
 ## What I took from it
 
 **The obvious answer is usually the most crowded one.** Blocking interruptions was the first idea we had precisely because it is what the entire productivity market already sells, which also made it the hardest place to stand out.
 
-Going one layer deeper into the literature and the interviews is what revealed the opening: the real damage happens after the interruption, in the emotional state it leaves behind. That moved the problem from crowded prevention to largely untouched recovery. Meditation was the vehicle; the reframe was the insight.
+Going one layer deeper into the literature and the interviews is what revealed the opening: an overlooked part of the damage happens after the interruption, in the emotional state it leaves behind. That moved the problem from crowded prevention to less crowded recovery. Meditation was the vehicle; the reframe was the insight.
 
 ---
 
-*A student workshop project, not a shipped product. The topic and the reading directions were set by the brief; the self-determination and meditation literature, the Time Well Spent framework and the design direction are the team's. Research was conducted in Mandarin with knowledge workers in Taiwan; participant quotes are paraphrased in translation.*
+*A student workshop project, not a shipped product. The topic and the reading directions were set by the brief; the self-determination and meditation literature, the Time Well Spent framework and the design direction are the team's. Research was conducted in Mandarin with knowledge workers in Taiwan; participant reactions are summarised from the team's final presentation.*

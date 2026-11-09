@@ -1,8 +1,8 @@
 ---
 title: Wisely
-hook: 'Retired people hold knowledge nobody can find. A marketplace only works if the numbers do.'
+hook: 'People over 45 hold knowledge nobody can find. A marketplace only works if the numbers do.'
 metric: Innovation Star Award
-summary: 'A platform for booking retired people''s experience like a consultation. I built the business model and the financial projection: break-even at about 18,000 bookings a year.'
+summary: 'A platform for booking older people''s experience like a consultation. I built the business model and the financial projection: break-even at about 15,000 bookings a year.'
 year: '2025'
 role: Business model and financial projections
 team: 3 students
@@ -18,9 +18,9 @@ coverCutout: true
 heroImage: /work/wisely/hero.webp
 heroAlt: Wisely on a laptop, a grid of older consultants with ratings and a message button
 glance:
-  problem: Researchers cannot reach the experience retired people hold, and there is no way to book it.
-  turn: Treat that experience as a paid consultation, so every booking funds the platform.
-  result: Break-even at about 18,000 bookings a year, and the Innovation Star Award.
+  problem: Researchers cannot reach the experience people over 45 hold, and there is no way to book it.
+  turn: Instead of more job listings, treat that experience as a paid consultation, so every booking funds the platform.
+  result: Innovation Star Award among 32 teams, with a model that breaks even at about 15,000 bookings a year.
 draft: false
 ---
 
@@ -48,7 +48,11 @@ draft: false
 <span class="fig__src">Trend: applications from over-45s grew 39% in three years. Pain points: 64.3% of older learners have no chance to use their expertise; age-friendly jobs remain scarce despite subsidies; collecting cultural stories is costly and unreliable. Goals, in the same columns: use older people's real strength, their experience and stories; offer friendly, flexible, high-value work; give culture and experience an easy channel. Strategy: an online matching ecosystem for passing on experience.</span>
 </figure>
 
-Older workers are mostly concentrated in manual jobs their bodies no longer suit, yet employers name experience and networks as their main strength. Meanwhile, local history and life stories are recorded one way, by experts and creators, and are hard to put to use.
+Local history and life stories, meanwhile, are recorded one way, by experts and creators, and are hard to put to use.
+
+## The obvious answer
+
+**More age-friendly jobs.** Senior-job services and hiring subsidies already push in this direction, yet age-friendly openings remain scarce and the work on offer often does not fit: 33.7% of older workers are in production and manual roles, and 36% of employers name weaker physical strength as a drawback. The same employers name experience and networks as the main strength of older workers. More listings would still leave that strength unused, so the better question was how to make the experience itself bookable.
 
 ## Who it serves
 
@@ -63,7 +67,7 @@ Older workers are mostly concentrated in manual jobs their bodies no longer suit
 
 ## The idea
 
-**Book a retired person's experience like a consultation.** Wisely is an online platform where older people become paid consultants for oral history, local knowledge and working experience, and anyone who needs that knowledge can search, filter and book them.
+**Book an older person's experience like a consultation.** Wisely is an online platform where older people become paid consultants for oral history, local knowledge and working experience, and anyone who needs that knowledge can search, filter and book them.
 
 <figure class="fig ws">
 <span class="fig__t">User flow</span>
@@ -102,15 +106,14 @@ Older workers are mostly concentrated in manual jobs their bodies no longer suit
 
 ## The numbers
 
-**Break-even in year six.** Year one assumes 6,000 bookings at a NT$200 platform cut: NT$1.2M in revenue. With consultants paid about NT$400 a booking and fixed costs near NT$1.5M a year, the platform breaks even at about 18,000 bookings a year.
+**Break-even at about 15,000 bookings a year.** Commission is 30%, 25% or 20% by consultant tier, which comes to about NT$200 a booking. The consultant's fee passes straight through, so it is not a platform cost. After about NT$25 of support, the platform keeps NT$175 a booking against NT$2.6M a year for a three-person team and upkeep.
 
 <figure class="fig ws">
-<span class="fig__t">Ten-year projection</span>
-<span class="fig__s">NT$ millions</span>
-<div class="fig__legend"><span><i style="background:var(--jx-strong)"></i>Total revenue</span><span><i style="background:var(--accent)"></i>Net income</span><span><i style="background:var(--g-2)"></i>Cumulative cost</span></div>
-<svg class="linechart" viewBox="0 0 640 300" role="img" aria-label="Ten-year projection in NT$ millions: revenue rises from 1 to 88, net income from 0 to 78, cumulative cost from 4 to 67; net income meets cumulative cost in year 6"><line x1="44" x2="624" y1="266.0" y2="266.0" stroke="var(--hair)"/><text x="36" y="270.0" text-anchor="end" class="ax">0</text><line x1="44" x2="624" y1="203.5" y2="203.5" stroke="var(--hair)"/><text x="36" y="207.5" text-anchor="end" class="ax">25</text><line x1="44" x2="624" y1="141.0" y2="141.0" stroke="var(--hair)"/><text x="36" y="145.0" text-anchor="end" class="ax">50</text><line x1="44" x2="624" y1="78.5" y2="78.5" stroke="var(--hair)"/><text x="36" y="82.5" text-anchor="end" class="ax">75</text><line x1="44" x2="624" y1="16.0" y2="16.0" stroke="var(--hair)"/><text x="36" y="20.0" text-anchor="end" class="ax">100</text><text x="44.0" y="288" text-anchor="middle" class="ax">Y1</text><text x="108.4" y="288" text-anchor="middle" class="ax">Y2</text><text x="172.9" y="288" text-anchor="middle" class="ax">Y3</text><text x="237.3" y="288" text-anchor="middle" class="ax">Y4</text><text x="301.8" y="288" text-anchor="middle" class="ax">Y5</text><text x="366.2" y="288" text-anchor="middle" class="ax">Y6</text><text x="430.7" y="288" text-anchor="middle" class="ax">Y7</text><text x="495.1" y="288" text-anchor="middle" class="ax">Y8</text><text x="559.6" y="288" text-anchor="middle" class="ax">Y9</text><text x="624.0" y="288" text-anchor="middle" class="ax">Y10</text><polyline points="44.0,256.0 108.4,236.0 172.9,218.5 237.3,191.0 301.8,158.5 366.2,136.0 430.7,123.5 495.1,118.5 559.6,108.5 624.0,98.5" fill="none" stroke="var(--g-2)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><polyline points="44.0,266.0 108.4,263.5 172.9,256.0 237.3,238.5 301.8,213.5 366.2,138.5 430.7,116.0 495.1,108.5 559.6,91.0 624.0,71.0" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><polyline points="44.0,263.5 108.4,258.5 172.9,251.0 237.3,233.5 301.8,166.0 366.2,103.5 430.7,96.0 495.1,78.5 559.6,58.5 624.0,46.0" fill="none" stroke="var(--jx-strong)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="5 4"/><line x1="366.2" x2="366.2" y1="16" y2="266" stroke="var(--accent)" stroke-dasharray="3 4"/><circle cx="366.2" cy="136.0" r="5" fill="var(--accent)" stroke="var(--paper)" stroke-width="2"/><text x="374.2" y="158.0" class="ax ax--on">Break-even, year 6</text><rect x="11.8" y="16" width="64.4" height="250" fill="transparent" tabindex="0"><title>Year 1: revenue 1M · net income 0M · cumulative cost 4M (NT$)</title></rect><rect x="76.2" y="16" width="64.4" height="250" fill="transparent" tabindex="0"><title>Year 2: revenue 3M · net income 1M · cumulative cost 12M (NT$)</title></rect><rect x="140.7" y="16" width="64.4" height="250" fill="transparent" tabindex="0"><title>Year 3: revenue 6M · net income 4M · cumulative cost 19M (NT$)</title></rect><rect x="205.1" y="16" width="64.4" height="250" fill="transparent" tabindex="0"><title>Year 4: revenue 13M · net income 11M · cumulative cost 30M (NT$)</title></rect><rect x="269.6" y="16" width="64.4" height="250" fill="transparent" tabindex="0"><title>Year 5: revenue 40M · net income 21M · cumulative cost 43M (NT$)</title></rect><rect x="334.0" y="16" width="64.4" height="250" fill="transparent" tabindex="0"><title>Year 6: revenue 65M · net income 51M · cumulative cost 52M (NT$)</title></rect><rect x="398.4" y="16" width="64.4" height="250" fill="transparent" tabindex="0"><title>Year 7: revenue 68M · net income 60M · cumulative cost 57M (NT$)</title></rect><rect x="462.9" y="16" width="64.4" height="250" fill="transparent" tabindex="0"><title>Year 8: revenue 75M · net income 63M · cumulative cost 59M (NT$)</title></rect><rect x="527.3" y="16" width="64.4" height="250" fill="transparent" tabindex="0"><title>Year 9: revenue 83M · net income 70M · cumulative cost 63M (NT$)</title></rect><rect x="591.8" y="16" width="64.4" height="250" fill="transparent" tabindex="0"><title>Year 10: revenue 88M · net income 78M · cumulative cost 67M (NT$)</title></rect></svg>
-<span class="fig__src">Values read from the team's chart in the final deck.</span>
-<details><summary>View as table</summary><table><tr><th>Year</th><th class="num">1</th><th class="num">2</th><th class="num">3</th><th class="num">4</th><th class="num">5</th><th class="num">6</th><th class="num">7</th><th class="num">8</th><th class="num">9</th><th class="num">10</th></tr><tr><td>Total revenue</td><td class="num">1</td><td class="num">3</td><td class="num">6</td><td class="num">13</td><td class="num">40</td><td class="num">65</td><td class="num">68</td><td class="num">75</td><td class="num">83</td><td class="num">88</td></tr><tr><td>Net income</td><td class="num">0</td><td class="num">1</td><td class="num">4</td><td class="num">11</td><td class="num">21</td><td class="num">51</td><td class="num">60</td><td class="num">63</td><td class="num">70</td><td class="num">78</td></tr><tr><td>Cumulative cost</td><td class="num">4</td><td class="num">12</td><td class="num">19</td><td class="num">30</td><td class="num">43</td><td class="num">52</td><td class="num">57</td><td class="num">59</td><td class="num">63</td><td class="num">67</td></tr></table></details>
+<span class="fig__t">Annual profit by booking volume</span>
+<span class="fig__s">NT$ a year · shaded band shows the range across cost assumptions</span>
+<svg class="linechart" viewBox="0 0 640 300" role="img" aria-label="Annual platform profit against bookings a year: a loss of NT$2.6M at zero bookings, a loss of about NT$1.55M at 6,000, break-even at about 15,000, and a range of 12,300 to 17,500 across the cost assumptions"><rect x="282.4" y="16" width="100.5" height="250" fill="var(--accent)" fill-opacity="0.14"/><line x1="44" x2="624" y1="57.7" y2="57.7" stroke="var(--hair)"/><text x="36" y="61.7" text-anchor="end" class="ax">+2M</text><line x1="44" x2="624" y1="141.0" y2="141.0" stroke="var(--hair)"/><text x="36" y="145.0" text-anchor="end" class="ax">0</text><line x1="44" x2="624" y1="224.3" y2="224.3" stroke="var(--hair)"/><text x="36" y="228.3" text-anchor="end" class="ax">-2M</text><text x="44.0" y="288" text-anchor="middle" class="ax">0</text><text x="237.3" y="288" text-anchor="middle" class="ax">10,000</text><text x="430.7" y="288" text-anchor="middle" class="ax">20,000</text><text x="624.0" y="288" text-anchor="middle" class="ax">30,000</text><polyline points="44.0,249.3 624.0,30.6" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/><circle cx="160.0" cy="205.6" r="5" fill="var(--g-2)" stroke="var(--paper)" stroke-width="2"/><text x="170.0" y="223.6" class="ax">Year one: 6,000</text><circle cx="331.2" cy="141.0" r="5" fill="var(--accent)" stroke="var(--paper)" stroke-width="2"/><text x="323.2" y="129.0" text-anchor="end" class="ax ax--on">Break-even: about 15,000</text></svg>
+<span class="fig__src">Commission tiers, a 60/30/10 tier mix and cost ranges are from the team's deck. Recalculated after the hackathon, because the deck's ten-year chart counted consultant fees as a platform cost and compared one year's income with cumulative cost.</span>
+<details><summary>View as table</summary><table><tr><th>Assumption</th><th class="num">Low cost</th><th class="num">Base</th><th class="num">High cost</th></tr><tr><td>Fixed cost a year, NT$M</td><td class="num">2.22</td><td class="num">2.60</td><td class="num">2.98</td></tr><tr><td>Support cost a booking, NT$</td><td class="num">20</td><td class="num">25</td><td class="num">30</td></tr><tr><td>Platform keeps a booking, NT$</td><td class="num">180</td><td class="num">175</td><td class="num">170</td></tr><tr><td>Break-even bookings a year</td><td class="num">12,300</td><td class="num">14,900</td><td class="num">17,500</td></tr></table></details>
 </figure>
 
 ## Result
@@ -119,4 +122,4 @@ Older workers are mostly concentrated in manual jobs their bodies no longer suit
 
 ---
 
-*A student hackathon concept, not a launched product. Market figures are from the sources cited in the team's deck (104 Job Bank, Ministry of Labor). Projections are the team's own estimates.*
+*A student hackathon concept, not a launched product. Market figures are from the sources cited in the team's deck (104 Job Bank, Ministry of Labor). Commission and cost assumptions are the team's own estimates; the break-even was recalculated from them after the hackathon.*

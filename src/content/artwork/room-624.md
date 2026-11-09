@@ -1,7 +1,7 @@
 ---
 title: 'Cleaning Request: Room 624'
 hook: You are hired to clear out a hoarder's flat. Every object you throw away was holding a memory.
-summary: 'A VR piece where you come to understand a hoarder by clearing his room. I led the four-person team and wrote the concept and script.'
+summary: 'A VR piece where you piece together one fictional hoarder''s story by clearing his room. I led the four-person team and wrote the concept and script.'
 year: '2024'
 artists: Chen Chia-Ni, Chen Shih-Yang, Shih Tsung-Hsuan, Tai Jie-Yin
 medium: VR installation, Meta Quest 3 · about 10-minute narrative
@@ -46,27 +46,28 @@ draft: false
 <section class="walk__step walk__step--mem" data-step="cigarettes"><img src="/work/room-624/cigarettes.webp" alt="Red-gloved hands reach for a glowing cigarette on the floor; beside it, a crate packed with cigarette boxes" width="1600" height="766" loading="lazy" /><figure class="walk__flash"><img src="/work/room-624/cigarettes-memory.webp" alt="Live-action memory: a boy in grey joggers walking beside his father along a pavement" width="1600" height="464" loading="lazy" /><figcaption>The memory it holds: walking beside his father.</figcaption></figure><p><small>Memory 1 · Cigarettes</small><b>His father, and family.</b><span>The bond he has held since he was a boy.</span></p></section>
 <section class="walk__step walk__step--mem" data-step="controller"><img src="/work/room-624/controller.webp" alt="A desk of old game controllers, one glowing yellow" width="956" height="463" loading="lazy" /><p><small>Memory 2 · Controller</small><b>The friend who left.</b><span>They grew up together, until he suddenly left.</span></p></section>
 <section class="walk__step walk__step--mem" data-step="pet"><img src="/work/room-624/pet.webp" alt="A red cat collar lies on the bed; cat portraits hang above it and a water dispenser and food bowl wait beside it" width="1600" height="900" loading="lazy" /><p><small>Memory 3 · Pet</small><b>Company that could not speak.</b><span>It stayed with him, without a word.</span></p></section>
-<section class="walk__step" data-step="end"><img src="/work/room-624/memory.webp" alt="Illustration of one hand passing a small object into another" width="1500" height="651" loading="lazy" /><p><small>III · The end</small><b>Under the rubbish, him.</b><span>You came to clear his room. You leave understanding him.</span></p></section>
+<section class="walk__step" data-step="end"><img src="/work/room-624/memory.webp" alt="Illustration of one hand passing a small object into another" width="1500" height="651" loading="lazy" /><p><small>III · The end</small><b>Under the rubbish, him.</b><span>You came to clear his room. You leave knowing part of his story.</span></p></section>
 </div>
 </div>
 
 ## Artist Statement
 
-**Compulsion, or a reason we cannot see?**
+**What does the mess leave out?**
 
 <figure class="fig rm">
 <div class="goals">
-<div><small>Worldwide</small><b>2–6%</b><span>have hoarding disorder</span></div>
+<div><small>Community surveys</small><b>2–6%</b><span>estimated to have clinically significant hoarding</span></div>
 <div><small>Taiwan, est.</small><b>460k–1.38M</b><span>people</span></div>
 <div><small>Most of us</small><b>Outside</b><span>only ever see the mess</span></div>
 </div>
+<span class="fig__src">The 2–6% range is the DSM-5 estimate from US and European community surveys; the Taiwan figure simply applies it to about 23M people.</span>
 </figure>
 
-Inspired by Ni Hsiang's 2024 solo exhibition *Everyone Has Come to See You* (《大家都來看你了》), whose sorted, stacked found objects turn into metaphors for solitude and memory. I saw hoarding as a subject made for VR: a new point of view, a space you can always enter again, and a fuller sense of the many sides of being human.
+Inspired by Ni Hsiang's 2024 solo exhibition *Everyone Has Come to See You* (《大家都來看你了》), whose sorted, stacked found objects turn into metaphors for solitude and memory. I saw hoarding as a subject made for VR: a new point of view, a space you can always enter again, and a fuller sense of the many sides of being human. The man in Room 624 is fictional: hoarding disorder has many causes, and this story imagines one person's reasons, not an explanation of the condition.
 
 ## Form & Immersion
 
-**Only VR puts you in the room.**
+**VR lets you change who you are in the room.**
 
 <figure class="fig rm">
 <span class="fig__t">Three ways of seeing</span>
@@ -77,7 +78,7 @@ Inspired by Ni Hsiang's 2024 solo exhibition *Everyone Has Come to See You* (《
 </div>
 </div>
 </div>
-<span class="fig__src">The viewer moves inward, then throws the object away themselves.</span>
+<span class="fig__src">The viewer moves inward, then has to throw each object away: the story only moves on if they do.</span>
 </figure>
 
 ## Process
