@@ -203,7 +203,6 @@ So we went back to the research.
 
 <figure class="fig jx">
 <span class="fig__t">Where Jianxu sits against existing tools</span>
-<img class="fig__img" src="/work/jianxu/compare.webp" alt="Diagram comparing traditional productivity tools with Jianxu across three stages: working, interrupted and resuming" width="1600" height="674" loading="lazy" />
 <div class="cmp">
 <span></span><span class="cmp__h">Working</span><span class="cmp__h">Interrupted</span><span class="cmp__h">Resuming</span>
 <span class="cmp__r">Tools we compared</span><div class="cmp__c" style="grid-column:span 2">Avoid the interruption</div><div class="cmp__c cmp__c--gap">Little on recovery</div>
