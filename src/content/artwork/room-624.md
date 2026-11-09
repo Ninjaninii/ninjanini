@@ -9,7 +9,7 @@ role: Project management, concept and statement, script and memory stories
 team: Chen Chia-Ni, Chen Shih-Yang, Shih Tsung-Hsuan, Tai Jie-Yin
 context: NTHU Interdisciplinary Program of Arts and Technology
 tools: ['Unity', 'Meta Quest 3', 'Blender']
-skills: ['Storytelling', 'Leadership']
+skills: ['Storytelling']
 cover: /work/room-624/hero.webp
 coverAlt: The hoarder's room in Room 624, lit green, with a gaming chair, stacked crates and a glowing yellow controller on the desk
 folderPapers: ['/work/room-624/hero.webp']
