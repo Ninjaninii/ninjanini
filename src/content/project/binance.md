@@ -104,10 +104,10 @@ I was one of two Teaching Supervisors on the team, alongside a mentor. TAs did n
 <figure class="fig bn">
 <span class="fig__t">What the priced plan delivers</span>
 <div class="goals">
-<div><small>User goal · 109k needed</small><b>119.7k</b><span>New sign-ups for NT$118.7M. Each channel acquires a user for NT$951–1,358, below the NT$1,659 expected value.</span></div>
+<div><small>User goal · 109k needed</small><b>119.7k</b><span>New sign-ups for NT$118.7M. Each channel acquires a user for NT$951–1,358, below the NT$1,659 the team estimated each sign-up is worth.</span></div>
 <div><small>Volume goal · +70% needed</small><b>+54.7%</b><span>NT$469B of added volume for NT$205M, including legal and AML review. The plan reaches about 78% of the target.</span></div>
 </div>
-<span class="fig__src">Source: the team's cost–benefit section; NT$118.7M is the sum of its three channel costs. The model does not separate the plan's effect from market growth of about 15% a year.</span>
+<span class="fig__src">Source: the team's cost–benefit section; NT$118.7M is the sum of its three channel costs. Value per sign-up is benchmarked on Coinbase's revenue per active user, adjusted for a 5× fee gap and 18% retention. The model does not separate the plan's effect from market growth of about 15% a year.</span>
 </figure>
 
 ## Result
