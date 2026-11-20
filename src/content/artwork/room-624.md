@@ -54,32 +54,17 @@ draft: false
 
 **What does the mess leave out?**
 
-<figure class="fig rm">
-<div class="goals">
-<div><small>Community surveys</small><b>2–6%</b><span>estimated to have clinically significant hoarding</span></div>
-<div><small>Taiwan, est.</small><b>460k–1.38M</b><span>people</span></div>
-<div><small>Most of us</small><b>Outside</b><span>only ever see the mess</span></div>
-</div>
-<span class="fig__src">The 2–6% range is the DSM-5 estimate from US and European community surveys; the Taiwan figure simply applies it to about 23M people.</span>
-</figure>
+Community surveys estimate that 2–6% of people live with clinically significant hoarding, yet most of us only ever see the mess from outside.
 
 Inspired by Ni Hsiang's 2024 solo exhibition *Everyone Has Come to See You* (《大家都來看你了》), whose sorted, stacked found objects turn into metaphors for solitude and memory. I saw hoarding as a subject made for VR: a new point of view, a space you can always enter again, and a fuller sense of the many sides of being human. The man in Room 624 is fictional: hoarding disorder has many causes, and this story imagines one person's reasons, not an explanation of the condition.
+
+<p class="wall-note">The range is the DSM-5 estimate from US and European community surveys.</p>
 
 ## Form & Immersion
 
 **VR lets you change who you are in the room.**
 
-<figure class="fig rm">
-<span class="fig__t">Three ways of seeing</span>
-<div class="rings">
-<div><small>Outsider</small><b>Sees a mess</b>
-<div><small>Cleaner</small><b>Walks in, clears a path</b>
-<div><small>Him</small><b>Sees through his eyes</b></div>
-</div>
-</div>
-</div>
-<span class="fig__src">The viewer moves inward, then has to throw each object away: the story only moves on if they do.</span>
-</figure>
+You begin outside, seeing a mess; as the cleaner you walk in and clear a path; through his memories you see with his eyes, then have to throw each object away. The story only moves on if you do.
 
 ## Process
 

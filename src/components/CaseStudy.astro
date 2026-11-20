@@ -13,6 +13,12 @@ const d = entry.data;
 // a case study written in the four chapters (Situation, The turn, The work, Outcome) lists them in the margin
 const sections = headings.filter((h) => h.depth === 2);
 const chapters = sections[0]?.text === 'Situation' ? sections : [];
+// exhibition wall layout: the work first, its label underneath
+const wall = entry.id === 'room-624' || entry.id === 'chat-to-escape';
+// each wall page's hero at its natural size, so it is never drawn larger than the file.
+// A tall photograph also gets a height cap, so the title and label still fit in the first screen.
+const heroSize: Record<string, [number, number, string]> = { 'room-624': [1156, 644, 'none'], 'chat-to-escape': [1600, 1201, '64vh'] };
+const [heroW, heroH, heroMaxH] = heroSize[entry.id] ?? [1600, 1000, 'none'];
 const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwork' } : { href: '/project', label: 'Projects' };
 ---
 
@@ -32,7 +38,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
         </nav>
       )
     }
-    <header class="sec sec--tight whead">
+    <header class:list={['sec sec--tight whead', { 'whead--wall': wall }]}>
       {d.medium && <Sparkles />}
       {d.particles && <canvas class="particles" data-src={d.particles} aria-hidden="true"></canvas>}
       <div class="shell">
@@ -40,9 +46,28 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
           <a class="back" href={back.href}><span aria-hidden="true">&#8592;</span> {back.label}</a>
         </p>
 
-        {d.metric && <span class="eyebrow reveal" data-delay="40" style="margin-top:24px"><i></i>{d.metric}</span>}
+        {
+          wall && (
+            <>
+              <img class="wall__hero reveal" data-delay="40" src={d.cover} alt={d.coverAlt ?? ''} width={heroW} height={heroH} style={`--max:${heroW}px;--maxh:${heroMaxH}`} />
+              <div class="wall__card reveal" data-delay="120">
+                <div>
+                  <h1 class="wall__title">{d.title}</h1>
+                  <p class="wall__hook">{d.hook}</p>
+                </div>
+                <dl class="wall__label">
+                  <div><dt>Artists</dt><dd>{d.artists}</dd></div>
+                  <div><dt>Year</dt><dd>{d.year}</dd></div>
+                  <div><dt>Medium</dt><dd>{d.medium}</dd></div>
+                </dl>
+              </div>
+            </>
+          )
+        }
 
-        <div class={d.heroImage ? 'herogrid' : undefined}>
+        {!wall && d.metric && <span class="eyebrow reveal" data-delay="40" style="margin-top:24px"><i></i>{d.metric}</span>}
+
+        {!wall && <div class={d.heroImage ? 'herogrid' : undefined}>
           <div>
             <h1 class="display reveal" data-delay="80" style="margin-top:20px; font-size:clamp(40px,7vw,82px)">
               {
@@ -75,9 +100,9 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
           </div>
 
           {d.heroImage && <img class="heroimg reveal" data-delay="180" src={d.heroImage} alt={d.heroAlt ?? ''} />}
-        </div>
+        </div>}
 
-        <div class="reveal" data-delay="200">
+        {!wall && <div class="reveal" data-delay="200">
           {
             d.medium ? (
               <dl class="label">
@@ -89,7 +114,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
               <WorkMeta data={d} />
             )
           }
-        </div>
+        </div>}
 
         {
           d.glance && (
@@ -104,7 +129,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     </header>
 
     {
-      d.cover && !d.heroImage && !d.coverCutout && (
+      d.cover && !wall && !d.heroImage && !d.coverCutout && (
         <div class="shell reveal">
           <div class="plate plate--wide">
             <div class="plate__in">
@@ -116,7 +141,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     }
 
     <div class="shell">
-      <div class:list={['prose reveal', { 'prose--ex': d.medium }]}>
+      <div class:list={['prose reveal', { 'prose--ex': d.medium, 'prose--wall': wall }]}>
         <Content />
       </div>
 
@@ -1303,6 +1328,108 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     --paper: #1b1c18;
     --paper-2: #23241f;
   }
+  /* exhibition wall: the image leads, and the title and label sit beneath it like a wall card.
+     The hero is capped near its natural 1156px so it is never enlarged. */
+  .whead.whead--wall {
+    padding-top: 46px;
+  }
+  .whead--wall .backrow {
+    margin-bottom: 14px;
+  }
+  .wall__hero {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: min(100%, var(--max));
+    max-height: var(--maxh);
+    /* a narrower photograph lines up with the title beneath it */
+    margin-inline: 0 auto;
+    border-radius: var(--radius-inner);
+  }
+  .wall__card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
+    gap: 24px 64px;
+    max-width: 1160px;
+    margin: 28px 0 0;
+  }
+  .wall__title {
+    margin: 0;
+    font-size: clamp(28px, 3.2vw, 42px);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .wall__hook {
+    margin: 12px 0 0;
+    max-width: 44ch;
+    font-size: 18px;
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+  .wall__label {
+    display: grid;
+    gap: 10px;
+    margin: 4px 0 0;
+  }
+  .wall__label div {
+    display: grid;
+    grid-template-columns: 76px 1fr;
+    gap: 12px;
+  }
+  .wall__label dt {
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .wall__label dd {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+  /* images and figures sit straight on the wall, with no card around them */
+  .prose--wall > .fig {
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+  }
+  .prose--wall .wall-note {
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .prose--wall .swatches {
+    max-width: 720px;
+    gap: 16px;
+  }
+  .prose--wall .swatches > div {
+    border-radius: 0;
+    background: none;
+  }
+  .prose--wall .swatches i {
+    height: 28px;
+    border-radius: 6px;
+  }
+  .prose--wall .swatches b,
+  .prose--wall .swatches span {
+    padding-inline: 0;
+  }
+  .prose--wall .swatches span {
+    padding-bottom: 0;
+  }
+  @media (max-width: 760px) {
+    .wall__hero {
+      width: 100vw;
+      max-width: none;
+      max-height: none;
+      margin-inline: calc(50% - 50vw);
+      border-radius: 0;
+    }
+    .wall__card {
+      grid-template-columns: 1fr;
+    }
+  }
+
   /* ── artwork pages read as an exhibition: wall label, numbered rooms ── */
   .label {
     display: grid;

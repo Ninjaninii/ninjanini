@@ -68,18 +68,8 @@ Shown at the NTHU Technology and Art graduation exhibition at C-LAB (Taiwan Cont
 <div class="pinned"><img src="/work/chat-to-escape/phone.webp" alt="A red telephone booth with blue stars on a red plinth, its screen lit blue" width="1201" height="1600" loading="lazy" /><span class="pin pin--up" style="--x:33%;--y:46%"><b>Pick up to answer</b></span><span class="pin pin--up" style="--x:62%;--y:34%"><b>Shows the locked visitor</b></span></div>
 </div>
 <div class="shots">
-<figure><img src="/work/chat-to-escape/handprint.webp" alt="Close-up of a dark hand print on a pink surface inside the faux fur" width="1201" height="1600" loading="lazy" /><figcaption>Where the hand goes.</figcaption></figure>
 <figure><img src="/work/chat-to-escape/corridor.webp" alt="The red telephone booth at the side of a long, dim corridor" width="1600" height="1201" loading="lazy" /><figcaption>The booth waits in the corridor.</figcaption></figure>
-</div>
-</figure>
-
-<figure class="fig ce">
-<span class="fig__t">In use</span>
-<div class="shots">
-<figure><img src="/work/chat-to-escape/in-use.webp" alt="Seen from behind, a visitor with long hair has a hand in the plinth and faces the screen" width="1201" height="1600" loading="lazy" /><figcaption>At the locked end, hand in place.</figcaption></figure>
 <figure><img src="/work/chat-to-escape/phone-screen.webp" alt="The red booth's screen shows a live view of a person standing at the other end" width="1201" height="1600" loading="lazy" /><figcaption>The booth's screen shows the other end.</figcaption></figure>
-<figure><img src="/work/chat-to-escape/free.webp" alt="A visitor raises one hand beside the pink plinth while the screen shows a person holding a phone" width="1600" height="1201" loading="lazy" /><figcaption>Talking to the stranger on screen.</figcaption></figure>
-<figure><img src="/work/chat-to-escape/listening.webp" alt="A person with green hair holds the red receiver and faces the booth" width="1600" height="1201" loading="lazy" /><figcaption>The stranger, at the phone.</figcaption></figure>
 </div>
 </figure>
 
