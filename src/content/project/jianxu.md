@@ -83,7 +83,7 @@ draft: false
 <i aria-hidden="true">→</i>
 <div>Motivation drops</div>
 </div>
-<div class="hmw"><i aria-hidden="true">↓</i><div><small>How might we</small><b>Turn the negative emotion an unplanned interruption leaves behind into a positive experience the user can regulate?</b></div></div>
+<div class="hmw"><i aria-hidden="true">↓</i><div><small>How might we</small><b><mark class="hl">Turn the negative emotion an unplanned interruption leaves behind into a positive experience the user can regulate?</mark></b></div></div>
 <span class="fig__src">Found through the 20 interviews, read against Cognitive Load Theory, Self-Determination Theory and Bandura's self-efficacy.</span>
 </figure>
 

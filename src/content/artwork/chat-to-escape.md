@@ -69,7 +69,7 @@ Shown at the NTHU Technology and Art graduation exhibition at C-LAB (Taiwan Cont
 </div>
 <div class="shots">
 <figure><img src="/work/chat-to-escape/corridor.webp" alt="The red telephone booth at the side of a long, dim corridor" width="1600" height="1201" loading="lazy" /><figcaption>The booth waits in the corridor.</figcaption></figure>
-<figure><img src="/work/chat-to-escape/phone-screen.webp" alt="The red booth's screen shows a live view of a person standing at the other end" width="1201" height="1600" loading="lazy" /><figcaption>The booth's screen shows the other end.</figcaption></figure>
+<figure><img src="/work/chat-to-escape/free.webp" alt="A visitor raises one hand beside the pink plinth while the screen shows a person holding a phone" width="1600" height="1201" loading="lazy" /><figcaption>Talking to the stranger on screen.</figcaption></figure>
 </div>
 </figure>
 

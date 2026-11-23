@@ -48,7 +48,7 @@ I was one of two Teaching Supervisors on the team, alongside a mentor. TAs did n
 
 ## The turn
 
-**One question, every round: why?**
+<strong><mark class="hl">One question, every round: why?</mark></strong>
 
 <figure class="fig bn">
 <span class="fig__t">What I asked, and what the next review showed</span>

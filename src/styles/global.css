@@ -1,34 +1,99 @@
 /* ============================================================
    ninjanini.cc — design system
-   Soft structuralism: near-white ground, one accent, heavy air.
-   Swap --accent in one place to re-tune the whole site.
+   Low-key and quiet: cream paper, slate ink, one mint accent, heavy air.
+   Colour values live only in the palette block; everything else uses the roles.
    ============================================================ */
 
 :root {
+  /* ── palette: the one place colour values live; components use the roles below ── */
+  --mint-50: #eef6f4;
+  --mint-100: #ddeee8;
+  --mint-200: #c4e3d9;
+  --mint-300: #a8d8c8; /* base; on light grounds decoration only (bars, fills, rules) */
+  --mint-500: #53a287; /* decoration only on light grounds, 2.9:1 */
+  --mint-700: #327b64; /* accent text and big numbers on light grounds, 4.7:1 on cream */
+  --mint-800: #24604e; /* small accent text on light grounds */
+  --mint-900: #193e33;
+  --aqua: #b8d8d8;
+  --cream: #f8f8ee;
+  --slate-ink: #1f2427;
+  --slate-ink-2: #5c6468;
+  /* artwork: iron grey */
+  --iron: #26292b;
+  --iron-ink: #e6eaea;
+  --iron-ink-2: #a9b0b2;
+  --iron-hair: #4a4f53;
+
+  /* one shadow, faint, never stacked */
+  --shadow: 0 10px 28px -18px rgba(31, 36, 39, 0.28);
+
+  /* ── type: weights, one size scale, label tracking ── */
+  --fw-light: 300; /* only for type 36px and larger */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 500; /* three weights site-wide: 300, 400, 500 */
+  --fw-display: var(--fw-medium); /* the page title */
+  --fw-heading: var(--fw-medium); /* section titles (h2) */
+  --ls-label: 0.2em;
+
+  /* ── lines and corners ── */
+  --stroke-icon: 1.25px;
+  --radius-pill: 999px;
+  /* the double oval from the CHIA NI mark, set before chapter labels */
+  --mark-oval: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Cellipse cx='10' cy='6' rx='9' ry='5' fill='none' stroke='%23327B64' stroke-width='1'/%3E%3Cellipse cx='10' cy='6' rx='6.5' ry='3' fill='none' stroke='%23327B64' stroke-width='.75'/%3E%3C/svg%3E");
+
+  /* ── materials ── */
+  --glass-bg: rgba(255, 255, 255, 0.38);
+  --glass-bg-solid: rgba(255, 255, 255, 0.72); /* phones: no live blur */
+  --glass-edge: rgba(255, 255, 255, 0.75);
+  --glass-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 18px 40px -18px rgba(36, 96, 78, 0.22);
+  --emboss: inset 1px 1px 0 rgba(255, 255, 255, 0.95), inset -1px -1px 0 rgba(36, 96, 78, 0.12), 0 1px 2px rgba(36, 96, 78, 0.06);
+  --glow-field:
+    radial-gradient(36% 30% at 84% 20%, rgba(168, 216, 200, 0.7), transparent 70%),
+    radial-gradient(30% 26% at 6% 64%, rgba(184, 216, 216, 0.6), transparent 70%),
+    radial-gradient(34% 30% at 62% 96%, rgba(196, 227, 217, 0.65), transparent 70%);
+  --fs-display: clamp(38px, 7.2vw, 86px);
+  --fs-h2: clamp(26px, 3.4vw, 40px);
+  --fs-h3: clamp(18px, 1.8vw, 22px);
+  --fs-lede: clamp(17px, 1.65vw, 20px);
+  --fs-body: 16px;
+  --fs-ui: 14px;
+  --fs-small: 12px;
+  /* chart and diagram text: at least 12px as drawn, so it grows to offset the 85% desktop zoom below */
+  --fs-chart: 12px;
+  --fs-label: 11px; /* uppercase tracked labels only */
+  /* faces: Outfit for reading, Bodoni Moda 400 for headlines 28px and up, quotes and the prologue */
+  --font-sans: 'Outfit', ui-sans-serif, system-ui, 'Noto Sans TC', sans-serif;
+  --font-display: 'Bodoni Moda', Georgia, serif;
+  --font-quote: var(--font-display);
+  /* chapter lead sentences are 22–30px: Bodoni only once they reach 28px (from 1120px wide), Outfit below */
+  --face-lead: var(--font-sans);
+
   /* ground */
-  --paper: #fbfbfa;
-  --paper-2: #f4f4f1;
+  --paper: var(--cream);
+  --paper-2: var(--mint-50);
   --panel: #ffffff;
-  --plate: #f0f0ee; /* tinted ground that images float on */
+  --plate: var(--mint-50); /* tinted ground that images float on */
 
-  /* ink — warm-biased neutrals, not pure grey */
-  --ink: #232321;
-  --ink-2: #4d4d49;
-  --ink-3: #6b6b66; /* 4.5:1 or better on every light page ground, for small text */
-  --hair: rgba(35, 35, 33, 0.1);
-  --hair-2: rgba(35, 35, 33, 0.06);
+  /* ink */
+  --ink: var(--slate-ink);
+  --ink-2: var(--slate-ink-2);
+  --ink-3: var(--slate-ink-2); /* 5.6:1 on cream */
+  --hair: rgba(31, 36, 39, 0.1);
+  --hair-2: rgba(31, 36, 39, 0.06);
 
-  /* the single accent */
-  --accent: #4a5bb8;
-  --accent-soft: rgba(74, 91, 184, 0.09);
+  /* the single accent: mint-700 for text and big numbers, mint-800 for small accent text */
+  --accent: var(--mint-700);
+  --accent-ink: var(--mint-800);
+  --accent-soft: var(--mint-100);
   /* chart steps — one hue light→dark, plus two greys for de-emphasis */
-  --seq-1: #dfe2f5;
-  --seq-2: #aab3e6;
-  --seq-3: #5f6fc6;
-  --seq-4: #2b367a;
+  --seq-1: var(--mint-100);
+  --seq-2: var(--mint-300);
+  --seq-3: var(--mint-700);
+  --seq-4: var(--mint-900);
   --seq-on: #ffffff; /* text on seq-3/4 */
-  --g-1: #d9d9d4;
-  --g-2: #b4b4ae;
+  --g-1: #dcdfda;
+  --g-2: #b6bbb6;
 
   /* motion */
   --ease: cubic-bezier(0.32, 0.72, 0, 1);
@@ -52,12 +117,13 @@
     --ink-3: #8f8f86;
     --hair: rgba(242, 242, 236, 0.12);
     --hair-2: rgba(242, 242, 236, 0.07);
-    --accent: #93a0ec;
-    --accent-soft: rgba(147, 160, 236, 0.14);
-    --seq-1: #262b4a;
-    --seq-2: #3b478e;
-    --seq-3: #6878d2;
-    --seq-4: #a9b3f1;
+    --accent: var(--mint-300);
+    --accent-ink: var(--mint-300);
+    --accent-soft: rgba(168, 216, 200, 0.14);
+    --seq-1: #1f332d;
+    --seq-2: #2f5a4c;
+    --seq-3: var(--mint-500);
+    --seq-4: var(--mint-300);
     --seq-on: #0e0e0c;
     --g-1: #34342f;
     --g-2: #4f4f48;
@@ -73,12 +139,13 @@
   --ink-3: #8f8f86;
   --hair: rgba(242, 242, 236, 0.12);
   --hair-2: rgba(242, 242, 236, 0.07);
-  --accent: #93a0ec;
-  --accent-soft: rgba(147, 160, 236, 0.14);
-  --seq-1: #262b4a;
-  --seq-2: #3b478e;
-  --seq-3: #6878d2;
-  --seq-4: #a9b3f1;
+  --accent: var(--mint-300);
+  --accent-ink: var(--mint-300);
+  --accent-soft: rgba(168, 216, 200, 0.14);
+  --seq-1: #1f332d;
+  --seq-2: #2f5a4c;
+  --seq-3: var(--mint-500);
+  --seq-4: var(--mint-300);
   --seq-on: #0e0e0c;
   --g-1: #34342f;
   --g-2: #4f4f48;
@@ -94,6 +161,9 @@ html {
 /* on a desktop-sized window the whole site is drawn at 85%, as if the browser were zoomed out:
    at 100% the type and images feel oversized on a full screen. Phones and tablets keep 100%. */
 @media (min-width: 1024px) {
+  :root {
+    --fs-chart: calc(12px / 0.85);
+  }
   html {
     zoom: 0.85;
   }
@@ -107,8 +177,8 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: 'Outfit', ui-sans-serif, system-ui, 'Noto Sans TC', sans-serif;
-  font-size: 16px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
   line-height: 1.6;
   font-feature-settings: normal;
   -webkit-font-smoothing: antialiased;
@@ -156,45 +226,118 @@ h3 {
   line-height: 1.04;
   text-wrap: balance;
   margin: 0;
-  font-weight: 500;
+  font-weight: var(--fw-medium);
+}
+h2 {
+  font-weight: var(--fw-heading);
 }
 p {
   margin: 0;
 }
+/* bold is the bold token (500): no 600 or 700 is loaded */
+b,
+strong {
+  font-weight: var(--fw-bold);
+}
 
 .display {
-  font-size: clamp(38px, 7.2vw, 86px);
-}
-.serif-it {
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
+  font-size: var(--fs-display);
+  font-family: var(--font-display);
+  font-weight: var(--fw-regular);
+  font-optical-sizing: auto;
   letter-spacing: -0.02em;
+}
+/* stamp: a pill pressed into the paper. Tags use .stamp; buttons add .stamp--btn for the inner ring */
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--mint-800);
+  background: var(--cream);
+  border: 1px solid var(--mint-300);
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 var(--mint-100);
+  padding: 6px 13px;
+}
+.stamp--lg {
+  font-size: var(--fs-ui);
+  letter-spacing: 0.06em;
+  padding: 15px 26px;
+  gap: 10px;
+}
+.stamp--btn {
+  border-color: var(--mint-700);
+  box-shadow: inset 0 0 0 3px var(--cream), inset 0 0 0 4px var(--mint-200);
+  padding: 9px 18px;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* liquid highlight: a soft mint wash behind one key phrase; at most one a section, three a page */
+mark.hl {
+  color: inherit;
+  background: var(--mint-200);
+  border-radius: 8px 10px 9px 7px;
+  padding: 0 4px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+/* on a dark card the mark keeps body-text ink, so it stays readable on the light wash */
+.hmw mark.hl {
+  color: var(--slate-ink);
+}
+
+/* big numbers line up: tabular figures */
+.num {
+  font-variant-numeric: tabular-nums;
+}
+/* the italic half of a headline: Bodoni Moda italic */
+.serif-it {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+}
+/* a headline set in Bodoni Moda: 400, slightly tight */
+.face-display {
+  font-family: var(--font-display);
+  font-weight: var(--fw-regular);
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+}
+@media (min-width: 1120px) {
+  :root {
+    --face-lead: var(--font-display);
+  }
 }
 
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
   color: var(--ink-3);
   border: 1px solid var(--hair);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   padding: 5px 12px;
 }
 .eyebrow i {
   width: 4px;
   height: 4px;
-  border-radius: 50%;
+  border-radius: var(--radius-pill);
   background: var(--accent);
   display: block;
 }
 
 .lede {
-  font-size: clamp(17px, 1.65vw, 20px);
+  font-size: var(--fs-lede);
   line-height: 1.55;
   color: var(--ink-2);
   max-width: 54ch;
@@ -202,7 +345,7 @@ p {
 .lede strong,
 .hero__line strong {
   color: var(--ink);
-  font-weight: 600;
+  font-weight: var(--fw-bold);
 }
 
 /* ─────────── floating nav ─────────── */
@@ -222,7 +365,7 @@ p {
   align-items: center;
   gap: 4px;
   padding: 6px 6px 6px 18px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   border: 1px solid var(--hair);
   background: color-mix(in srgb, var(--panel) 72%, transparent);
   backdrop-filter: blur(20px) saturate(1.6);
@@ -231,7 +374,7 @@ p {
 }
 .nav__brand {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: var(--fw-bold);
   letter-spacing: -0.02em;
   text-decoration: none;
   margin-right: 14px;
@@ -246,7 +389,7 @@ p {
   text-decoration: none;
   color: var(--ink-2);
   padding: 7px 13px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   white-space: nowrap;
   transition: color 0.5s var(--ease), background 0.5s var(--ease);
 }
@@ -290,7 +433,7 @@ main {
   margin-bottom: clamp(32px, 4vw, 56px);
 }
 .sec__head h2 {
-  font-size: clamp(26px, 3.4vw, 40px);
+  font-size: var(--fs-h2);
 }
 
 /* ─────────── island button ─────────── */
@@ -299,7 +442,7 @@ main {
   align-items: center;
   gap: 14px;
   padding: 7px 7px 7px 22px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   border: 1px solid var(--hair);
   background: var(--ink);
   color: var(--paper);
@@ -315,7 +458,7 @@ main {
 .btn__ico {
   width: 32px;
   height: 32px;
-  border-radius: 50%;
+  border-radius: var(--radius-pill);
   display: grid;
   place-items: center;
   background: color-mix(in srgb, var(--paper) 16%, transparent);
@@ -391,12 +534,23 @@ main {
     align-items: start;
   }
 }
-.foot h2 {
+/* the closing line: Bodoni Moda 400, with its last words in the italic */
+.foot__title {
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-weight: var(--fw-regular);
+  font-optical-sizing: auto;
   font-size: clamp(30px, 5.4vw, 58px);
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+.foot__title em {
+  font-style: italic;
 }
 .foot__lede {
   margin: 18px 0 0;
   font-size: 17px;
+  font-weight: var(--fw-regular);
   color: var(--ink-2);
 }
 .foot__side {
@@ -409,82 +563,8 @@ main {
   padding: 28px;
   margin: -28px;
 }
-/* a glass pill: a translucent gradient in the page's own colours, frosted, with a light rim and sheen.
-   Mint by default; each case study swaps in its palette. */
-:root {
-  --cta-a: rgba(194, 242, 228, 0.78);
-  --cta-b: rgba(53, 200, 180, 0.42);
-  --cta-c: rgba(237, 247, 190, 0.8);
-  --cta-glow: rgba(53, 200, 180, 0.18);
-  --cta-shadow: rgba(35, 110, 95, 0.55);
-}
-:root:has(.prose .jx) {
-  --cta-a: rgba(247, 232, 222, 0.85);
-  --cta-b: rgba(192, 97, 58, 0.36);
-  --cta-c: rgba(243, 222, 205, 0.85);
-  --cta-glow: rgba(192, 97, 58, 0.16);
-  --cta-shadow: rgba(140, 70, 40, 0.5);
-}
-:root:has(.prose .ws) {
-  --cta-a: rgba(253, 232, 210, 0.85);
-  --cta-b: rgba(224, 131, 42, 0.38);
-  --cta-c: rgba(252, 236, 214, 0.85);
-  --cta-glow: rgba(224, 131, 42, 0.16);
-  --cta-shadow: rgba(163, 86, 15, 0.45);
-}
-:root:has(.prose .kk) {
-  --cta-a: rgba(224, 237, 249, 0.85);
-  --cta-b: rgba(47, 111, 179, 0.32);
-  --cta-c: rgba(230, 241, 250, 0.85);
-  --cta-glow: rgba(47, 111, 179, 0.16);
-  --cta-shadow: rgba(34, 86, 140, 0.45);
-}
-:root:has(.prose .rm) {
-  --cta-a: rgba(52, 54, 46, 0.85);
-  --cta-b: rgba(167, 174, 140, 0.3);
-  --cta-c: rgba(44, 46, 39, 0.85);
-  --cta-glow: rgba(167, 174, 140, 0.12);
-  --cta-shadow: rgba(0, 0, 0, 0.55);
-}
-:root:has(.prose .bn) {
-  --cta-a: rgba(249, 240, 210, 0.85);
-  --cta-b: rgba(196, 149, 15, 0.38);
-  --cta-c: rgba(246, 235, 200, 0.85);
-  --cta-glow: rgba(196, 149, 15, 0.16);
-  --cta-shadow: rgba(125, 91, 0, 0.45);
-}
 .contact-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 18px 30px;
-  border-radius: 999px;
-  overflow: hidden;
-  isolation: isolate;
-  color: var(--ink);
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  background: linear-gradient(120deg, var(--cta-a) 0%, var(--cta-b) 48%, var(--cta-c) 100%);
-  -webkit-backdrop-filter: blur(14px) saturate(1.4);
-  backdrop-filter: blur(14px) saturate(1.4);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -8px 16px var(--cta-glow),
-    0 18px 34px -18px var(--cta-shadow);
   will-change: transform;
-}
-/* the sheen: a soft white band across the top half */
-.contact-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 50% 0;
-  z-index: -1;
-  border-radius: 999px 999px 0 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));
 }
 .contact-btn:focus-visible {
   outline: 2px solid var(--accent);
@@ -523,9 +603,9 @@ main {
   font: inherit;
   font-size: 15px;
   color: var(--ink);
-  background: color-mix(in srgb, var(--ink) 4%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
   border: 1px solid var(--hair);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   padding: 6px 6px 6px 18px;
   cursor: pointer;
   display: inline-flex;
@@ -545,9 +625,9 @@ main {
   place-items: center;
   width: 32px;
   height: 32px;
-  border-radius: 50%;
-  color: var(--paper);
-  background: var(--ink);
+  border-radius: var(--radius-pill);
+  color: var(--cream);
+  background: var(--mint-800);
   transition: background 0.4s var(--ease), transform 0.5s var(--ease);
 }
 .mail__icon svg {
@@ -555,7 +635,7 @@ main {
   transition: opacity 0.3s var(--ease), transform 0.4s var(--ease);
 }
 .mail__copy:hover .mail__icon {
-  background: var(--accent);
+  background: var(--mint-700);
   transform: rotate(-8deg);
 }
 .mail__i-done {
@@ -563,7 +643,7 @@ main {
   transform: scale(0.4);
 }
 .mail__copy.is-copied .mail__icon {
-  background: var(--accent);
+  background: var(--mint-700);
   transform: none;
 }
 .mail__copy.is-copied .mail__i-copy {
@@ -581,9 +661,9 @@ main {
   bottom: calc(100% + 8px);
   font-style: normal;
   font-size: 12px;
-  color: var(--paper);
-  background: var(--ink);
-  border-radius: 999px;
+  color: var(--cream);
+  background: var(--mint-800);
+  border-radius: var(--radius-pill);
   padding: 4px 10px;
   white-space: nowrap;
   pointer-events: none;
@@ -601,7 +681,7 @@ main {
   width: 46px;
   height: 46px;
   border: 1px solid var(--hair);
-  border-radius: 50%;
+  border-radius: var(--radius-pill);
   color: var(--ink-2);
   transition: color 0.4s var(--ease), border-color 0.4s var(--ease), transform 0.4s var(--ease);
 }
@@ -631,7 +711,7 @@ main {
   z-index: 80;
   background: var(--panel);
   padding: 10px 16px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   border: 1px solid var(--hair);
 }
 

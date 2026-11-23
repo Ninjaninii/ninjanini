@@ -15,9 +15,11 @@ const sections = headings.filter((h) => h.depth === 2);
 const chapters = sections[0]?.text === 'Situation' ? sections : [];
 // exhibition wall layout: the work first, its label underneath
 const wall = entry.id === 'room-624' || entry.id === 'chat-to-escape';
+// case studies with the material pass: glow field, frosted containers, embossed cells, oval chapter marks
+const material = ['wisely', 'jianxu', 'binance'].includes(entry.id);
 // each wall page's hero at its natural size, so it is never drawn larger than the file.
 // A tall photograph also gets a height cap, so the title and label still fit in the first screen.
-const heroSize: Record<string, [number, number, string]> = { 'room-624': [1156, 644, 'none'], 'chat-to-escape': [1600, 1201, '64vh'] };
+const heroSize: Record<string, [number, number, string]> = { 'room-624': [1156, 644, 'calc(100vh - 250px)'], 'chat-to-escape': [1600, 1201, 'calc(100vh - 250px)'] };
 const [heroW, heroH, heroMaxH] = heroSize[entry.id] ?? [1600, 1000, 'none'];
 const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwork' } : { href: '/project', label: 'Projects' };
 ---
@@ -141,7 +143,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     }
 
     <div class="shell">
-      <div class:list={['prose reveal', { 'prose--ex': d.medium, 'prose--wall': wall }]}>
+      <div class:list={['prose reveal', { 'prose--ex': d.medium, 'prose--wall': wall, 'prose--material': material }]}>
         <Content />
       </div>
 
@@ -539,7 +541,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
       width: 1em;
       height: 0.34em;
       border-radius: 50%;
-      border: 1px solid #c0613a;
+      border: 1px solid var(--accent);
       transform: translate(-50%, -50%) scale(0.2);
       opacity: 0;
       animation: koi-ripple 1.8s ease-out 4.6s both;
@@ -657,16 +659,14 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     font-weight: 500;
   }
 
-  /* at a glance: problem, the turn, result, side by side; one card, a shadow rather than a border */
+  /* at a glance: problem, the turn, result, side by side; ruled, not boxed */
   .glance {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0;
     margin: 28px 0 0;
     padding: 0;
-    background: var(--panel);
-    border-radius: 16px;
-    box-shadow: 0 1px 2px rgba(35, 35, 33, 0.04), 0 14px 34px -16px rgba(35, 35, 33, 0.16);
+    border-block: 1px solid var(--hair);
   }
   .glance div {
     display: grid;
@@ -775,7 +775,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   .prose p > strong:first-child {
     color: var(--ink);
-    font-weight: 600;
+    font-weight: var(--fw-bold);
   }
   .prose ul,
   .prose ol {
@@ -793,7 +793,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   .prose strong {
     color: var(--ink);
-    font-weight: 600;
+    font-weight: var(--fw-bold);
   }
   .prose blockquote {
     margin: 30px 0;
@@ -801,7 +801,8 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     border-left: 2px solid var(--accent);
   }
   .prose blockquote p {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--font-quote);
+    font-weight: var(--fw-regular);
     font-style: italic;
     font-size: clamp(18px, 2vw, 22px);
     line-height: 1.35;
@@ -859,11 +860,9 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
 
   /* ── figures written as raw HTML in the markdown ── */
   .prose .fig {
-    margin: 30px 0 34px;
-    padding: 22px 22px 18px;
-    background: var(--paper);
-    border-radius: var(--radius);
-    box-shadow: var(--lift);
+    margin: 40px 0 40px;
+    padding: 24px 0 0;
+    border-top: 1px solid var(--hair);
   }
   /* a figure without a subtitle still needs air under its title */
   .fig__t + div,
@@ -1189,54 +1188,30 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     margin: 36px 0 8px;
   }
 
-  /* project palette: a case study can tint its figures to its own brand */
+  /* every case study shares the site palette: one mint accent, one shadow */
   .prose {
-    --lift: 0 1px 2px rgba(35, 35, 33, 0.04), 0 14px 34px -16px rgba(35, 35, 33, 0.16);
-    --glow: 0 1px 2px rgba(165, 74, 42, 0.08), 0 14px 30px -14px rgba(192, 97, 58, 0.45);
+    --lift: var(--shadow);
+    --glow: var(--shadow);
+    --jx-strong: var(--accent-ink);
+    --jx-soft: var(--accent-soft);
+    --jx-ink: var(--ink-2);
   }
-  .prose .jx {
-    --accent: #c0613a;
-    --g-1: #ecd5c6;
-    --jx-ink: #6b5444;
-    /* Jianxu: beige card, lighter raised tiles; shadows, not fills, separate the layers */
-    --paper: #f3efe8;
-    --paper-2: #f9f7f3;
-  }
+  /* dark mode: a deep mint fill, light mint text */
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme='light']) .prose .jx {
-      --accent: #e08a62;
-      --g-1: #4a3a31;
-      --jx-ink: #d9bfae;
-      --paper: #1f1d16;
-      --paper-2: #2a2720;
+    :root:not([data-theme='light']) .prose {
+      --jx-soft: #1f332d;
     }
   }
-  :root[data-theme='dark'] .prose .jx {
-    --accent: #e08a62;
-    --g-1: #4a3a31;
-    --jx-ink: #d9bfae;
-    --paper: #1f1d16;
-    --paper-2: #2a2720;
+  :root[data-theme='dark'] .prose {
+    --jx-soft: #1f332d;
   }
   :is(.jx, .bn, .ws, .kk) :is(.scenes > div, .chain > div:not(.on), .match > div:not(.on), .seq li,
   .cmp__c:not(.on):not(.cmp__c--gap), .vflow li:not(.on):not(.off), .goals > div, .layers > div,
   .split__one, .split__two > div, .formula > div:not(.on), .loop > div) {
-    box-shadow: 0 1px 2px rgba(35, 35, 33, 0.04), 0 8px 18px -12px rgba(35, 35, 33, 0.18);
+    box-shadow: var(--shadow);
   }
   /* a case study with Jianxu figures takes the same ivory-beige for the whole page,
      so cards and page share one colour and only shadows separate them */
-  @media (prefers-color-scheme: light) {
-    :root:not([data-theme='dark']):has(.prose .jx) {
-      --accent: #c0613a;
-      --paper: #f3efe8;
-      --paper-2: #f9f7f3;
-    }
-  }
-  :root[data-theme='light']:has(.prose .jx) {
-    --accent: #c0613a;
-    --paper: #f3efe8;
-    --paper-2: #f9f7f3;
-  }
   /* Resus Tray case study: clinical soft blue, after the team's testing deck */
   .prose .kk {
     --accent: #2f6fb3;
@@ -1284,49 +1259,37 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     --jx-strong: #22568c;
     --jx-soft: #e0edf9;
   }
-  /* Chat to Escape: a black room, with the installation's red as the only colour */
-  :root:has(.prose .ce) {
-    --paper: #111110;
-    --paper-2: #1a1918;
-    --panel: #1a1918;
-    --plate: #1f1e1c;
-    --ink: #efeae4;
-    --ink-2: #aaa59e;
-    --ink-3: #8f8a84;
-    --line: rgba(239, 234, 228, 0.14);
-    --hair: rgba(239, 234, 228, 0.12);
-    --hair-2: rgba(239, 234, 228, 0.07);
-    --accent: #e8483f;
-    --accent-soft: rgba(232, 72, 63, 0.14);
+  /* Artwork: one iron-grey room in every theme, mint-300 and aqua the only colours.
+     Never mint-700 here: it is 2.9:1 on iron. */
+  :root:has(.prose :is(.ce, .rm)) {
+    --paper: var(--iron);
+    --paper-2: #2e3234;
+    --panel: #2e3234;
+    --plate: #2b2e30;
+    --ink: var(--iron-ink);
+    --ink-2: var(--iron-ink-2);
+    --ink-3: var(--iron-ink-2);
+    --line: var(--iron-hair);
+    --hair: var(--iron-hair);
+    --hair-2: rgba(230, 234, 234, 0.07);
+    --accent: var(--mint-300);
+    --accent-ink: var(--mint-300);
+    --accent-soft: rgba(168, 216, 200, 0.12);
+    --seq-1: #2f3a37;
+    --seq-2: #3f5b52;
+    --seq-3: var(--mint-500);
+    --seq-4: var(--mint-300);
+    --g-1: #3a3f42;
+    --g-2: #5a6064;
     color-scheme: dark;
   }
-
-  /* Room 624: a dim gallery room in every theme. The page stays darker and greyer than the
-     artwork's own muted greens, so the work is always the brightest thing on screen. */
-  :root:has(.prose .rm) {
-    --paper: #1b1c18;
-    --paper-2: #23241f;
-    --panel: #23241f;
-    --plate: #262722;
-    --ink: #e6e6de;
-    --ink-2: #a2a398;
-    --ink-3: #8a8b81;
-    --line: rgba(230, 230, 222, 0.14);
-    --hair: rgba(230, 230, 222, 0.12);
-    --hair-2: rgba(230, 230, 222, 0.07);
-    --accent: #a7ae8c;
-    --accent-soft: rgba(167, 174, 140, 0.12);
-    color-scheme: dark;
-  }
-  .prose .rm {
-    --accent: #a7ae8c;
-    --jx-strong: #c9cdb4;
-    --jx-soft: #262820;
-    --g-1: #2c2e27;
-    --g-2: #44473d;
-    --glow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 14px 30px -14px rgba(0, 0, 0, 0.6);
-    --paper: #1b1c18;
-    --paper-2: #23241f;
+  .prose :is(.ce, .rm) {
+    --jx-strong: var(--mint-300);
+    --jx-soft: rgba(168, 216, 200, 0.12);
+    --glow: 0 14px 30px -16px rgba(0, 0, 0, 0.6);
+    --lift: 0 14px 30px -16px rgba(0, 0, 0, 0.6);
+    --paper: var(--iron);
+    --paper-2: #2e3234;
   }
   /* exhibition wall: the image leads, and the title and label sit beneath it like a wall card.
      The hero is capped near its natural 1156px so it is never enlarged. */
@@ -1356,7 +1319,9 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   .wall__title {
     margin: 0;
     font-size: clamp(28px, 3.2vw, 42px);
-    font-weight: 500;
+    font-family: var(--font-display);
+    font-weight: var(--fw-regular);
+    font-optical-sizing: auto;
     line-height: 1.1;
     letter-spacing: -0.02em;
   }
@@ -1369,23 +1334,29 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   .wall__label {
     display: grid;
-    gap: 10px;
     margin: 4px 0 0;
+    border-bottom: 1px solid var(--hair);
   }
   .wall__label div {
     display: grid;
-    grid-template-columns: 76px 1fr;
-    gap: 12px;
+    grid-template-columns: 84px 1fr;
+    gap: 16px;
+    padding: 11px 0;
+    border-top: 1px solid var(--hair);
   }
   .wall__label dt {
-    font-size: 13px;
+    font-size: var(--fs-label);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1.9;
     color: var(--ink-3);
   }
   .wall__label dd {
     margin: 0;
-    font-size: 14px;
-    line-height: 1.45;
-    color: var(--ink-2);
+    font-size: var(--fs-ui);
+    line-height: 1.5;
+    color: var(--ink);
   }
   /* images and figures sit straight on the wall, with no card around them */
   .prose--wall > .fig {
@@ -1487,7 +1458,8 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   /* the prologue: a sentence or two to set the mood, nothing else */
   .prose .prologue {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--font-quote);
+    font-weight: var(--fw-regular);
     font-style: italic;
     font-size: clamp(24px, 3vw, 36px);
     line-height: 1.3;
@@ -1556,7 +1528,9 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   .story figcaption em {
     display: block;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--font-quote);
+    font-weight: var(--fw-regular);
+    font-style: italic;
     font-size: 18px;
     color: var(--accent);
     margin: 6px 0 12px;
@@ -1589,8 +1563,8 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     overflow: hidden;
   }
   .tl > div.on {
-    background: rgba(242, 193, 78, 0.16);
-    box-shadow: inset 0 0 0 1px rgba(242, 193, 78, 0.45);
+    background: rgba(184, 216, 216, 0.16);
+    box-shadow: inset 0 0 0 1px rgba(184, 216, 216, 0.45);
   }
   .tl b {
     font-size: 16px;
@@ -1617,7 +1591,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     margin-top: 6px;
   }
   .tl > div.on span {
-    color: #f2c14e;
+    color: var(--aqua);
   }
   @media (max-width: 760px) {
     .tl {
@@ -1679,7 +1653,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   .walk__time li.on.is-past::before,
   .walk__time li.on.is-now::before {
-    background: #f2c14e;
+    background: var(--aqua);
   }
   .walk__time b {
     font-size: 19px;
@@ -1690,14 +1664,14 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     font-variant-numeric: tabular-nums;
   }
   .walk__time li.on b {
-    color: rgba(242, 193, 78, 0.6);
+    color: rgba(184, 216, 216, 0.75);
   }
   .walk__time li.is-now b,
   .walk__time li.is-now span {
     color: var(--ink);
   }
   .walk__time li.on.is-now b {
-    color: #f2c14e;
+    color: var(--aqua);
   }
   /* Chat to Escape: the rail is the installation's meter, charged by reading down the page */
   .walk.ce {
@@ -1788,7 +1762,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     margin: -5px 0 0 -5px;
     border-radius: 50%;
     background: var(--accent);
-    box-shadow: 0 0 0 4px rgba(232, 72, 63, 0.3);
+    box-shadow: 0 0 0 4px rgba(168, 216, 200, 0.3);
   }
   .pin::after {
     content: '';
@@ -2090,7 +2064,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     color: var(--ink-3);
   }
   .walk__step--mem small {
-    color: #f2c14e;
+    color: var(--aqua);
   }
   .walk__step b {
     font-size: clamp(24px, 2.8vw, 36px);
@@ -2137,8 +2111,8 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     background: var(--paper);
   }
   .rings div div div {
-    background: rgba(242, 193, 78, 0.14);
-    border-color: rgba(242, 193, 78, 0.45);
+    background: rgba(184, 216, 216, 0.14);
+    border-color: rgba(184, 216, 216, 0.45);
   }
   .rings small {
     display: block;
@@ -2148,7 +2122,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     color: var(--ink-3);
   }
   .rings div div div small {
-    color: #f2c14e;
+    color: var(--aqua);
   }
   .rings b {
     display: block;
@@ -2202,7 +2176,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     aspect-ratio: 16 / 9;
     border-radius: var(--radius-inner);
     overflow: hidden;
-    background: #11140d;
+    background: #1d2022;
   }
   .video iframe {
     position: absolute;
@@ -2225,51 +2199,104 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
 
   /* Wisely case study: warm cream with the deck's orange; same layering rules as Jianxu */
-  .prose .ws {
-    --accent: #e0832a;
-    --jx-strong: #a3560f;
-    --jx-soft: #fde8d2;
-    --g-1: #eee3d6;
-    --g-2: #cdb9a4;
-    --glow: 0 1px 2px rgba(163, 86, 15, 0.08), 0 14px 30px -14px rgba(224, 131, 42, 0.5);
-    --paper: #f6f1ea;
-    --paper-2: #fcf9f5;
+
+  /* ── material pass (Wisely, Jianxu, Binance): light large numbers, a glow field, frosted glass
+     on the two or three main containers, embossed cells, stamp tag, oval chapter marks ── */
+  :root:has(.prose--material) {
+    --fw-display: var(--fw-light);
+    --fw-heading: var(--fw-light);
+    --fw-bold: var(--fw-medium); /* three weights: 300, 400, 500 */
+    --ls-label: 0.14em;
+    --measure: 65ch;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme='light']) .prose .ws {
-      --accent: #f0a35a;
-      --jx-strong: #f5b97d;
-      --jx-soft: #3c2b1c;
-      --g-1: #3a342d;
-      --g-2: #5c5145;
-      --paper: #1d1a16;
-      --paper-2: #27231e;
+  /* everything 24px and up is light */
+  :root:has(.prose--material) :is(.whead .hook, .goals b) {
+    font-weight: var(--fw-light);
+    letter-spacing: -0.02em;
+  }
+  /* chapter lead sentences on case studies (not artwork): Bodoni Moda only at 28px and up,
+     via --face-lead (Outfit 400 below) */
+  :root .prose:not(.prose--ex) > h2 + p > strong:first-child {
+    font-family: var(--face-lead);
+    font-weight: var(--fw-regular);
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
+  }
+  :root:has(.prose--material) .prose p {
+    line-height: 1.6;
+  }
+  :root:has(.prose--material) .prose :is(b, strong) {
+    font-weight: var(--fw-bold);
+  }
+  /* the glow field sits fixed behind the content and never takes a click */
+  :root:has(.prose--material) body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: var(--glow-field);
+  }
+  /* phones: a fixed full-screen layer can black out iOS Safari (the grain did), so the glow scrolls
+     with the page instead, repeating one screen-tall field down its length */
+  @media (max-width: 760px), (hover: none), (pointer: coarse) {
+    :root:has(.prose--material) body {
+      position: relative;
+    }
+    :root:has(.prose--material) body::before {
+      position: absolute;
+      background-size: 100% 100vh;
+      background-repeat: repeat-y;
     }
   }
-  :root[data-theme='dark'] .prose .ws {
-    --accent: #f0a35a;
-    --jx-strong: #f5b97d;
-    --jx-soft: #3c2b1c;
-    --g-1: #3a342d;
-    --g-2: #5c5145;
-    --paper: #1d1a16;
-    --paper-2: #27231e;
+  /* chapter labels: the double oval, 8px before the text */
+  :root:has(.prose--material) .prose > h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--fs-label);
+    letter-spacing: var(--ls-label);
   }
-  @media (prefers-color-scheme: light) {
-    :root:not([data-theme='dark']):has(.prose .ws) {
-      --accent: #e0832a;
-      --paper: #f6f1ea;
-      --paper-2: #fcf9f5;
+  :root:has(.prose--material) .prose > h2::before,
+  :root:has(.prose--material) .motion .prose > h2::before,
+  :root:has(.prose--material) .motion .prose > h2.is-in::before {
+    width: 20px;
+    height: 12px;
+    margin: 0;
+    flex: none;
+    background: var(--mark-oval) center / 20px 12px no-repeat;
+    transition: none;
+  }
+  /* frosted glass on the main containers: the pairs, the numbers, the chart */
+  .prose--material > .fig:has(.pairs, .goals, .linechart, .research) {
+    padding: 22px 24px 20px;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(22px) saturate(1.25);
+    backdrop-filter: blur(22px) saturate(1.25);
+    border: 1px solid var(--glass-edge);
+    border-radius: 16px;
+    box-shadow: var(--glass-shadow);
+  }
+  @media (max-width: 760px), (hover: none), (pointer: coarse) {
+    .prose--material > .fig:has(.pairs, .goals, .linechart, .research) {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      background: var(--glass-bg-solid);
     }
   }
-  :root[data-theme='light']:has(.prose .ws) {
-    --accent: #e0832a;
-    --paper: #f6f1ea;
-    --paper-2: #fcf9f5;
+  /* embossed cells inside the glass */
+  .prose--material :is(.pairs > div, .goals > div) {
+    background: var(--cream);
+    border: 0;
+    border-radius: 12px;
+    box-shadow: var(--emboss);
   }
-  :has(.prose .ws) .prose {
-    --jx-strong: #a3560f;
-    --jx-soft: #fde8d2;
+  /* the award badge in the header is a stamp */
+  :root:has(.prose--material) .whead .eyebrow {
+    color: var(--mint-800);
+    background: var(--cream);
+    border: 1px solid var(--mint-300);
+    box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 var(--mint-100);
   }
 
   /* line chart drawn as inline SVG */
@@ -2285,7 +2312,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   .linechart .ax--on {
     fill: var(--jx-strong);
-    font-weight: 600;
+    font-weight: var(--fw-bold);
   }
   /* the chart scales down with the page, so its labels are set larger on phones to stay readable */
   @media (max-width: 560px) {
@@ -2298,67 +2325,6 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
 
   /* Binance case study: warm paper with a muted exchange gold; same layering rules as Jianxu */
-  .prose .bn {
-    --accent: #c4950f;
-    --jx-strong: #8a6400;
-    --jx-soft: #f6ebc8;
-    --g-1: #e6e0cf;
-    --g-2: #cdc4ab;
-    --seq-1: #f4e9c6;
-    --seq-2: #e3c66e;
-    --seq-3: #c4950f;
-    --seq-4: #7d5b00;
-    --seq-on: #fffaf0;
-    --glow: 0 1px 2px rgba(138, 100, 0, 0.08), 0 14px 30px -14px rgba(196, 149, 15, 0.5);
-    --paper: #f2f0ea;
-    --paper-2: #f9f8f4;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme='light']) .prose .bn {
-      --accent: #e2b84a;
-      --jx-strong: #e9c86a;
-      --jx-soft: #3a3220;
-      --g-1: #3a372e;
-      --g-2: #57513f;
-      --seq-1: #3a3220;
-      --seq-2: #6b5a26;
-      --seq-3: #b08a24;
-      --seq-4: #e2b84a;
-      --seq-on: #17150f;
-      --paper: #1d1b15;
-      --paper-2: #27241d;
-    }
-  }
-  :root[data-theme='dark'] .prose .bn {
-    --accent: #e2b84a;
-    --jx-strong: #e9c86a;
-    --jx-soft: #3a3220;
-    --g-1: #3a372e;
-    --g-2: #57513f;
-    --seq-1: #3a3220;
-    --seq-2: #6b5a26;
-    --seq-3: #b08a24;
-    --seq-4: #e2b84a;
-    --seq-on: #17150f;
-    --paper: #1d1b15;
-    --paper-2: #27241d;
-  }
-  @media (prefers-color-scheme: light) {
-    :root:not([data-theme='dark']):has(.prose .bn) {
-      --accent: #c4950f;
-      --paper: #f2f0ea;
-      --paper-2: #f9f8f4;
-    }
-  }
-  :root[data-theme='light']:has(.prose .bn) {
-    --accent: #c4950f;
-    --paper: #f2f0ea;
-    --paper-2: #f9f8f4;
-  }
-  :has(.prose .bn) .prose {
-    --jx-strong: #8a6400;
-    --jx-soft: #f6ebc8;
-  }
 
   /* shared small labels for the Binance diagrams */
   :is(.goals, .layers, .split, .formula, .loop) small {
@@ -2373,13 +2339,13 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   :is(.goals, .layers, .split, .formula, .loop) b {
     display: block;
     color: var(--ink);
-    font-weight: 600;
+    font-weight: var(--fw-bold);
   }
   :is(.goals, .layers, .split, .formula, .loop) span {
     display: block;
     margin-top: 4px;
     font-size: 13.5px;
-    font-weight: 300;
+    font-weight: var(--fw-regular);
     line-height: 1.5;
     color: var(--ink-2);
   }
@@ -2438,9 +2404,9 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     border-radius: 50%;
     font-size: 12px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--fw-bold);
     color: #fff;
-    background: #d2452f;
+    background: var(--accent);
   }
   .ba__img i {
     position: absolute;
@@ -2643,7 +2609,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   .formula > div.on small,
   .formula > div.on b {
-    color: #fffaf0;
+    color: #ffffff;
   }
   .formula > div.on b {
     font-size: 20px;
@@ -2727,7 +2693,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   .shots figcaption b {
     display: block;
-    font-weight: 600;
+    font-weight: var(--fw-bold);
   }
   .shots--4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2750,7 +2716,8 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     }
   }
   .prose .jx-name {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--font-quote);
+    font-weight: var(--fw-regular);
     font-style: italic;
     font-size: clamp(19px, 2.2vw, 24px);
     color: var(--ink);
@@ -2764,24 +2731,10 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     margin: 0 10px;
   }
 
-  /* Jianxu: brand colours and the small diagrams in its case study */
-  .prose {
-    --jx-strong: #a54a2a;
-    --jx-soft: #f7e8de;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme='light']) .prose {
-      --jx-strong: #e3a07c;
-      --jx-soft: #3a2b23;
-    }
-  }
-  :root[data-theme='dark'] .prose {
-    --jx-strong: #e3a07c;
-    --jx-soft: #3a2b23;
-  }
+  /* Jianxu: the small diagrams in its case study */
   .prose .jx-topic {
     color: var(--jx-strong);
-    font-weight: 600;
+    font-weight: var(--fw-bold);
     line-height: 1.55;
   }
   .prose .jx-topic small {
@@ -2816,14 +2769,14 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     text-align: left;
     padding: 18px 22px;
     border-radius: 12px;
-    background: #6b5444;
-    box-shadow: 0 1px 2px rgba(60, 40, 30, 0.12), 0 16px 32px -16px rgba(60, 40, 30, 0.5);
+    background: var(--mint-900);
+    box-shadow: var(--shadow);
   }
   .prose .hmw small {
-    color: #ebc9b7;
+    color: var(--mint-200);
   }
   .prose .hmw b {
-    color: #faf6ef;
+    color: #ffffff;
   }
   .hmw small,
   .chain small,
@@ -2843,7 +2796,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     margin-bottom: 4px;
   }
   .hmw b {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--font-quote);
     font-style: italic;
     font-weight: 400;
     font-size: clamp(17px, 1.9vw, 20px);
@@ -2884,7 +2837,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   .research__legend b {
     color: var(--ink);
-    font-weight: 600;
+    font-weight: var(--fw-bold);
     margin-right: 4px;
   }
   .scenes {
@@ -2902,7 +2855,8 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   .prose .scenes p {
     margin: 0;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--font-quote);
+    font-weight: var(--fw-regular);
     font-style: italic;
     font-size: 17px;
     line-height: 1.4;
@@ -2925,8 +2879,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     color: var(--jx-strong);
     padding: 5px 14px;
     border-radius: 99px;
-    /* sits outside the tinted figures, so it names the brand colour directly */
-    box-shadow: inset 0 0 0 1px #c0613a;
+    box-shadow: inset 0 0 0 1px var(--accent);
   }
   .vflow__src {
     display: block;
@@ -2991,7 +2944,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   .crowd__empty b {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: var(--fw-bold);
     color: var(--ink);
   }
   .crowd__empty span {
@@ -3043,10 +2996,10 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   .shift__to small,
   .shift__to span {
-    color: #f7e3d6 !important;
+    color: #ffffff !important;
   }
   .shift__to b {
-    color: #fffaf5 !important;
+    color: #ffffff !important;
   }
   .shift i {
     align-self: center;
@@ -3065,7 +3018,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   .shift b {
     display: block;
     font-size: 17px;
-    font-weight: 600;
+    font-weight: var(--fw-bold);
     color: var(--ink);
     margin-top: 4px;
   }
@@ -3144,14 +3097,14 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   .vflow b,
   .seq b {
     display: block;
-    font-weight: 600;
+    font-weight: var(--fw-bold);
     font-size: 15.5px;
   }
   .vflow span {
     display: block;
     margin-top: 3px;
     font-size: 13.5px;
-    font-weight: 300;
+    font-weight: var(--fw-regular);
     color: var(--ink-2);
   }
 
@@ -3206,6 +3159,94 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     font-weight: 500;
   }
 
+  /* ── node flow: Binance's three reviews and Jianxu's emotion chain ──
+     a dotted canvas, white nodes, thin connecting lines; the chosen node gets a mint outline, not a fill */
+  .prose :is(.vflow, .chain) {
+    --dot: rgba(31, 36, 39, 0.16);
+    --link: var(--g-2);
+    padding: clamp(18px, 3vw, 32px);
+    border-radius: 12px;
+    background:
+      radial-gradient(circle, var(--dot) 1px, transparent 1.3px) 0 0 / 16px 16px,
+      var(--paper-2);
+  }
+  .prose :is(.vflow li, .chain > div) {
+    background: var(--panel);
+    border: 1px solid var(--hair);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+  }
+  .prose :is(.vflow li.on, .chain > div.on) {
+    background: var(--panel);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), var(--shadow);
+  }
+  .prose :is(.vflow li.on, .chain > div.on) small {
+    color: var(--accent-ink);
+  }
+  /* every label inside a node flow is drawn at 12px or more */
+  .prose :is(.vflow, .chain, .hmw) small,
+  .prose .vflow span {
+    font-size: var(--fs-chart);
+  }
+  /* reviews: three nodes in a row, joined by a line */
+  .prose .vflow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 36px;
+  }
+  .prose .vflow li {
+    margin: 0;
+    max-width: none;
+    padding: 14px 16px 16px;
+  }
+  .prose .vflow li::before {
+    display: none;
+  }
+  .prose .vflow li:not(:last-child)::after {
+    left: 100%;
+    top: 50%;
+    bottom: auto;
+    width: 37px;
+    height: 1px;
+    background: var(--link);
+    opacity: 1;
+  }
+  /* chain: the arrow characters become short lines */
+  .prose .chain {
+    gap: 0;
+  }
+  .prose .chain i {
+    font-size: 0;
+    width: 28px;
+    height: 1px;
+    background: var(--link);
+  }
+  @media (max-width: 760px) {
+    .prose .vflow {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .prose .vflow li:not(:last-child)::after {
+      left: 50%;
+      top: 100%;
+      width: 1px;
+      height: 25px;
+    }
+    .prose .chain i {
+      transform: none;
+      width: 1px;
+      height: 22px;
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .prose :is(.vflow, .chain) {
+      --dot: rgba(242, 242, 236, 0.14);
+    }
+  }
+  :root[data-theme='dark'] .prose :is(.vflow, .chain) {
+    --dot: rgba(242, 242, 236, 0.14);
+  }
+
   /* the guided sequence: one line per step */
   .seq {
     list-style: none;
@@ -3235,7 +3276,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     display: grid;
     place-items: center;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: var(--fw-bold);
     color: var(--paper);
     background: var(--accent);
   }
@@ -3247,7 +3288,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     color: var(--ink);
   }
   .seq .seq__q {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--font-quote);
     font-style: italic;
     font-weight: 400;
     font-size: 17px;
@@ -3255,7 +3296,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   .seq span {
     font-size: 14px;
     color: var(--ink-2);
-    font-weight: 300;
+    font-weight: var(--fw-regular);
     white-space: normal;
   }
   @media (max-width: 1240px) {
@@ -3306,7 +3347,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   .persona__name {
     display: block;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: var(--fw-bold);
     color: var(--ink);
     margin: 6px 0 0;
   }
@@ -3342,7 +3383,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #a54a2a;
+    color: var(--jx-strong);
     margin-bottom: 6px;
   }
   @media (max-width: 760px) {
@@ -3368,7 +3409,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   .cmp__r {
     align-self: center;
-    font-weight: 600;
+    font-weight: var(--fw-bold);
     color: var(--ink);
   }
   .cmp__c {
@@ -3576,7 +3617,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     width: 1.1em;
     height: 0.38em;
     border-radius: 50%;
-    border: 1px solid #c0613a;
+    border: 1px solid var(--accent);
     opacity: 0;
     animation: koi-ring 1.8s ease-out 4.2s both;
   }

@@ -72,7 +72,7 @@ draft: false
 <span class="fig__src">Value: pass experience on, so older people's real value is used and generations succeed together. Customers: history lovers and travellers, researchers and students, industry researchers and founders, with people aged 45+ as consultants. Revenue: a 20–30% commission on each hour of consultation (the main stream), ads and brand partnerships, and, in the long term, anonymised data and insight licensing. Costs: salaries and platform upkeep (fixed); consultant fees and events (variable). The canvas lists consultant fees as a cost; the break-even below treats them as passing through to the consultant.</span>
 </figure>
 
-**Break-even at about 15,000 bookings a year.** Commission is 30%, 25% or 20% by consultant tier, which comes to about NT$200 a booking. The consultant's fee passes straight through, so it is not a platform cost. After about NT$25 of support, the platform keeps NT$175 a booking against NT$2.6M a year for a three-person team and upkeep.
+<strong><mark class="hl">Break-even at about 15,000 bookings a year.</mark></strong> Commission is 30%, 25% or 20% by consultant tier, which comes to about NT$200 a booking. The consultant's fee passes straight through, so it is not a platform cost. After about NT$25 of support, the platform keeps NT$175 a booking against NT$2.6M a year for a three-person team and upkeep.
 
 <figure class="fig ws">
 <span class="fig__t">Annual profit by booking volume</span>
