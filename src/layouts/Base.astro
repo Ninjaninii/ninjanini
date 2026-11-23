@@ -5,9 +5,11 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  /* a line of small print in the footer, for one page only */
+  colophon?: string;
 }
 
-const { title, description = site.tagline } = Astro.props;
+const { title, description = site.tagline, colophon } = Astro.props;
 
 const fullTitle = title === site.name ? `${site.name} — Designer & Producer` : `${title} — ${site.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.domain).href;
@@ -115,6 +117,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
           <span>&copy; {new Date().getFullYear()} {site.name}</span>
           <span>Built and maintained by hand</span>
         </p>
+        {colophon && <p class="colophon">{colophon}</p>}
       </div>
     </footer>
 

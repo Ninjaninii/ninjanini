@@ -1,0 +1,305 @@
+---
+/*
+ * About: a ring of photos and two silent clips, turning slowly in 3D.
+ * Every card shares one height, so landscape items stay wide; each card is cut into thin
+ * vertical strips placed on the cylinder, so it bends with the ring instead of staying flat.
+ * Numbers follow the approved preview (about-ring-reference/index.html). Plain JS, no 3D library.
+ */
+const items = [
+  { src: '/about/ring-1-cap.webp', ratio: 3 / 4 },
+  { src: '/about/vintage-toys.mp4', poster: '/about/vintage-toys-poster.webp', ratio: 16 / 9, tag: 'Travel & vintage toys' },
+  { src: '/about/ring-3-busan.webp', ratio: 3 / 4 },
+  { src: '/about/ring-4-escape.webp', ratio: 3 / 4 },
+  { src: '/about/ring-5-gown.webp', ratio: 3 / 2 },
+  { src: '/about/art-curating.mp4', poster: '/about/art-curating-poster.webp', ratio: 16 / 9, tag: 'Art & curating' },
+  { src: '/about/ring-7-cappadocia.webp', ratio: 3 / 4 },
+  { src: '/about/ring-8-exhibition.webp', ratio: 3 / 4 },
+];
+---
+
+<div class="ringwrap">
+  <div class="ringglow" aria-hidden="true"></div>
+  <div
+    class="stage"
+    data-ring-stage
+    role="img"
+    aria-label="Photos of Chia Ni: at graduation with sunflowers, on a cable car in Busan, in an escape room, in her graduation gown by the lake, in Cappadocia, at the graduation exhibition, and two short clips of setting up a show and holding a vintage toy"
+  >
+    <div class="ring" data-ring></div>
+  </div>
+  <script is:inline type="application/json" data-ring-items set:html={JSON.stringify(items)} />
+</div>
+
+<style>
+  .ringwrap {
+    position: relative;
+    isolation: isolate;
+  }
+  /* three soft mint pools behind the ring */
+  .ringglow {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 900px;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(40% 35% at 50% 38%, rgba(168, 216, 200, 0.45), transparent 70%),
+      radial-gradient(30% 25% at 20% 20%, rgba(184, 216, 216, 0.35), transparent 70%),
+      radial-gradient(30% 25% at 82% 30%, rgba(196, 227, 217, 0.4), transparent 70%);
+  }
+  .stage {
+    position: relative;
+    height: min(72vh, 620px);
+    perspective: 1500px;
+    perspective-origin: 50% 40%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+  }
+  .stage:active {
+    cursor: grabbing;
+  }
+  /* the ring is a point at the centre of the stage; the strips are placed around it */
+  .ring {
+    position: relative;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+  }
+  .ring :global(.strip) {
+    position: absolute;
+    display: block;
+    backface-visibility: visible;
+    background-repeat: no-repeat;
+  }
+  .ring :global(.ringtag) {
+    position: absolute;
+    white-space: nowrap;
+    backface-visibility: hidden;
+  }
+</style>
+
+<script>
+  type Item = { src: string; ratio: number; poster?: string; tag?: string };
+  type Piece = {
+    el: HTMLElement;
+    a: number; // angle on the ring, degrees
+    lift?: number; // tags sit a hair in front of their card
+    src?: string;
+    u0?: number;
+    u1?: number;
+    ctx?: CanvasRenderingContext2D | null;
+    video?: HTMLVideoElement | null;
+    poster?: HTMLImageElement | null;
+    f?: number; // last facing value drawn, so unchanged strips are not repainted
+    t?: number; // last video time drawn, so a strip repaints only when the clip moves on a frame
+  };
+
+  const stage = document.querySelector<HTMLElement>('[data-ring-stage]');
+  const ring = document.querySelector<HTMLElement>('[data-ring]');
+  const data = document.querySelector<HTMLScriptElement>('[data-ring-items]');
+
+  if (stage && ring && data) {
+    const items: Item[] = JSON.parse(data.textContent || '[]');
+    const P = { height: 280, radius: 558, tiltX: -9, turn: 40, fade: 0.85, stepDeg: 1.5, minStrips: 8, overlap: 0.8, corner: 10 };
+    const DEG = 180 / Math.PI;
+    const n = items.length;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // the clips play hidden; each frame is painted into the strips of their card
+    const videos = items.map((it) => {
+      if (!it.poster) return null;
+      const v = document.createElement('video');
+      Object.assign(v, { src: it.src, muted: true, loop: true, playsInline: true, preload: 'metadata' });
+      v.setAttribute('aria-hidden', 'true');
+      v.style.cssText = 'position:fixed;left:0;top:0;width:2px;height:2px;opacity:0;pointer-events:none';
+      document.body.appendChild(v);
+      return v;
+    });
+    // posters stand in before a clip has a frame, and always with reduced motion
+    const posters = items.map((it) => {
+      if (!it.poster) return null;
+      const img = new Image();
+      img.src = it.poster;
+      img.onload = () => pieces.forEach((p) => (p.f = undefined));
+      return img;
+    });
+
+    let pieces: Piece[] = [];
+    let R = 0;
+
+    function place() {
+      ring!.innerHTML = '';
+      pieces = [];
+      const s = Math.min(1, (window.innerWidth / 1280) * 1.4); // narrow screens shrink in proportion
+      const H = P.height * s;
+      R = P.radius * s;
+      const dpr = window.devicePixelRatio || 1;
+      const widths = items.map((it) => H * it.ratio);
+      const gap = (2 * Math.PI * R - widths.reduce((a, b) => a + b, 0)) / n; // equal gaps all round
+      let start = 0;
+      items.forEach((it, i) => {
+        const w = widths[i];
+        const k = Math.max(P.minStrips, Math.ceil(((w / R) * DEG) / P.stepDeg)); // one strip per ~1.5°
+        const arc = w / k;
+        const sw = 2 * R * Math.sin(arc / (2 * R)) + P.overlap; // the chord, overlapped to hide seams
+        for (let j = 0; j < k; j++) {
+          const el = document.createElement(it.poster ? 'canvas' : 'div') as HTMLElement;
+          el.className = 'strip';
+          el.style.width = `${sw}px`;
+          el.style.height = `${H}px`;
+          el.style.left = `${-sw / 2}px`;
+          el.style.top = `${-H / 2}px`;
+          if (j === 0) el.style.borderRadius = `${P.corner}px 0 0 ${P.corner}px`;
+          if (j === k - 1) el.style.borderRadius = `0 ${P.corner}px ${P.corner}px 0`;
+          if (it.poster) {
+            const c = el as HTMLCanvasElement;
+            c.width = Math.ceil(sw * dpr);
+            c.height = Math.ceil(H * dpr);
+          } else {
+            el.style.backgroundSize = `100% 100%, ${w}px ${H}px`;
+            el.style.backgroundPosition = `0 0, ${-j * arc}px 0`;
+          }
+          const a = ((start + (j + 0.5) * arc) / R) * DEG;
+          el.style.transform = `rotateY(${a}deg) translateZ(${R}px)`;
+          ring!.appendChild(el);
+          pieces.push({
+            el,
+            a,
+            src: it.src,
+            u0: j / k,
+            u1: (j + 1) / k,
+            ctx: it.poster ? (el as HTMLCanvasElement).getContext('2d') : null,
+            video: videos[i],
+            poster: posters[i],
+          });
+        }
+        if (it.tag) {
+          const t = document.createElement('span');
+          t.className = 'stamp ringtag';
+          t.textContent = it.tag;
+          ring!.appendChild(t);
+          const tw = t.offsetWidth;
+          const th = t.offsetHeight;
+          t.style.left = `${-tw / 2}px`;
+          t.style.top = `${H / 2 - 10 - th}px`;
+          const a = ((start + 10 + tw / 2) / R) * DEG; // 10px in from the card's lower-left corner
+          t.style.transform = `rotateY(${a}deg) translateZ(${R + 1.5}px)`;
+          pieces.push({ el: t, a, lift: 1.5 });
+        }
+        start += w + gap;
+      });
+    }
+
+    // start with the graduation photo facing the viewer
+    const firstW = P.height * Math.min(1, (window.innerWidth / 1280) * 1.4) * items[0].ratio;
+    let angle = -((firstW / 2) / (P.radius * Math.min(1, (window.innerWidth / 1280) * 1.4))) * DEG;
+    let vel = 0;
+    let dragging = false;
+    let hover = false;
+    let lastX = 0;
+    let last = performance.now();
+    let raf = 0;
+    let visible = false;
+
+    function draw(force = false) {
+      ring!.style.transform = `translateZ(${-R}px) rotateX(${P.tiltX}deg) rotateY(${angle}deg)`;
+      for (const p of pieces) {
+        const rel = (((p.a + angle) % 360) + 540) % 360 - 180; // 0 = facing the viewer
+        const f = (Math.cos(rel / DEG) + 1) / 2; // 1 front, 0 back
+        const veilA = P.fade * (1 - f); // the back keeps 15% of the picture
+        if (p.lift) {
+          p.el.style.opacity = (1 - veilA).toFixed(3);
+          continue;
+        }
+        // repaint only what would look different: a new video frame, or a fade step big enough to see
+        // (0.012 of facing is under 0.011 of veil opacity)
+        const newFrame = !!p.video && !reduce && p.video.readyState >= 2 && p.video.currentTime !== p.t;
+        if (!force && !newFrame && p.f !== undefined && Math.abs(p.f - f) < 0.012) continue;
+        p.f = f;
+        if (p.video) p.t = p.video.currentTime;
+        const veil = `rgba(248,248,238,${veilA.toFixed(3)})`;
+        p.el.style.filter = `saturate(${(0.6 + 0.4 * f).toFixed(3)})`;
+        if (p.ctx) {
+          const c = p.el as HTMLCanvasElement;
+          const v = p.video!;
+          const src: CanvasImageSource | null = v.readyState >= 2 && !reduce ? v : p.poster && p.poster.complete ? p.poster : null;
+          if (!src) continue;
+          const sw = src === v ? v.videoWidth : (p.poster as HTMLImageElement).naturalWidth;
+          const sh = src === v ? v.videoHeight : (p.poster as HTMLImageElement).naturalHeight;
+          p.ctx.drawImage(src, p.u0! * sw, 0, (p.u1! - p.u0!) * sw, sh, 0, 0, c.width, c.height);
+          p.ctx.fillStyle = veil; // the strip stays opaque; fading is the paper colour mixed in
+          p.ctx.fillRect(0, 0, c.width, c.height);
+        } else {
+          p.el.style.backgroundImage = `linear-gradient(${veil},${veil}), url(${p.src})`;
+        }
+      }
+    }
+
+    function frame(t: number) {
+      const dt = Math.min(50, t - last) / 1000;
+      last = t;
+      if (!dragging) {
+        if (Math.abs(vel) > 1) {
+          angle += vel * dt; // a flick keeps turning and slows down
+          vel *= Math.pow(0.04, dt);
+        } else if (!hover && !reduce) {
+          angle -= (360 / P.turn) * dt; // one turn in 40s, to the left
+        }
+      }
+      draw();
+      raf = visible ? requestAnimationFrame(frame) : 0;
+    }
+
+    const playClips = (on: boolean) =>
+      videos.forEach((v) => {
+        if (!v) return;
+        if (on && !reduce) v.play().catch(() => {});
+        else v.pause();
+      });
+
+    place();
+    draw(true);
+    addEventListener('resize', () => {
+      place();
+      draw(true);
+    });
+
+    // off screen: no turning, no clips
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      playClips(visible);
+      if (visible && !raf) {
+        last = performance.now();
+        raf = requestAnimationFrame(frame);
+      }
+    }).observe(stage);
+
+    stage.addEventListener('pointerenter', (e) => {
+      if (e.pointerType === 'mouse') hover = true;
+    });
+    stage.addEventListener('pointerleave', () => {
+      hover = false;
+      dragging = false;
+    });
+    stage.addEventListener('pointerdown', (e) => {
+      dragging = true;
+      lastX = e.clientX;
+      vel = 0;
+      stage.setPointerCapture(e.pointerId);
+    });
+    stage.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - lastX;
+      lastX = e.clientX;
+      angle += dx * 0.25;
+      vel = dx * 0.25 * 60;
+    });
+    const release = () => (dragging = false);
+    stage.addEventListener('pointerup', release);
+    stage.addEventListener('pointercancel', release);
+  }
+</script>

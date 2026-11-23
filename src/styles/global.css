@@ -691,6 +691,11 @@ main {
   transform: translateY(-2px);
   gap: 0;
 }
+.colophon {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: var(--ink-2);
+}
 .fine {
   margin-top: 44px;
   font-size: 12.5px;

@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import AboutRing from '../components/AboutRing.astro';
+import { site } from '../site';
 
 /*
  * Every entry below is a confirmed CV line from the master experience
@@ -99,70 +101,78 @@ const strengths = [
   },
 ];
 
+// experience by kind of work; every entry is the same line as above, word for word
+const pick = (org: string, role: string) => experience.find((e) => e.org === org && e.role === role)!;
 const groups = [
+  {
+    label: 'Work',
+    items: [pick('LINE Taiwan', 'B2B Marketing Intern, Brand Communication Group'), pick('Tang Cheng Goose Restaurant', 'Freelance Marketing')],
+  },
+  {
+    label: 'Teaching',
+    items: [pick('NTHU Consulting Group', 'Teaching Supervisor'), pick('OpenHCI', 'Academic Team')],
+  },
+  {
+    label: 'Leading',
+    items: [pick('NTHU Consulting Group', 'Director of Marketing'), pick('NTHU Technology & Art Graduation Exhibition', 'Director of Public Relations')],
+  },
+  { label: 'Exhibitions', items: [pick('Taipei Art Book Fair', 'Exhibition Coordination & Arts Administration Intern')] },
   { label: 'Education', items: education },
-  { label: 'Experience', items: experience },
   { label: 'Recognition', items: recognition },
 ];
 ---
 
 <Base
+  colophon="Set in Bodoni Moda and Outfit. Logo designed by me."
   title="About"
   description="Chia Ni Chen: research, product design and marketing strategy. Technology and Art at NTHU, on exchange at NUS Singapore."
 >
-  <section class="sec sec--tight">
+  <AboutRing />
+
+  <section class="sec sec--tight about-top">
     <div class="shell">
-      <span class="eyebrow reveal"><i></i>About</span>
-      <h1 class="display reveal" data-delay="60" style="margin-top:22px; font-size:clamp(34px,5.6vw,64px)">
-        Curious about why,<br /><span class="serif-it">practical about how.</span>
-      </h1>
-
-      <div class="intro">
-        <p class="lede reveal" data-delay="130">
-          I study <strong>Technology and Art</strong> at National Tsing Hua University and am finishing the degree on
-          exchange in Industrial Design at the <strong>National University of Singapore</strong>. My work moves between
-          research, product design and marketing.
-        </p>
-        <p class="lede reveal" data-delay="180">
-          I don't trust the first answer. I check why before I decide what, then I see it through: budgets,
-          vendors, launch day. That habit is the thread through everything below.
-        </p>
-      </div>
-
-      <div class="note reveal">
-        <h2 class="group__label">Where I started</h2>
-        <div class="note__body">
-          <p>
-            Art taught me to start from the audience. In an exhibition, I think about every object, material and space,
-            and about what a visitor should feel the moment they walk in. A good piece lets people sense something in
-            themselves: ideas collide, and they leave knowing themselves a little better.
-          </p>
-          <p>
-            Products work the same way through a different medium. I watch how people actually behave, find what gets in
-            their way, and refine the product until it serves them better. What I want from both is the same: to make
-            people's days a little better. Research is how I find out what would truly improve their lives, and that is
-            why I work in design.
-          </p>
+      <div class="copy">
+        <span class="eyebrow reveal"><i></i>About</span>
+        <h1 class="display reveal" data-delay="60" style="margin-top:22px; font-size:clamp(34px,5.6vw,64px)">
+          Say hi on <a href={site.linkedin} rel="me noopener" target="_blank">LinkedIn</a>, or see what I’m <a class="serif-it" href="/artwork/">making</a>.
+        </h1>
+        <div class="intro">
+          <p class="lede reveal" data-delay="130">I’m a designer from Taiwan, studying Technology and Art at National Tsing Hua University and now on exchange in Industrial Design at NUS.</p>
+          <p class="lede reveal" data-delay="180">At LINE Taiwan, a year of data from 386 small-business accounts reshaped the next year’s marketing plan. Outside of studio, I make collages and paint, curate shows, travel, and look for vintage toys.</p>
+          <p class="lede reveal" data-delay="230">I’m looking for product design roles first, then UX and marketing, and I’m always happy to meet people, so reach out.</p>
         </div>
       </div>
 
-      <ul class="strengths">
-        {
-          strengths.map((st, i) => (
-            <li class="reveal" data-delay={220 + i * 60}>
-              <b>{st.title}</b>
-              <p>{st.body}</p>
-            </li>
-          ))
-        }
-      </ul>
-
-      <div class="note note--after reveal">
-        <h2 class="group__label">What I'm looking for</h2>
-        <div class="note__body">
-          <p>I'm looking for roles in product design first, then UX and marketing.</p>
+      <!-- the longer story, closed until asked for -->
+      <details class="more reveal">
+        <summary class="stamp stamp--btn">Read more</summary>
+        <div class="note">
+          <h2 class="group__label">Where I started</h2>
+          <div class="note__body">
+            <p>
+              Art taught me to start from the audience. In an exhibition, I think about every object, material and space,
+              and about what a visitor should feel the moment they walk in. A good piece lets people sense something in
+              themselves: ideas collide, and they leave knowing themselves a little better.
+            </p>
+            <p>
+              Products work the same way through a different medium. I watch how people actually behave, find what gets in
+              their way, and refine the product until it serves them better. What I want from both is the same: to make
+              people’s days a little better. Research is how I find out what would truly improve their lives, and that is
+              why I work in design.
+            </p>
+          </div>
         </div>
-      </div>
+        <ul class="strengths">
+          {
+            strengths.map((st) => (
+              <li>
+                <b>{st.title}</b>
+                <p>{st.body}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
     </div>
   </section>
 
@@ -171,7 +181,7 @@ const groups = [
       {
         groups.map((g) => (
           <div class="group reveal">
-            <h2 class="group__label">{g.label}</h2>
+            <h2 class="group__label"><span class="stamp">{g.label}</span></h2>
             <ol class="cv">
               {g.items.map((it) => (
                 <li class="cv__row">
@@ -189,18 +199,63 @@ const groups = [
         ))
       }
 
-      <!-- the image grid goes here once the pictures are supplied -->
-      <div class="group reveal">
-        <h2 class="group__label">Outside of work</h2>
-        <div class="note__body">
-          <p>Collage, travel and painting.</p>
-        </div>
-      </div>
     </div>
   </section>
 </Base>
 
 <style>
+
+  /* the copy sits beneath the ring: one centred column, the headline centred, the ledes left-aligned */
+  .about-top {
+    padding-top: 8px;
+  }
+  .copy {
+    max-width: 760px;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .copy .intro {
+    text-align: left;
+  }
+  .copy h1 a.serif-it {
+    color: var(--accent);
+  }
+  /* the headline's links: quiet until pointed at */
+  h1 a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.12em;
+    text-decoration-color: var(--mint-300);
+    transition: text-decoration-color 0.4s var(--ease), color 0.4s var(--ease);
+  }
+  h1 a:hover {
+    color: var(--accent);
+    text-decoration-color: currentColor;
+  }
+  .intro .lede {
+    font-size: 20px;
+    line-height: 1.55;
+  }
+  /* Read more: closed by default; the stamp button opens the longer story */
+  .more {
+    margin-top: clamp(32px, 4vw, 48px);
+  }
+  .more summary {
+    list-style: none;
+    width: max-content;
+  }
+  .more summary::-webkit-details-marker {
+    display: none;
+  }
+  .more[open] summary {
+    margin-bottom: 8px;
+  }
+  .group__label .stamp {
+    font-size: var(--fs-label);
+  }
+
+
   .intro {
     display: grid;
     gap: 18px;
