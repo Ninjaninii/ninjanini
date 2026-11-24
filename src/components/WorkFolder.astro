@@ -378,19 +378,20 @@ const fan = (i: number, current = 0) => {
       captions.forEach((c) => (c.hidden = c.dataset.caption !== String(current)));
     };
 
-    // with a mouse, the folder closes when the pointer leaves the card (folder and caption) and opens
-    // again when it comes back; on touch it stays open
+    // with a mouse, the folder is open only while the pointer is over it (the folder and its fanned
+    // sheets); anywhere else on the page it closes, including the empty space beside it in the card.
+    // On touch it stays open.
     const setOpen = (open: boolean) => {
       if (folder.classList.contains('is-open') === open) return;
       folder.classList.toggle('is-open', open);
       hit.setAttribute('aria-expanded', String(open));
       layout();
     };
-    card.addEventListener('pointerleave', (e) => {
-      if (e.pointerType === 'mouse') setOpen(false);
+    document.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'mouse') setOpen(hit.contains(e.target as Node));
     });
-    card.addEventListener('pointerenter', (e) => {
-      if (e.pointerType === 'mouse') setOpen(true);
+    document.documentElement.addEventListener('pointerleave', (e) => {
+      if (e.pointerType === 'mouse') setOpen(false);
     });
     // keyboard: focus inside the card opens it
     card.addEventListener('focusin', () => setOpen(true));
