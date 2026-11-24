@@ -64,7 +64,7 @@
   --fs-label: 11px; /* uppercase tracked labels only */
   /* faces: Outfit for reading, Bodoni Moda 400 for headlines 28px and up, quotes and the prologue */
   --font-sans: 'Outfit', ui-sans-serif, system-ui, 'Noto Sans TC', sans-serif;
-  --font-display: 'Bodoni Moda', Georgia, serif;
+  --font-display: 'Bodoni Moda', 'Noto Serif TC', Georgia, serif;
   --font-quote: var(--font-display);
   /* chapter lead sentences are 22–30px: Bodoni only once they reach 28px (from 1120px wide), Outfit below */
   --face-lead: var(--font-sans);
@@ -284,10 +284,6 @@ mark.hl {
   padding: 0 4px;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
-}
-/* on a dark card the mark keeps body-text ink, so it stays readable on the light wash */
-.hmw mark.hl {
-  color: var(--slate-ink);
 }
 
 /* big numbers line up: tabular figures */
