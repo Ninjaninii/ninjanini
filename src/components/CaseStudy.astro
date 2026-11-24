@@ -2600,6 +2600,78 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     display: grid;
     gap: 6px;
   }
+  /* UX law review: the screen before, beside the problem; the screen after, beside the fix */
+  .pairs--iter > div {
+    align-items: start;
+  }
+  .pairs--iter > div > i {
+    align-self: center;
+  }
+  .iter {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-top: 10px;
+  }
+  .prose .iter img {
+    margin: 0;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px var(--line, rgba(0, 0, 0, 0.08));
+  }
+  .prose .iter .iter__phone {
+    width: min(132px, 46%);
+  }
+  .prose .iter .iter__crop {
+    width: 100%;
+    max-width: 300px;
+  }
+  .prose .iter .iter__crop--sq {
+    max-width: 200px;
+  }
+  .prose .iter .iter__nav {
+    width: 100%;
+    max-width: 260px;
+    box-shadow: none;
+    border-radius: 40px;
+  }
+  /* personas: an image beside who they are */
+  .pairs--persona .pairs__q {
+    grid-template-columns: 72px minmax(0, 1fr);
+    column-gap: 16px;
+    align-items: center;
+  }
+  .pairs--persona .pairs__q > :not(.pairs__face) {
+    grid-column: 2;
+  }
+  .prose .pairs__face {
+    grid-row: 1 / span 2;
+    width: 72px;
+    height: 72px;
+    margin: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: none;
+  }
+  .prose .pairs__face--badge {
+    border-radius: 0;
+    object-fit: contain;
+  }
+  /* phones: the image sits above, so the text keeps the full width */
+  @media (max-width: 760px) {
+    .pairs--persona .pairs__q {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .pairs--persona .pairs__q > :not(.pairs__face) {
+      grid-column: 1;
+    }
+    .prose .pairs__face {
+      grid-row: auto;
+      width: 56px;
+      height: 56px;
+      margin-bottom: 4px;
+    }
+  }
   .pairs small {
     font-size: 12px;
     color: var(--ink-3);
@@ -4078,8 +4150,15 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     }
   }
 
-  /* five steps of a journey in one row (vflow with five nodes) */
+  /* four or five steps in one row (vflow with four or five nodes) */
   @media (min-width: 761px) {
+    .prose .vflow.vflow--4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 28px;
+    }
+    .prose .vflow.vflow--4 li:not(:last-child)::after {
+      width: 29px;
+    }
     .prose .vflow.vflow--5 {
       grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 22px;

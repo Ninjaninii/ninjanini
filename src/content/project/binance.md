@@ -12,7 +12,7 @@ skills: ['Business strategy', 'Storytelling', 'Leadership']
 featured: true
 folderPapers: ['/work/binance/logo.webp']
 folderPad: 28
-order: 1
+order: 4
 cover: /work/binance/logo.webp
 coverAlt: Logo of the NTHU Consulting Group, the student club that ran the project
 coverCutout: true
