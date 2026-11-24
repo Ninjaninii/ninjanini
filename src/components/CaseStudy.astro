@@ -2600,6 +2600,47 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     display: grid;
     gap: 6px;
   }
+  /* each step on a card of warm letterpress stock: an even felt tooth, and pressed up from the page
+     like a blind emboss (light on the top edge, a faint shade under the bottom) */
+  .prose .pairs--paper > div {
+    background: #e9e4d8 url('/tex/letterpress-stock.webp') repeat;
+    background-size: 128px 128px;
+    border: 0;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 252, 244, 0.85),
+      inset 1px 0 0 rgba(255, 252, 244, 0.5),
+      inset 0 -1px 0 rgba(110, 95, 70, 0.1),
+      0 1px 1px rgba(110, 95, 70, 0.1),
+      0 10px 22px -16px rgba(110, 95, 70, 0.32);
+  }
+  /* the small headings are letterpressed in the site's own type: dark ink pressed into the stock,
+     so a light edge sits under each letter and a faint shade above it */
+  .prose .pairs--paper small {
+    color: #1e1a15;
+    -webkit-text-stroke: 0.2px currentColor;
+    text-shadow:
+      0 1px 0 rgba(255, 252, 244, 0.9),
+      0 -0.5px 0 rgba(60, 50, 35, 0.35);
+  }
+  /* dark theme: no cream paper on a dark page; the plain panel instead */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .prose .pairs--paper > div {
+      background: var(--panel);
+    }
+  }
+  :root[data-theme='dark'] .prose .pairs--paper > div {
+    background: var(--panel);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .prose .pairs--paper small {
+      color: var(--ink-3);
+      text-shadow: none;
+    }
+  }
+  :root[data-theme='dark'] .prose .pairs--paper small {
+    color: var(--ink-3);
+    text-shadow: none;
+  }
   /* UX law review: the screen before, beside the problem; the screen after, beside the fix */
   .pairs--iter > div {
     align-items: start;
