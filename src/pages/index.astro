@@ -46,11 +46,10 @@ const skills = SKILLS.filter((name) => pieces.some((p) => p.skills.includes(name
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec work-sec">
     <div class="shell">
       <div class="sec__head reveal">
         <h2>Selected work</h2>
-        <a class="quiet" href="/project">All projects &#8594;</a>
       </div>
 
       <ul class="grid">
@@ -71,14 +70,13 @@ const skills = SKILLS.filter((name) => pieces.some((p) => p.skills.includes(name
       <div class="sec__head reveal">
         <h2>Skills, and where to see them</h2>
       </div>
-      <p class="skills__hint reveal">Point at a skill to see the work behind it.</p>
+      <p class="skills__hint reveal">Pick a skill to see the work behind it.</p>
       <ul class="bubbles reveal" data-delay="60">
         {
           skills.map((s) => (
             <li>
               <button type="button" class="bubble" data-works={s.works.join(' ')}>
                 {s.name}
-                <small>{s.works.length}</small>
               </button>
             </li>
           ))
@@ -209,6 +207,26 @@ const skills = SKILLS.filter((name) => pieces.some((p) => p.skills.includes(name
   }
   .hero__title {
     margin: 26px 0 0;
+  }
+  /* phones: tighter air around the opening, so the first folder starts inside the first screen */
+  @media (max-width: 760px) {
+    .hero {
+      padding: 30px 0 10px;
+    }
+    .hero__title {
+      margin-top: 18px;
+    }
+    .hero__grid {
+      margin-top: 22px;
+    }
+    .work-sec {
+      padding-top: 18px;
+      /* the open folders fan wider than a phone; the far sheets peek in from the screen edge */
+      overflow-x: clip;
+    }
+    .work-sec .sec__head {
+      margin-bottom: 8px;
+    }
   }
   .hero .lede {
     line-height: 1.55;

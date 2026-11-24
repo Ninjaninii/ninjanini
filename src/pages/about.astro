@@ -180,22 +180,21 @@ const groups = [
     <div class="shell">
       {
         groups.map((g) => (
-          <div class="group reveal">
+          <section class="group reveal">
             <h2 class="group__label"><span class="stamp">{g.label}</span></h2>
-            <ol class="cv">
-              {g.items.map((it) => (
-                <li class="cv__row">
+            {g.items.map((it) => (
+              <details class="cv">
+                <summary>
+                  <span class="cv__plus" aria-hidden="true">+</span>
+                  <span class="cv__role">{it.role}</span>
+                  <span class="cv__org">{it.org}</span>
                   <span class="cv__dates">{it.dates}</span>
-                  <div class="cv__body">
-                    <p class="cv__role">{it.role}</p>
-                    <p class="cv__org">{it.org}</p>
-                    {it.proof && <p class="cv__proof">{it.proof}</p>}
-                    {it.note && <p class="cv__note">{it.note}</p>}
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
+                </summary>
+                {it.proof && <p class="cv__proof">{it.proof}</p>}
+                {it.note && <p class="cv__note">{it.note}</p>}
+              </details>
+            ))}
+          </section>
         ))
       }
 
@@ -337,85 +336,102 @@ const groups = [
     }
   }
 
+  /* the record as an index: one line a role, closed; open a line for what changed because of it */
   .group {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 28px;
-    padding: clamp(28px, 4vw, 44px) 0;
-    border-top: 1px solid var(--hair-2);
+    max-width: 760px;
+    margin-inline: auto;
   }
-  .group:first-child {
-    border-top: 0;
-    padding-top: 0;
-  }
-  @media (max-width: 760px) {
-    .group {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
+  .group + .group {
+    margin-top: 44px;
   }
   .group__label {
+    display: block;
+    margin-bottom: 6px;
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--ink-3);
-    padding-top: 4px;
   }
-
   .cv {
+    border-bottom: 1px solid var(--hair);
+  }
+  .cv summary {
     list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 15px 0;
+    cursor: pointer;
   }
-  .cv__row {
-    display: grid;
-    grid-template-columns: 150px 1fr;
-    gap: 22px;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--hair-2);
+  .cv summary::-webkit-details-marker {
+    display: none;
   }
-  .cv__row:first-child {
-    padding-top: 0;
+  .cv__plus {
+    flex: none;
+    width: 14px;
+    text-align: center;
+    font-size: 16px;
+    color: var(--mint-700);
+    transition: transform 0.3s var(--ease);
   }
-  .cv__row:last-child {
-    border-bottom: 0;
+  .cv[open] .cv__plus {
+    transform: rotate(45deg);
   }
-  @media (max-width: 560px) {
-    .cv__row {
-      grid-template-columns: 1fr;
-      gap: 4px;
-    }
+  .cv__role {
+    font-size: 16px;
+    font-weight: var(--fw-regular);
+    color: var(--ink);
+  }
+  .cv__org {
+    font-size: 16px;
+    color: var(--ink-3);
   }
   .cv__dates {
+    margin-left: auto;
     font-size: 13px;
     color: var(--ink-3);
     font-variant-numeric: tabular-nums;
-    padding-top: 2px;
+    white-space: nowrap;
   }
-  .cv__role {
-    font-size: 16.5px;
-    font-weight: 500;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-  }
-  .cv__org {
-    font-size: 14.5px;
-    color: var(--ink-2);
-    margin-top: 2px;
-  }
+  /* the detail lines up with the role, past the + and its gap */
   .cv__proof {
+    margin: 0;
+    padding: 0 0 16px 28px;
+    max-width: calc(60ch + 28px);
     font-size: 15px;
-    line-height: 1.55;
-    color: var(--ink);
-    margin-top: 8px;
-    max-width: 62ch;
+    line-height: 1.6;
+    color: var(--ink-2);
   }
   .cv__note {
+    margin: -8px 0 0;
+    padding: 0 0 16px 28px;
     font-size: 13px;
     color: var(--ink-3);
-    margin-top: 4px;
+  }
+  /* phones: the + keeps its own column; role, place and dates wrap beneath the role */
+  @media (max-width: 760px) {
+    .cv summary {
+      display: grid;
+      grid-template-columns: 14px minmax(0, 1fr);
+      column-gap: 14px;
+      row-gap: 2px;
+    }
+    .cv__plus {
+      grid-row: 1;
+    }
+    .cv__role,
+    .cv__org,
+    .cv__dates {
+      grid-column: 2;
+    }
+    .cv__dates {
+      margin-left: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cv__plus {
+      transition: none;
+    }
   }
 </style>

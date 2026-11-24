@@ -25,22 +25,30 @@ const items = entries.map((e) => ({
 }));
 // an empty folder still holds three blank sheets, so it opens the same way
 const sheets = items.length ? items : [null, null, null];
+const isArtwork = base === '/artwork';
+// the folder starts open with the first piece in front; the same fan the script draws
+const fan = (i: number, current = 0) => {
+  const k = i - current;
+  const far = Math.abs(k);
+  return `--i:${i};--k:${k};--ty:${k === 0 ? -92 : -62 + far * 6}%;--sc:${k === 0 ? 1 : 0.86};z-index:${10 - far}`;
+};
 ---
 
 <!--
   A section of the site as a folder, after the Framer "Folder" component: a back panel with a tab,
-  sheets inside and a two-part front flap. Hover lifts it and tilts the flap; a tap opens it and
-  fans the sheets out, one sheet per piece of work. While it is open, tapping a sheet (or the
-  arrows) brings that piece to the front, and the caption below switches to it.
+  sheets inside and a two-part front flap. It is open from the start, its sheets fanned out, one per
+  piece of work, with the first in front and described below. With a mouse, moving across the folder
+  picks a piece and a click opens it. On touch, tapping a side sheet brings it to the middle, tapping
+  the middle one opens it, and a sideways swipe moves along.
 -->
 <li class="fcard reveal" data-delay={delay}>
-  <div class="folder" data-folder data-count={items.length}>
-    <button class="folder__hit" type="button" aria-expanded="false" aria-label={`Open the ${label} folder`}>
+  <div class="folder is-open" data-folder data-count={items.length}>
+    <button class="folder__hit" type="button" aria-expanded="true" aria-label={`${label}: open the piece in front`}>
       <span class="folder__back">
         <span class="folder__tab" aria-hidden="true"></span>
         {
           sheets.map((it, i) => (
-            <span class="folder__paper" data-paper={i} data-href={it?.href} style={`--i:${i}`}>
+            <span class:list={['folder__paper', { 'is-current': i === 0 }]} data-paper={i} data-href={it?.href} style={fan(i)}>
               {it?.img && <img src={it.img} alt="" loading="lazy" style={it.pad ? `padding:${it.pad}%` : undefined} />}
             </span>
           ))
@@ -54,20 +62,14 @@ const sheets = items.length ? items : [null, null, null];
   </div>
 
   <div class="fcard__caption" aria-live="polite">
-    <div class="fcard__item" data-caption="closed">
-      <span class="fcard__tag">{items.length ? `${items.length} ${items.length === 1 ? 'piece' : 'pieces'}` : 'Coming soon'}</span>
-      <h3>{label}</h3>
-      <p>{items.length ? 'Open the folder, then move across it to flip through the pieces.' : empty}</p>
-      <a class="fcard__go" href={base}>See all {label.toLowerCase()} <span aria-hidden="true">&#8594;</span></a>
-    </div>
     {
       items.map((it, i) => (
-        <div class="fcard__item" data-caption={i} hidden>
+        <div class="fcard__item" data-caption={i} hidden={i !== 0}>
           <span class="fcard__tag">{it.tag}</span>
           <h3>{it.title}</h3>
           <p>{it.summary}</p>
           <div class="fcard__row">
-            <a class="fcard__go" href={it.href}>Read the case study <span aria-hidden="true">&#8594;</span></a>
+            <a class="fcard__go" href={it.href}>{isArtwork ? 'View the piece' : 'Read the case study'} <span aria-hidden="true">&#8594;</span></a>
             {items.length > 1 && (
               <span class="fcard__nav">
                 <button type="button" data-step="-1" aria-label="Previous piece">‹</button>
@@ -81,7 +83,7 @@ const sheets = items.length ? items : [null, null, null];
     }
     {
       !items.length && (
-        <div class="fcard__item" data-caption="0" hidden>
+        <div class="fcard__item" data-caption="0">
           <span class="fcard__tag">Coming soon</span>
           <h3>{label}</h3>
           <p>{empty}</p>
@@ -105,10 +107,13 @@ const sheets = items.length ? items : [null, null, null];
     --h: 208px;
     --r: 18px;
     --dur: 0.45s;
+    --spread: 46%;
     height: calc(var(--h) + 150px);
     display: grid;
     place-items: end center;
     padding-bottom: 6px;
+    /* sideways swipes belong to the folder; vertical ones still scroll the page */
+    touch-action: pan-y;
   }
   .folder__hit {
     all: unset;
@@ -141,10 +146,11 @@ const sheets = items.length ? items : [null, null, null];
   }
 
   /* sheets: stacked inside when closed, fanned out above the folder when open */
+  /* the fan: each sheet sits --k places from the front one, --spread apart */
   .folder__paper {
-    --tx: -50%;
+    --tx: calc(-50% + var(--k, 0) * var(--spread));
     --ty: 10%;
-    --rot: 0deg;
+    --rot: calc(var(--k, 0) * 11deg);
     --sc: 1;
     position: absolute;
     z-index: 2;
@@ -238,7 +244,7 @@ const sheets = items.length ? items : [null, null, null];
     opacity: 0;
   }
 
-  /* caption under the folder: the folder itself when closed, the chosen piece when open */
+  /* caption under the folder: the piece in front */
   .fcard__item {
     display: grid;
     gap: 8px;
@@ -322,6 +328,8 @@ const sheets = items.length ? items : [null, null, null];
     .folder {
       --w: 210px;
       --h: 168px;
+      /* a tighter fan, so the side sheets stay on a phone screen */
+      --spread: 26%;
       height: calc(var(--h) + 130px);
     }
   }
@@ -351,41 +359,22 @@ const sheets = items.length ? items : [null, null, null];
 
     // fan the sheets out: the chosen one at the front and centre, the rest leaning away on either side
     const layout = () => {
-      const open = folder.classList.contains('is-open');
       papers.forEach((p, i) => {
-        p.classList.toggle('is-current', open && i === current);
-        if (!open) {
-          p.style.removeProperty('--tx');
-          p.style.removeProperty('--ty');
-          p.style.removeProperty('--rot');
-          p.style.removeProperty('--sc');
-          p.style.zIndex = '';
-          return;
-        }
+        p.classList.toggle('is-current', i === current);
         const k = i - current;
         const far = Math.abs(k);
-        p.style.setProperty('--tx', `${-50 + k * 46}%`);
+        p.style.setProperty('--k', String(k));
         p.style.setProperty('--ty', `${i === current ? -92 : -62 + far * 6}%`);
-        p.style.setProperty('--rot', `${k * 11}deg`);
         p.style.setProperty('--sc', `${i === current ? 1 : 0.86}`);
         p.style.zIndex = String(10 - far);
       });
-      const show = open ? String(current) : 'closed';
-      captions.forEach((c) => (c.hidden = c.dataset.caption !== show));
+      captions.forEach((c) => (c.hidden = c.dataset.caption !== String(current)));
     };
 
-    // with a mouse, the folder opens on hover and the pointer's position across it picks the
-    // piece: left third, middle, right third (for three pieces). A click then opens that case study.
-    let mouse = false;
-    folder.addEventListener('pointerenter', (e) => {
-      mouse = e.pointerType === 'mouse';
-      if (!mouse || folder.classList.contains('is-open')) return;
-      folder.classList.add('is-open');
-      hit.setAttribute('aria-expanded', 'true');
-      layout();
-    });
+    // with a mouse, the pointer's position across the folder picks the piece (left third, middle,
+    // right third for three pieces) and a click opens it
     folder.addEventListener('pointermove', (e) => {
-      if (e.pointerType !== 'mouse' || !folder.classList.contains('is-open') || n < 2) return;
+      if (e.pointerType !== 'mouse' || n < 2) return;
       const r = folder.getBoundingClientRect();
       const i = Math.min(n - 1, Math.max(0, Math.floor(((e.clientX - r.left) / r.width) * n)));
       if (i !== current) {
@@ -394,32 +383,37 @@ const sheets = items.length ? items : [null, null, null];
       }
     });
 
+    // touch: a sideways swipe of more than 40px moves along; a tap on a side sheet brings it to the
+    // middle, and a tap on the middle sheet opens it
+    let downX = 0;
+    let downY = 0;
+    let swiped = false;
+    folder.addEventListener('pointerdown', (e) => {
+      downX = e.clientX;
+      downY = e.clientY;
+      swiped = false;
+    });
+    folder.addEventListener('pointerup', (e) => {
+      if (e.pointerType === 'mouse' || n < 2) return;
+      const dx = e.clientX - downX;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(e.clientY - downY)) {
+        swiped = true;
+        current = Math.min(n - 1, Math.max(0, current + (dx < 0 ? 1 : -1)));
+        layout();
+      }
+    });
+
     hit.addEventListener('click', (e) => {
-      if (mouse && folder.classList.contains('is-open')) {
-        const href = papers[current]?.dataset.href;
-        if (href) location.href = href;
+      if (swiped) return;
+      const paper = (e.target as HTMLElement).closest<HTMLElement>('[data-paper]');
+      const i = paper ? Number(paper.dataset.paper) : current;
+      if (i !== current) {
+        current = i;
+        layout();
         return;
       }
-      const paper = (e.target as HTMLElement).closest<HTMLElement>('[data-paper]');
-      if (folder.classList.contains('is-open') && paper) {
-        const i = Number(paper.dataset.paper);
-        if (i !== current) {
-          current = i;
-          layout();
-          return;
-        }
-      }
-      const open = folder.classList.toggle('is-open');
-      hit.setAttribute('aria-expanded', String(open));
-      layout();
-    });
-    // with a mouse, the folder closes as soon as the pointer leaves the card (folder and caption);
-    // the caption stays inside the card so its arrows and link are still reachable
-    card.addEventListener('pointerleave', (e) => {
-      if (e.pointerType !== 'mouse' || !folder.classList.contains('is-open')) return;
-      folder.classList.remove('is-open');
-      hit.setAttribute('aria-expanded', 'false');
-      layout();
+      const href = papers[current]?.dataset.href;
+      if (href) location.href = href;
     });
     card.querySelectorAll<HTMLButtonElement>('[data-step]').forEach((b) =>
       b.addEventListener('click', () => {

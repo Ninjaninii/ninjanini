@@ -94,4 +94,3 @@ The first answer was about where people sit. The piece only found its form once 
 
 Chia Ni Chen, Arts and Technology, National Tsing Hua University.
 
-<a class="nextwork" href="/artwork/room-624/"><small>See another piece</small><b>Cleaning Request: Room 624</b><span aria-hidden="true">&#8594;</span></a>

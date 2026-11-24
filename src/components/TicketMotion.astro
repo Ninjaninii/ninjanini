@@ -1,0 +1,595 @@
+---
+/*
+ * Opening motion: an app that connects musicians with bands looking for members.
+ * The story, in order:
+ *   1. Maya's dog with a guitar in a circle: "Musicians looking / for a band"
+ *   2. the band in the circle: "Bands looking / for members"
+ *   3. the circle opens on the band's phone: they send her a GigJam ticket (it lifts and settles)
+ *   4. the circle closes on Maya and opens on her phone: she accepts; the mint pattern sweeps the ticket
+ *      to Confirmed, then the chat moves on in one move and the bot's Ongoing ticket follows
+ *      (Figma: Smart Animate, 1022ms, gentle)
+ *   5. both faces side by side: "An app that connects / musicians with bands"; they fold back into
+ *      Maya's circle and the reel starts again.
+ * Each face fades in while its circle is still closing, so no cropped interface flashes between.
+ * The "The band" / "Maya" label shows only over the phone, never over the circles.
+ * Ticket images are cut from the Figma screens; coordinates are the 402px-wide frame's, offset to the close-up.
+ */
+const T = '/work/bands-and-musicians/ticket/';
+---
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&text=CancelSndtikyDApYou!&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&text=BandslokigfrmeMucAptchwb&display=swap" />
+
+<div class="tm" data-tm role="img" aria-label="An app that connects musicians with bands looking for members: a band sends a GigJam ticket in the chat, a musician accepts it, and the session is confirmed and under way">
+  <div class="tm__stage">
+    <p class="tm__words tm__words--band" aria-hidden="true"><span>Bands looking</span><span class="tm__em">for members</span></p>
+    <p class="tm__words tm__words--maya" aria-hidden="true"><span>Musicians looking</span><span class="tm__em">for a band</span></p>
+    <p class="tm__words tm__words--app" aria-hidden="true"><span>An app that connects</span><span class="tm__em">musicians with bands</span></p>
+    <span class="tm__who" data-who aria-hidden="true">The band</span>
+    <div class="tm__orbit" aria-hidden="true">
+      <img class="tm__bit tm__bit--1" src={`${T}star-mint.webp`} alt="" width="62" height="62" />
+      <img class="tm__bit tm__bit--2" src={`${T}headstock.webp`} alt="" width="86" height="80" />
+      <img class="tm__bit tm__bit--3" src={`${T}star-yellow.webp`} alt="" width="48" height="48" />
+      <img class="tm__bit tm__bit--4" src={`${T}star-mint.webp`} alt="" width="34" height="34" />
+      <img class="tm__bit tm__bit--5" src={`${T}headstock-2.webp`} alt="" width="52" height="57" />
+      <img class="tm__bit tm__bit--6" src={`${T}pick-add.webp`} alt="" width="44" height="71" />
+      <img class="tm__face tm__face--maya" src={`${T}maya.webp`} alt="" width="172" height="172" />
+      <img class="tm__face tm__face--band" src={`${T}band.webp`} alt="" width="172" height="172" />
+    </div>
+    <div class="tm__window">
+      <div class="tm__scene" data-scene>
+        <!-- the band's side -->
+        <div class="tm__a">
+          <span class="tm__you">You</span>
+          <img class="tm__ticket tm__ticket--a" src={`${T}draft.webp`} alt="" width="340" height="168" />
+          <div class="tm__btns tm__btns--a">
+            <span class="tm__btn tm__btn--ghost">Cancel</span>
+            <span class="tm__btn tm__btn--primary"><b>Send ticket</b><b class="tm__sent">sent!</b></span>
+          </div>
+        </div>
+        <!-- Maya's side -->
+        <div class="tm__b">
+          <img class="tm__name" src={`${T}band-lead.webp`} alt="" width="207" height="24" />
+          <div class="tm__ticketbox">
+            <img class="tm__ticket" src={`${T}pending.webp`} alt="" width="340" height="168" />
+            <img class="tm__ticket tm__ticket--confirmed" src={`${T}confirmed.webp`} alt="" width="340" height="168" />
+          </div>
+          <div class="tm__btns tm__btns--b">
+            <span class="tm__btn tm__btn--ghost">Decline</span>
+            <span class="tm__btn tm__btn--primary">Accept</span>
+          </div>
+          <img class="tm__bot" src={`${T}bot-label.webp`} alt="" width="60" height="24" />
+          <img class="tm__ticket tm__ticket--ongoing" src={`${T}ongoing.webp`} alt="" width="340" height="168" />
+        </div>
+        <img class="tm__composer" src={`${T}composer.webp`} alt="" width="402" height="62" />
+        <span class="tm__finger"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .tm {
+    --s: 1;
+    --sw: 1000;
+    --sh: 560;
+    position: relative;
+    height: calc(var(--sh) * var(--s) * 1px);
+    margin: 6px 0 clamp(28px, 4vw, 56px);
+    overflow-x: clip;
+  }
+  .tm__stage {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: calc(var(--sw) * 1px);
+    height: calc(var(--sh) * 1px);
+    margin-left: calc(var(--sw) * -0.5px);
+    transform: scale(var(--s));
+    transform-origin: top center;
+  }
+  /* the phone close-up: the bottom of a chat, at the app's own 402px width */
+  .tm__window {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 402px;
+    height: 470px;
+    margin: -235px 0 0 -201px;
+    border-radius: 36px;
+    overflow: hidden;
+  }
+  .tm__scene {
+    position: absolute;
+    inset: 0;
+    background: #2a296f;
+    clip-path: circle(310px at 50% 50%);
+    font-family: 'Poppins', var(--font-sans);
+  }
+  .tm__a,
+  .tm__b {
+    position: absolute;
+    inset: 0;
+  }
+  /* the screens swap by opacity, not visibility: content under a hidden screen can be left unpainted in
+     Chrome when its animations restart, which empties the phone from the second loop on */
+  .tm__b {
+    opacity: 0;
+  }
+  .tm__you {
+    position: absolute;
+    right: 20px;
+    top: 131px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+  }
+  .tm__ticket {
+    position: absolute;
+    display: block;
+    width: 340px;
+    height: 168px;
+  }
+  .tm__ticket--a {
+    left: 42px;
+    top: 171px;
+  }
+  .tm__name {
+    position: absolute;
+    left: 20px;
+    top: 146px;
+    width: 207px;
+    height: 24px;
+  }
+  .tm__ticketbox {
+    position: absolute;
+    left: 20px;
+    top: 178px;
+    width: 340px;
+    height: 168px;
+  }
+  .tm__ticketbox .tm__ticket {
+    left: 0;
+    top: 0;
+  }
+  .tm__ticket--confirmed {
+    clip-path: inset(0 100% 0 0);
+  }
+  .tm__btns {
+    position: absolute;
+    display: flex;
+    gap: 12px;
+    width: 340px;
+    height: 48px;
+  }
+  .tm__btns--a {
+    left: 42px;
+    top: 347px;
+  }
+  .tm__btns--b {
+    left: 20px;
+    top: 356px;
+  }
+  .tm__btn {
+    position: relative;
+    flex: 1 1 0;
+    display: grid;
+    place-items: center;
+    height: 48px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .tm__btn--ghost {
+    color: #fff;
+    box-shadow: inset 0 0 0 1px #fff;
+  }
+  .tm__btn--primary {
+    color: #0f0e43;
+    background: #24efac;
+  }
+  .tm__btn b {
+    grid-area: 1 / 1;
+    font-weight: 500;
+  }
+  .tm__sent {
+    opacity: 0;
+  }
+  .tm__bot {
+    position: absolute;
+    left: 20px;
+    top: 200px;
+    width: 60px;
+    height: 24px;
+    opacity: 0;
+  }
+  .tm__ticket--ongoing {
+    left: 20px;
+    top: 232px;
+    opacity: 0;
+  }
+  /* the circle's face, and the shapes that pop out around it */
+  .tm__orbit {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    z-index: 3;
+    pointer-events: none;
+  }
+  /* the orbit is a zero-size point; its images keep their own size */
+  .tm__orbit img {
+    max-width: none;
+  }
+  .tm__face {
+    position: absolute;
+    left: -86px;
+    top: -86px;
+    width: 172px;
+    height: 172px;
+    border-radius: 50%;
+    object-fit: cover;
+    opacity: 0;
+  }
+  .tm__bit {
+    position: absolute;
+    height: auto;
+    opacity: 0;
+  }
+  /* the shapes sit either side of the circle, clear of the lines above and below (and of both faces) */
+  .tm__bit--1 {
+    left: 186px;
+    top: -74px;
+  }
+  .tm__bit--2 {
+    left: -292px;
+    top: -16px;
+  }
+  .tm__bit--3 {
+    left: 200px;
+    top: 30px;
+  }
+  .tm__bit--4 {
+    left: -236px;
+    top: -82px;
+  }
+  .tm__bit--5 {
+    left: 272px;
+    top: -36px;
+  }
+  /* the app's "add" pick: an open place in the band */
+  .tm__bit--6 {
+    left: -356px;
+    top: -58px;
+  }
+  @media (max-width: 760px) {
+    .tm__bit--1 {
+      left: 132px;
+      top: -100px;
+      width: 48px;
+    }
+    .tm__bit--2 {
+      left: -200px;
+      top: 44px;
+      width: 62px;
+    }
+    .tm__bit--3 {
+      left: 150px;
+      top: 62px;
+      width: 38px;
+    }
+    .tm__bit--4 {
+      left: -170px;
+      top: -100px;
+      width: 28px;
+    }
+    .tm__bit--5 {
+      left: 156px;
+      top: -22px;
+      width: 38px;
+    }
+    .tm__bit--6 {
+      left: -200px;
+      top: -40px;
+      width: 30px;
+    }
+  }
+  .tm__composer {
+    position: absolute;
+    left: 0;
+    top: 408px;
+    width: 402px;
+    height: 62px;
+  }
+  /* the finger: a pale disc, as in screen recordings */
+  .tm__finger {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.75);
+    opacity: 0;
+  }
+  .tm__who {
+    position: absolute;
+    left: 50%;
+    top: 6px;
+    transform: translateX(-50%);
+    font-size: var(--fs-label);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    opacity: 0;
+  }
+  /* the lines above and below the closed circle */
+  .tm__words {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    display: grid;
+    grid-template-rows: 1fr 196px 1fr;
+    justify-items: center;
+    /* Bagel Fat One: the app's own display face, as on the tickets */
+    font-family: 'Bagel Fat One', var(--font-sans);
+    font-size: 50px;
+    letter-spacing: 0;
+    line-height: 1.05;
+    text-align: center;
+    color: var(--ink);
+    pointer-events: none;
+  }
+  .tm__words span {
+    opacity: 0;
+    padding-inline: 12px;
+  }
+  .tm__words span:first-child {
+    grid-row: 1;
+    align-self: end;
+    padding-bottom: 14px;
+  }
+  .tm__words span:last-child {
+    grid-row: 3;
+    align-self: start;
+    padding-top: 14px;
+  }
+  .tm__em {
+    color: var(--accent);
+  }
+  @media (max-width: 760px) {
+    .tm {
+      --sw: 420;
+      --sh: 600;
+    }
+    .tm__words {
+      font-size: 34px;
+    }
+  }
+
+  /* reduced motion: the end of the reel, still: Confirmed above, the bot's Ongoing below */
+  @media (prefers-reduced-motion: reduce) {
+    .tm__a {
+      opacity: 0;
+    }
+    .tm__b {
+      opacity: 1;
+    }
+    .tm__btns--b {
+      display: none;
+    }
+    .tm__name,
+    .tm__ticketbox {
+      translate: 0 -162px;
+    }
+    .tm__ticket--confirmed {
+      clip-path: none;
+    }
+    .tm__bot,
+    .tm__ticket--ongoing {
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  const EASE = 'cubic-bezier(0.65, 0, 0.35, 1)';
+  const OUT = 'cubic-bezier(0.16, 1, 0.3, 1)';
+  const POP = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
+  const OPEN = 'circle(310px at 50% 50%)';
+  const SHUT = 'circle(86px at 50% 50%)';
+  // pace: the whole reel runs at 0.85 of the times written below (15% faster)
+  const PACE = 0.85;
+  const wait = (ms: number) => new Promise((r) => setTimeout(r, ms * PACE));
+  const paced = (o: KeyframeAnimationOptions) => ({ ...o, duration: Number(o.duration ?? 0) * PACE, delay: (o.delay ?? 0) * PACE });
+
+  document.querySelectorAll<HTMLElement>('[data-tm]').forEach((root) => {
+    const $ = <T extends HTMLElement>(s: string) => root.querySelector<T>(s)!;
+    const scene = $('[data-scene]');
+    const a = $('.tm__a');
+    const b = $('.tm__b');
+    const who = $('[data-who]');
+    const finger = $('.tm__finger');
+    const ticketA = $('.tm__ticket--a');
+    const [cancel, send] = [...root.querySelectorAll<HTMLElement>('.tm__btns--a .tm__btn')];
+    const [sendLabel, sentLabel] = [...send.querySelectorAll<HTMLElement>('b')];
+    const btnsB = $('.tm__btns--b');
+    const accept = btnsB.querySelector<HTMLElement>('.tm__btn--primary')!;
+    const name = $('.tm__name');
+    const box = $('.tm__ticketbox');
+    const confirmed = $('.tm__ticket--confirmed');
+    const words = (k: string) => [...root.querySelectorAll<HTMLElement>(`.tm__words--${k} span`)];
+    const wordsBand = words('band');
+    const wordsMaya = words('maya');
+    const wordsApp = words('app');
+    const faceMaya = $('.tm__face--maya');
+    const faceBand = $('.tm__face--band');
+    const bits = [...root.querySelectorAll<HTMLElement>('.tm__bit')];
+    const bot = $('.tm__bot');
+    const ongoing = $('.tm__ticket--ongoing');
+    const phoneMq = matchMedia('(max-width: 760px)');
+
+    const fit = () => root.style.setProperty('--s', String(Math.min(1, root.clientWidth / (phoneMq.matches ? 420 : 1000))));
+    fit();
+    addEventListener('resize', fit);
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      who.textContent = 'Maya';
+      who.style.opacity = '1';
+      return;
+    }
+
+    const anim = (el: Element, k: Keyframe[], o: KeyframeAnimationOptions) => el.animate(k, paced({ fill: 'forwards', ...o }));
+    // the circle's clip is written back to the style once it has moved: a clip-path held by a finished
+    // animation can stop the phone's content from repainting in Chrome, leaving the screen empty
+    const clip = (k: Keyframe[], o: KeyframeAnimationOptions) => {
+      const x = anim(scene, k, o);
+      x.finished.then(() => { x.commitStyles(); x.cancel(); }).catch(() => {});
+      return x;
+    };
+    // the finger glides to a point in the frame, presses, and lifts
+    async function tap(x: number, y: number, target: HTMLElement) {
+      anim(finger, [{ opacity: 0, transform: `translate(${x + 30}px, ${y + 50}px)` }, { opacity: 1, transform: `translate(${x}px, ${y}px)` }], { duration: 360, easing: OUT });
+      await wait(400);
+      anim(finger, [{ transform: `translate(${x}px, ${y}px) scale(1)` }, { transform: `translate(${x}px, ${y}px) scale(0.78)` }, { transform: `translate(${x}px, ${y}px) scale(1)` }], { duration: 260 });
+      target.animate([{ transform: 'scale(1)' }, { transform: 'scale(0.95)' }, { transform: 'scale(1)' }], paced({ duration: 260 }));
+      await wait(240);
+      anim(finger, [{ opacity: 1 }, { opacity: 0 }], { duration: 300, delay: 120 });
+    }
+    // the circle closes; the face starts to show before it is fully shut, so no cropped interface flashes
+    async function close(face: HTMLElement) {
+      label(false);
+      const c = clip([{ clipPath: OPEN }, { clipPath: SHUT }], { duration: 700, easing: EASE });
+      // the face is fully in by the moment the circle is shut
+      anim(face, [{ opacity: 0, transform: 'scale(0.94)' }, { opacity: 1, transform: 'none' }], { duration: 420, delay: 280, easing: OUT });
+      await c.finished;
+    }
+    // the circle opens as the face clears, so the phone grows straight out of it
+    async function open(face: HTMLElement, who: string) {
+      label(true, who);
+      anim(face, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(1.08)' }], { duration: 360, easing: 'ease-in' });
+      await clip([{ clipPath: SHUT }, { clipPath: OPEN }], { duration: 700, delay: 60, easing: EASE }).finished;
+    }
+    function label(on: boolean, text?: string) {
+      if (text) who.textContent = text;
+      anim(who, [{ opacity: on ? 0 : 1 }, { opacity: on ? 1 : 0 }], { duration: 260 });
+    }
+    // a line comes down onto the circle from above, the other rises from below; the shapes pop out
+    function say(lines: HTMLElement[]) {
+      lines.forEach((w, k) =>
+        anim(w, [{ opacity: 0, transform: `translateY(${k ? 26 : -26}px)` }, { opacity: 1, transform: 'none' }], { duration: 600, delay: 80 + k * 110, easing: OUT }),
+      );
+      bits.forEach((b, k) => {
+        const spin = (k % 2 ? -1 : 1) * (18 + k * 7);
+        anim(b, [{ opacity: 0, transform: 'scale(0.2) rotate(0deg)' }, { opacity: 1, transform: `scale(1) rotate(${spin}deg)` }], { duration: 640, delay: 160 + k * 70, easing: POP });
+      });
+    }
+    function unsay(lines: HTMLElement[]) {
+      lines.forEach((w) => anim(w, [{ opacity: 1 }, { opacity: 0 }], { duration: 280, easing: 'ease-in' }));
+      bits.forEach((b, k) => anim(b, [{ opacity: 1 }, { opacity: 0, transform: 'scale(0.4)' }], { duration: 280, delay: k * 30, easing: 'ease-in' }));
+    }
+    const reset = () => {
+      [cancel, send, sendLabel, sentLabel, ticketA, btnsB, name, box, confirmed, bot, ongoing, faceBand, faceMaya].forEach((el) =>
+        el.getAnimations().forEach((x) => x.cancel()),
+      );
+      a.style.opacity = '1';
+      b.style.opacity = '0';
+    };
+
+    let visible = false;
+    let running = false;
+    let shut = false; // the frame is closed on Maya's face, ready for the first line
+    async function loop() {
+      if (running) return;
+      running = true;
+      while (visible) {
+        if (!shut) {
+          reset();
+          clip([{ clipPath: SHUT }], { duration: 0 });
+          anim(faceMaya, [{ opacity: 0, transform: 'scale(0.94)' }, { opacity: 1, transform: 'none' }], { duration: 300, easing: OUT });
+        }
+        shut = false;
+        // 1. musicians looking for a band
+        say(wordsMaya);
+        await wait(1400);
+        unsay(wordsMaya);
+        // the face changes only once its line has gone, so a line never sits beside the wrong face
+        await wait(300);
+        // 2. the circle turns to the band: bands looking for members
+        anim(faceMaya, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(0.94)' }], { duration: 320, easing: 'ease-in' });
+        anim(faceBand, [{ opacity: 0, transform: 'scale(1.06)' }, { opacity: 1, transform: 'none' }], { duration: 420, easing: OUT });
+        await wait(180);
+        say(wordsBand);
+        await wait(1400);
+        unsay(wordsBand);
+        await wait(200);
+        // 3. on the band's phone, they send her a GigJam ticket
+        await open(faceBand, 'The band');
+        await wait(250);
+        await tap(300, 371, send);
+        anim(cancel, [{ flexGrow: 1, opacity: 1 }, { flexGrow: 0.0001, opacity: 0, marginRight: '-12px' }], { duration: 520, easing: EASE });
+        anim(sendLabel, [{ opacity: 1 }, { opacity: 0 }], { duration: 200 });
+        anim(sentLabel, [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 360, delay: 260, easing: OUT });
+        // the ticket lifts as it goes, then settles
+        anim(ticketA, [{ transform: 'none' }, { transform: 'translateY(-16px) rotate(-1.2deg)', offset: 0.45 }, { transform: 'none' }], { duration: 900, delay: 160, easing: EASE });
+        await wait(1300);
+        if (!visible) break;
+        // 4. over to Maya: she accepts
+        await close(faceMaya);
+        a.style.opacity = '0';
+        b.style.opacity = '1';
+        await wait(350);
+        // the ticket, its sender and the buttons arrive while the circle opens; hidden until their turn
+        anim(box, [{ opacity: 0, transform: 'translateY(26px) scale(0.96)' }, { opacity: 1, transform: 'none' }], { duration: 600, delay: 380, easing: POP, fill: 'both' });
+        anim(name, [{ opacity: 0 }, { opacity: 1 }], { duration: 400, delay: 380, fill: 'both' });
+        anim(btnsB, [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: 500, delay: 620, easing: OUT, fill: 'both' });
+        await open(faceMaya, 'Maya');
+        await wait(600);
+        await tap(278, 380, accept);
+        // the buttons go, and the mint pattern sweeps the ticket to Confirmed where it stands
+        anim(btnsB, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(14px)' }], { duration: 320, easing: 'ease-in' });
+        await anim(confirmed, [{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 760, delay: 120, easing: EASE }).finished;
+        box.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.035) rotate(0.6deg)' }, { transform: 'scale(1)' }], paced({ duration: 520, easing: POP, composite: 'add' }));
+        // then the chat moves on in one move (Smart Animate, 1022ms, gentle): the confirmed ticket rises
+        // and the bot's Ongoing ticket comes in beneath it
+        await wait(700);
+        const GENTLE = 'cubic-bezier(0.22, 1, 0.36, 1)';
+        anim(name, [{ translate: '0 0' }, { translate: '0 -162px' }], { duration: 1022, easing: GENTLE });
+        anim(box, [{ translate: '0 0' }, { translate: '0 -162px' }], { duration: 1022, easing: GENTLE });
+        anim(bot, [{ opacity: 0, transform: 'translateY(40px)' }, { opacity: 1, transform: 'none' }], { duration: 1022, easing: GENTLE });
+        await anim(ongoing, [{ opacity: 0, transform: 'translateY(60px)' }, { opacity: 1, transform: 'none' }], { duration: 1022, easing: GENTLE }).finished;
+        await wait(1600);
+        if (!visible) break;
+        // 5. an app that connects musicians with bands: both faces side by side
+        await close(faceMaya);
+        anim(faceBand, [{ opacity: 0, transform: 'translateX(-260px) scale(0.9)' }, { opacity: 1, transform: 'translateX(-82px)' }], { duration: 760, easing: OUT });
+        anim(faceMaya, [{ transform: 'none' }, { transform: 'translateX(82px)' }], { duration: 760, easing: OUT });
+        clip([{ clipPath: SHUT }, { clipPath: 'circle(86px at calc(50% + 82px) 50%)' }], { duration: 760, easing: OUT });
+        say(wordsApp);
+        await wait(2200);
+        unsay(wordsApp);
+        // they fold back into Maya's circle, ready for the first line again
+        anim(faceBand, [{ opacity: 1, transform: 'translateX(-82px)' }, { opacity: 0, transform: 'none' }], { duration: 600, easing: EASE });
+        clip([{ clipPath: 'circle(86px at calc(50% + 82px) 50%)' }, { clipPath: SHUT }], { duration: 600, easing: EASE });
+        await anim(faceMaya, [{ transform: 'translateX(82px)' }, { transform: 'none' }], { duration: 600, easing: EASE }).finished;
+        // the band's phone goes back under the circle; Maya's face stays on top
+        [cancel, send, sendLabel, sentLabel, ticketA, btnsB, name, box, confirmed, bot, ongoing].forEach((el) => el.getAnimations().forEach((x) => x.cancel()));
+        a.style.opacity = '1';
+        b.style.opacity = '0';
+        shut = true;
+        await wait(250);
+      }
+      running = false;
+    }
+
+    new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      if (visible) loop();
+    }, { threshold: 0.3 }).observe(root);
+  });
+</script>

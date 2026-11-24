@@ -7,11 +7,17 @@ interface Props {
   description?: string;
   /* a line of small print in the footer, for one page only */
   colophon?: string;
+  /* the link-preview image: a site path, 1200 x 630 (defaults to the name card) */
+  ogImage?: string;
+  ogImageAlt?: string;
 }
 
-const { title, description = site.tagline, colophon } = Astro.props;
+const { title, description = site.tagline, colophon, ogImage = '/og/default.png', ogImageAlt } = Astro.props;
 
-const fullTitle = title === site.name ? `${site.name} — Designer & Producer` : `${title} — ${site.name}`;
+const fullTitle = title === site.name ? `${site.name} — Product Designer` : `${title} — ${site.name}`;
+// link previews need absolute addresses
+const ogImageUrl = new URL(ogImage, site.domain).href;
+const ogAlt = ogImageAlt ?? (ogImage === '/og/default.png' ? `${site.name}, Product Designer` : fullTitle);
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.domain).href;
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
@@ -21,10 +27,11 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- ?v=2: the CHIA NI mark; the version makes browsers drop the old cached Ni seal -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png?v=2" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=2" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -33,6 +40,11 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

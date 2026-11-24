@@ -1,14 +1,20 @@
 ---
 // shared case-study layout for projects and artwork: hero, particles, figures and motion
-import { render, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { listTitle } from '../lib/title';
 import Base from '../layouts/Base.astro';
 import WorkMeta from './WorkMeta.astro';
 import Sparkles from './Sparkles.astro';
+import TicketMotion from './TicketMotion.astro';
 
 type Props = { entry: CollectionEntry<'project'> | CollectionEntry<'artwork'> };
 
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
+// the next piece in the same list, in listing order; the last one leads back to the first
+const siblings = (await getCollection(entry.collection, ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
+const at = siblings.findIndex((e) => e.id === entry.id);
+const nextEntry = siblings.length > 1 && at >= 0 ? siblings[(at + 1) % siblings.length] : null;
 const d = entry.data;
 // a case study written in the four chapters (Situation, The turn, The work, Outcome) lists them in the margin
 const sections = headings.filter((h) => h.depth === 2);
@@ -17,6 +23,8 @@ const chapters = sections[0]?.text === 'Situation' ? sections : [];
 const wall = entry.id === 'room-624' || entry.id === 'chat-to-escape';
 // case studies with the material pass: glow field, frosted containers, embossed cells, oval chapter marks
 const material = ['wisely', 'jianxu', 'binance'].includes(entry.id);
+// opening motion above the title: a GigJam ticket sent and accepted
+const promo = entry.id === 'bands-and-musicians';
 // each wall page's hero at its natural size, so it is never drawn larger than the file.
 // A tall photograph also gets a height cap, so the title and label still fit in the first screen.
 const heroSize: Record<string, [number, number, string]> = { 'room-624': [1156, 644, 'calc(100vh - 250px)'], 'chat-to-escape': [1600, 1201, 'calc(100vh - 250px)'] };
@@ -24,7 +32,7 @@ const [heroW, heroH, heroMaxH] = heroSize[entry.id] ?? [1600, 1000, 'none'];
 const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwork' } : { href: '/project', label: 'Projects' };
 ---
 
-<Base title={d.title} description={d.summary}>
+<Base title={d.title} description={d.summary} ogImage={d.cover && !d.draft ? `/og/${entry.collection}-${entry.id}.jpg` : undefined} ogImageAlt={d.coverAlt}>
   <article>
     {!d.medium && <div class="readbar" aria-hidden="true"><i></i></div>}
     {
@@ -47,6 +55,8 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
         <p class="backrow reveal">
           <a class="back" href={back.href}><span aria-hidden="true">&#8592;</span> {back.label}</a>
         </p>
+
+        {promo && <TicketMotion />}
 
         {
           wall && (
@@ -131,7 +141,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     </header>
 
     {
-      d.cover && !wall && !d.heroImage && !d.coverCutout && (
+      !promo && d.cover && !wall && !d.heroImage && !d.coverCutout && (
         <div class="shell reveal">
           <div class="plate plate--wide">
             <div class="plate__in">
@@ -145,6 +155,15 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     <div class="shell">
       <div class:list={['prose reveal', { 'prose--ex': d.medium, 'prose--wall': wall, 'prose--material': material }]}>
         <Content />
+        {
+          nextEntry && (
+            <a class="nextwork" href={`/${entry.collection}/${nextEntry.id}/`}>
+              <small>{entry.collection === 'artwork' ? 'See another piece' : 'Next project'}</small>
+              <b>{listTitle(nextEntry.data.title)}</b>
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          )
+        }
       </div>
 
       {
@@ -212,7 +231,15 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
         else a.removeAttribute('aria-current');
       });
       chapnav.classList.toggle('is-on', now >= 0 && prose.getBoundingClientRect().bottom > line);
+      // phones: the bar appears once the summary has scrolled up under the navigation
+      const glance = document.querySelector('.glance') ?? document.querySelector('.whead');
+      const past = !!glance && glance.getBoundingClientRect().bottom < 90 && prose.getBoundingClientRect().bottom > 120;
+      chapnav.classList.toggle('is-past', past);
+      // keep the current chapter in view along the scrolling bar
+      if (past && now >= 0 && now !== last) links[now].scrollIntoView({ block: 'nearest', inline: 'center' });
+      last = now;
     };
+    let last = -1;
     addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(mark); } }, { passive: true });
     addEventListener('resize', mark);
     mark();
@@ -657,6 +684,62 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   }
   .chapnav a[aria-current] {
     font-weight: 500;
+  }
+  /* phones: the same chapters as a bar under the navigation, scrolling sideways, the current one in mint */
+  @media (max-width: 760px) {
+    .chapnav {
+      display: block;
+      position: fixed;
+      top: 74px;
+      left: 0;
+      right: 0;
+      z-index: 55;
+      padding: 0 var(--gutter);
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+    .chapnav.is-past {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+    .chapnav ol {
+      display: flex;
+      gap: 6px;
+      width: max-content;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 5px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--hair);
+      background: color-mix(in srgb, var(--panel) 94%, transparent);
+      box-shadow: var(--shadow);
+    }
+    .chapnav ol::-webkit-scrollbar {
+      display: none;
+    }
+    .chapnav li {
+      flex: none;
+    }
+    .chapnav a {
+      padding: 7px 13px;
+      border-radius: var(--radius-pill);
+      font-size: 13.5px;
+      white-space: nowrap;
+    }
+    .chapnav a[aria-current] {
+      color: var(--accent-ink);
+      background: var(--mint-100);
+    }
+  }
+  @media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+    .chapnav {
+      transition: none;
+    }
   }
 
   /* at a glance: problem, the turn, result, side by side; ruled, not boxed */
@@ -1996,7 +2079,7 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
   .nextwork b {
     grid-column: 1;
     font-size: clamp(22px, 2.6vw, 32px);
-    font-weight: 500;
+    font-weight: var(--fw-light);
     letter-spacing: -0.02em;
   }
   .nextwork span {
@@ -2005,6 +2088,10 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
     font-size: 24px;
     color: var(--accent);
     transition: transform 0.4s var(--ease);
+  }
+  /* large type is light everywhere, including inside the case studies' bold rule */
+  :root .prose .nextwork b {
+    font-weight: var(--fw-light);
   }
   .nextwork:hover span {
     transform: translateX(6px);
@@ -3799,4 +3886,203 @@ const back = entry.collection === 'artwork' ? { href: '/artwork', label: 'Artwor
       padding: 7px 8px;
     }
   }
+
+  /* ── clickable prototype (src/lib/proto.ts): step tabs, a phone, and the step beside it ── */
+  .proto__tabs {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+  .proto__tab {
+    display: grid;
+    align-content: start;
+    gap: 4px;
+    text-align: left;
+    font: inherit;
+    padding: 12px 12px 14px;
+    border-radius: 12px;
+    border: 0;
+    background: var(--cream);
+    box-shadow: var(--emboss);
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+  .proto__tab i {
+    font-style: normal;
+    font-size: var(--fs-chart);
+    font-weight: var(--fw-medium);
+    color: var(--accent-ink);
+  }
+  .proto__tab span {
+    font-size: var(--fs-chart);
+    line-height: 1.35;
+    color: var(--ink);
+  }
+  .proto__tab small {
+    font-size: var(--fs-chart);
+    color: var(--ink-2);
+  }
+  .proto__tab[aria-selected='true'] {
+    box-shadow: 0 0 0 1px var(--accent), var(--emboss);
+  }
+  .proto__stage {
+    display: grid;
+    grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 48px);
+    align-items: center;
+  }
+  .proto__phone {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--ratio);
+    padding: 9px;
+    border-radius: 46px;
+    background: #14161a;
+    box-shadow: var(--shadow);
+  }
+  .proto__screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 38px;
+    overflow: hidden;
+    background: #14161a;
+  }
+  .proto__layer {
+    position: absolute;
+    inset: 0;
+    animation: proto-in 0.25s var(--ease) both;
+  }
+  .proto__layer.is-leaving {
+    pointer-events: none;
+  }
+  @keyframes proto-in {
+    from {
+      opacity: 0;
+    }
+  }
+  .proto__layer img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+  }
+  .proto__spot {
+    position: absolute;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+  }
+  .proto__spot:focus-visible {
+    outline: 2px solid var(--mint-300);
+    outline-offset: 0;
+  }
+  /* a missed tap: every tap area glows briefly */
+  .proto__layer.is-hinting .proto__spot {
+    animation: proto-hint 0.9s ease-out;
+  }
+  @keyframes proto-hint {
+    0%,
+    40% {
+      background: rgba(168, 216, 200, 0.35);
+      box-shadow: inset 0 0 0 2px var(--mint-300);
+    }
+    100% {
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .proto__layer {
+      animation: none;
+    }
+  }
+  .proto__side {
+    display: grid;
+    gap: 14px;
+    align-content: center;
+  }
+  .prose .proto__step {
+    margin: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .proto__step small {
+    font-size: var(--fs-label);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--accent-ink);
+  }
+  .proto__step b {
+    font-family: var(--face-lead);
+    font-weight: var(--fw-regular);
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .prose .proto__now {
+    margin: 0;
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+  .proto__ctl {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .proto__ctl .stamp {
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .proto__ctl .stamp:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+  .prose .proto__hint {
+    margin: 0;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  @media (max-width: 760px) {
+    .proto__tabs {
+      grid-template-columns: none;
+      grid-auto-flow: column;
+      grid-auto-columns: 62%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 6px;
+    }
+    .proto__tab {
+      scroll-snap-align: start;
+    }
+    .proto__stage {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+    .proto__phone {
+      max-width: 320px;
+    }
+  }
+
+  /* five steps of a journey in one row (vflow with five nodes) */
+  @media (min-width: 761px) {
+    .prose .vflow.vflow--5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .prose .vflow.vflow--5 li:not(:last-child)::after {
+      width: 23px;
+    }
+  }
 </style>
+
+<script>
+  // clickable prototypes, on the case studies that have one
+  if (document.querySelector('[data-proto]')) import('../lib/proto');
+</script>
