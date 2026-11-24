@@ -4,7 +4,7 @@
  */
 export const site = {
   name: 'Chia Ni Chen',
-  tagline: 'Designer and producer working between technology and art.',
+  tagline: 'Product designer. Open to product design, UX and marketing roles.',
   domain: 'https://ninjanini.cc',
 
   email: 'chianiiiccn@gmail.com',

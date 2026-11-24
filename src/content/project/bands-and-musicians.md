@@ -5,7 +5,7 @@ summary: 'A mobile app where musicians who don''t know each other can play toget
 year: '2026'
 role: High-fidelity prototype, visual design and UX review
 team: 2 students
-context: National University of Singapore, ID3131
+context: 'NUS, 2026/27 Semester 1 · ID3131 Techniques in Interaction Design and User Experience'
 tools: []
 skills: ['Product design']
 featured: false
@@ -14,7 +14,7 @@ cover: /work/bands-and-musicians/cover.webp
 coverCutout: true
 coverWidth: 34
 coverAlt: The home feed on a phone, with a notification that a band nearby is looking for a bassist
-folderPapers: ['/work/bands-and-musicians/cover.webp']
+folderPapers: ['/work/bands-and-musicians/maya-badge.webp']
 glance:
   problem: Bands and musicians turn to mutual friends, because they cannot tell whether a stranger can really play, will turn up, or is safe to meet.
   turn: Trust is built on proof and experience. A duet audition before meeting, a meetup the app helps arrange, and a GigJam history both sides confirm.
@@ -68,6 +68,8 @@ The prototype below runs on the screens and links I built in Figma. Choose a ste
 <figure class="fig bd fig--proto">
 <div class="proto" data-proto="/work/bands-and-musicians/proto.json"></div>
 </figure>
+
+<p class="protolink"><a class="stamp stamp--btn" href="https://www.figma.com/proto/VlsRR2Dn5opZyhCdyqyR1K/ID3131-PROJECT-2?node-id=10-2&viewport=3238%2C-2353%2C0.9&t=RAIjb2hh71hohdAO-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=10%3A2&show-proto-sidebar=1&page-id=0%3A1" target="_blank" rel="noopener">Open the full prototype in Figma <span aria-hidden="true">&#8599;</span></a></p>
 
 <figure class="fig bd">
 <span class="fig__t">Design decisions, step by step</span>
