@@ -54,9 +54,9 @@ const skills = SKILLS.filter((name) => pieces.some((p) => p.skills.includes(name
     <div class="shell">
       {
         featured && (
-          <a class="feature reveal" href={`/project/${featured.id}/`}>
-            <video class="feature__motion" src={`${MOTION}.mp4`} poster={`${MOTION}-poster.jpg`} muted loop playsinline preload="metadata" width="700" height="480" aria-hidden="true" />
-            <span class="feature__text">
+          <a class="feature" href={`/project/${featured.id}/`}>
+            <video class="feature__motion reveal" src={`${MOTION}.mp4`} poster={`${MOTION}-poster.jpg`} muted loop playsinline preload="metadata" width="700" height="480" aria-hidden="true" />
+            <span class="feature__text reveal" data-delay="80">
               <span class="stamp">Featured &middot; {featured.data.year}</span>
               <span class="feature__title">{featured.data.title}</span>
               <span class="feature__sum">{featured.data.summary}</span>
@@ -240,7 +240,8 @@ const skills = SKILLS.filter((name) => pieces.some((p) => p.skills.includes(name
     width: 100%;
     height: auto;
     display: block;
-    /* the motion's ground is pure white, so multiply leaves only the page behind it */
+    /* the motion's ground is pure white, so multiply leaves only the page behind it. It fades in on
+       its own (never inside a fading parent, which would blend it against nothing and show the white) */
     mix-blend-mode: multiply;
   }
   /* dark theme: multiply would darken the motion itself, so it sits on its own light card instead */
